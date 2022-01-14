@@ -1,9 +1,10 @@
-import xIcon from "../assets/img/xIcon.svg"
+import xIcon from "../../assets/img/xIcon.svg"
 import {useContext, useState} from "react";
-import mainContext from "../MainContext";
+import mainContext from "../../MainContext";
+import {ModalFooterBtn} from "../../styledComponents/studentsStyle";
 
 const StudentEditModal = ({indexID, isActive, onClose}) => {
-    const {veri, setVeri} = useContext(mainContext)
+    const {veri, setVeri, serverLink} = useContext(mainContext)
 
     const [studentName, setStudentName] = useState(veri[indexID]?.studentName);
     const [studentInfo, setStudentInfo] = useState(veri[indexID]?.studentInfo);
@@ -26,7 +27,7 @@ const StudentEditModal = ({indexID, isActive, onClose}) => {
             redirect: "follow",
         };
 
-        fetch(`http://localhost:3001/editStudent/${id}`, requestOptions)
+        fetch(`${serverLink}/editStudent/${id}`, requestOptions)
             .then((response) => {
                 if (response.status === 200) {
                     setVeri(veri.map((item, index) => {
@@ -54,7 +55,7 @@ const StudentEditModal = ({indexID, isActive, onClose}) => {
                 <button className="studentModalclose" onClick={() => {
                     onClose()
                 }}>
-                    <img src={xIcon}/>
+                    <img src={xIcon} alt="X icon"/>
                 </button>
             </div>
 
@@ -84,10 +85,10 @@ const StudentEditModal = ({indexID, isActive, onClose}) => {
                 </div>
 
                 <div className="studentModalfooter">
-                    <button className="studentModalButton"
+                    <ModalFooterBtn bgColor="#1E40AF" textColor="#fff"
                             onClick={() => editStudent(studentName, studentInfo, studentClass, veri[indexID].id)}>
                         Save Changes
-                    </button>
+                    </ModalFooterBtn>
                 </div>
 
         </div>

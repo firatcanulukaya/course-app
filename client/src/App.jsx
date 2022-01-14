@@ -5,8 +5,7 @@ import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import HomePage from "./components/HomePage"
 import Footer from "./components/Footer";
-import Students from "./components/Students";
-import KullaniciEkle from "./components/KullaniciEkle";
+import Students from "./components/students/Students";
 import KullaniciBilgi from "./components/KullaniciBilgi";
 import MainContext from "./MainContext";
 import logo from "./assets/img/logomorumsu.png";
@@ -48,8 +47,9 @@ const App = () => {
         mainContent.classList.toggle("active");
     };
     const [veri, setVeri] = useState([]);
-    const [eskiVeri,setEskiVeri] = useState(veri);
-    const data = {veri, setVeri, eskiVeri, setEskiVeri};
+    const [serverLink, setServerLink] = useState("http://localhost:3001");
+    const [isDeleteStudentsModalBtnDisabled, setIsDeleteStudentsModalBtnDisabled] = useState(true)
+    const data = {veri, setVeri, serverLink, isDeleteStudentsModalBtnDisabled, setIsDeleteStudentsModalBtnDisabled};
 
   return (
     <MainContext.Provider value={data}>
@@ -61,7 +61,6 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<HomePage/>}/>
                     <Route path="students" element={<Students/>}/>
-                    <Route path="k" element={<KullaniciEkle/>}/>
                     <Route path="kgetir/:id" element={<KullaniciBilgi/>}/>
                 </Routes>
             </div>
