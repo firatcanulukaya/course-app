@@ -1,10 +1,10 @@
 module.exports = {
     //STUDENTS
-    getAllStudents: require('./student/getAllStudents'),
-    createStudent: require('./student/createStudent'),
-    deleteAllStudents: require('./student/deleteAllStudents'),
-    deleteStudent: require('./student/deleteStudent'),
-    editStudent: require('./student/editstudent'),
-    getStudentInfo: require('./student/getStudentInfo'),
-    getAllStudentsID: require('./student/getAllStudentsID'),
+    getAllStudents: require('./userRouter'),
+    createStudent: require('./userRouter'),
+    deleteAllStudents: require('./userRouter'),
+    deleteStudent: require('./userRouter'),
+    editStudent: require('./userRouter'),
+    getStudentInfo: require('./userRouter'),
+    getAllStudentsID: require('./userRouter'),
 }
