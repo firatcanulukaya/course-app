@@ -284,6 +284,7 @@ button {
 
   .homepage-bg {
     border-radius: 22px;
+    width: 1340px;
   }
 
   .table-container {
@@ -583,7 +584,7 @@ button {
 
   .tooltip {
     cursor: pointer;
-    position: relative;
+    position: absolute;
   }
 
   .tooltip::before,
@@ -604,14 +605,14 @@ button {
   .tooltip::after {
     background: #ffffff;
     border-radius: .25em;
-    bottom: 140%;
+    bottom: 3rem;
     color: #011F3B;
     content: attr(data-tip);
-    margin-left: -5rem;
+    margin-left: -4rem;
     padding: 1rem;
     transition: all .3s cubic-bezier(.84, -0.18, .31, 1.26) .2s;
     transform: scale(.6) translateY(50%);
-    min-width: 8rem;
+    width: max-content;
     box-shadow: 0 0 1rem rgba(0, 0, 0, .25);
   }
 

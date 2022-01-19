@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-function KullaniciListe() {
+function StudentInfo() {
   const [veri, setVeri] = useState(null);
   const { id } = useParams();
 
@@ -27,4 +27,4 @@ function KullaniciListe() {
   );
 }
 
-export default KullaniciListe;
+export default StudentInfo;
