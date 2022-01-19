@@ -21,7 +21,7 @@ const Students = () => {
     const {id} = useParams();
 
     useEffect(() => {
-        fetch(`${serverLink}/api/getAllStudents`)
+        fetch(`${serverLink}/api/student/getAllStudents`)
             .then((response) => response.json())
             .then((json) => {
                 setVeri(json)

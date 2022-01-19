@@ -27,7 +27,7 @@ const StudentEditModal = ({indexID, isActive, onClose}) => {
             redirect: "follow",
         };
 
-        fetch(`${serverLink}/editStudent/${id}`, requestOptions)
+        fetch(`${serverLink}/api/student/editStudent/${id}`, requestOptions)
             .then((response) => {
                 if (response.status === 200) {
                     setVeri(veri.map((item, index) => {

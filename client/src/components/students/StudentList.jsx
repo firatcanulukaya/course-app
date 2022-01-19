@@ -17,8 +17,8 @@ const StudentList = () => {
     }
 
     const deleteStudent = (id) => {
-        fetch(`${serverLink}/d/${id}`, {
-            method: "GET",
+        fetch(`${serverLink}/api/student/deleteStudent/${id}`, {
+            method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
             },

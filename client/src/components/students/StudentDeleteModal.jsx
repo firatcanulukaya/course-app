@@ -31,14 +31,14 @@ const StudentDeleteModal = ({isActive, onClose}) => {
 
     const deleteAllStudents = () => {
         var requestOptions = {
-            method: 'GET',
+            method: 'DELETE',
             redirect: 'follow'
         };
 
-        fetch(`${serverLink}/deleteAllStudents`, requestOptions)
+        fetch(`${serverLink}/api/student/deleteAllStudents`, requestOptions)
             .then(response => {
                 if (response.status === 200) {
-                    fetch(`${serverLink}/`)
+                    fetch(`${serverLink}/api/student/getAllStudents`)
                         .then((response) => response.json())
                         .then((json) => setVeri(json))
                         .catch((error) => console.log(error));
