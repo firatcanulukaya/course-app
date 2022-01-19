@@ -8,9 +8,8 @@ const Navbar = ({sidebarCollapse}) => {
         <button onClick={sidebarCollapse}><img src={ham} alt="" /></button>
           <Routes>
               <Route path="/" element={<p>Homepage</p>}/>
-              <Route path="students" element={<p>Students</p>}/>
-              <Route path="k" element={<p>Add Student</p>}/>
-              <Route path="kgetir/:id" element={<p>Student Info</p>}/>
+              <Route path="students" element={<p>Students List</p>}/>
+              <Route path="student/:id" element={<p>Student Info</p>}/>
           </Routes>
 
         <a href="/">Start</a>
