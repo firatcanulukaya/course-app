@@ -6,14 +6,13 @@ import Sidebar from "./components/Sidebar";
 import HomePage from "./components/HomePage"
 import Footer from "./components/Footer";
 import Students from "./components/students/Students";
-import KullaniciBilgi from "./components/KullaniciBilgi";
+import StudentInfo from "./components/students/StudentInfo";
 import MainContext from "./MainContext";
 import logo from "./assets/img/logomorumsu.png";
 import homeOutline from "./assets/img/home-outline.svg";
 import schoolOutline from "./assets/img/school-outline.svg";
 import easelOutline from "./assets/img/easel-outline.svg";
 import desktopOutline from "./assets/img/desktop-outline.svg";
-
 
 const App = () => {
 
@@ -49,7 +48,10 @@ const App = () => {
     const [veri, setVeri] = useState([]);
     const [serverLink, setServerLink] = useState("http://localhost:3001");
     const [isDeleteStudentsModalBtnDisabled, setIsDeleteStudentsModalBtnDisabled] = useState(true)
-    const data = {veri, setVeri, serverLink, isDeleteStudentsModalBtnDisabled, setIsDeleteStudentsModalBtnDisabled};
+    const [studentName, setStudentName] = useState("");
+    const [studentInfo, setStudentInfo] = useState("");
+    const [studentClass, setStudentClass] = useState("");
+    const data = {veri, setVeri, serverLink, isDeleteStudentsModalBtnDisabled, setIsDeleteStudentsModalBtnDisabled, studentName, studentInfo, studentClass, setStudentName, setStudentClass, setStudentInfo };
 
   return (
     <MainContext.Provider value={data}>
@@ -61,7 +63,7 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<HomePage/>}/>
                     <Route path="students" element={<Students/>}/>
-                    <Route path="kgetir/:id" element={<KullaniciBilgi/>}/>
+                    <Route path="student/:id" element={<StudentInfo/>}/>
                 </Routes>
             </div>
             <Footer logo={logo}/>
