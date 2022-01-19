@@ -6,9 +6,9 @@ import mainContext from "../../MainContext";
 import {CourseBadge} from "../../styledComponents/studentsStyle";
 
 const StudentList = () => {
-    const {veri, setVeri, serverLink} = useContext(mainContext)
+    const {veri, setVeri, serverLink, setStudentName, setStudentInfo, setStudentClass} = useContext(mainContext)
 
-    const [indexID, setIndexID] = useState(0);
+    const [indexID, setIndexID] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
 
     const studentIndex = (indexID) => {
@@ -42,7 +42,7 @@ const StudentList = () => {
             <Modal
                 studentIndex={studentIndex} onClose={() => {
                 setIsOpen(false);
-                setIndexID(0);
+                setIndexID(null);
             }}
                 indexID={indexID} isActive={isOpen}/>
             <div className="table-container">
@@ -70,16 +70,18 @@ const StudentList = () => {
 
                                 {veri.map((item, index) => (
                                     <div className="row" key={index}>
-                                        <div className="cell" data-title="ID">
+                                        <div className="cell tooltip" data-title="ID"
+                                             data-tip={
+                                                 item.updatedAt ? `last edited at ${new Date(item.updatedAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric"})}` : "created at just now"
+                                             } >
                                             {item.id}
                                         </div>
                                         <div className="cell" data-title="Student Info">
-                                            <a href={`kgetir/${item.id}`}>
-                                                {
-                                                    item.studentName.length < 20 ? item.studentName : item.studentName.substr(0, 20) + "..."
-                                                }
+                                            <a href={`student/${item.id}`}>{item.studentName.length < 20 ? item.studentName : item.studentName.substr(0, 20) + "..."}
                                             </a>
-                                            <p>{item.studentClassName.length < 20 ? item.studentClassName : item.studentClassName.substr(0, 5) + "..."} {item.studentInfo.length < 20 ? item.studentInfo : item.studentInfo.substr(0, 15) + "..."}</p>
+
+                                            <p>Class: {item.studentClassName.length < 20 ? item.studentClassName : item.studentClassName.substr(0, 5) + "..."} -
+                                                Age: {item.studentInfo.length < 20 ? item.studentInfo : item.studentInfo.substr(0, 15) + "..."}</p>
                                         </div>
                                         <div className="cell" data-title="Courses">
 
@@ -106,6 +108,9 @@ const StudentList = () => {
                                             <img src={editIcon} alt="Edit icon" onClick={() => {
                                                 setIsOpen(true);
                                                 studentIndex(index)
+                                                setStudentName(veri[index]?.studentName);
+                                                setStudentInfo(veri[index]?.studentInfo);
+                                                setStudentClass(veri[index]?.studentClassName);
                                             }}
 
                                             />
