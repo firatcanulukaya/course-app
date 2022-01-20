@@ -9,12 +9,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       studentName: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        type: Sequelize.STRING
       },
       studentAge: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

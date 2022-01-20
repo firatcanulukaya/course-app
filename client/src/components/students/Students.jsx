@@ -10,10 +10,9 @@ import deleteIcon from "../../assets/img/delete.svg";
 
 const Students = () => {
     const {
-        veri,
-        setVeri,
+        studentsData,
+        setStudentsData,
         serverLink,
-        isDeleteStudentsModalBtnDisabled,
         setIsDeleteStudentsModalBtnDisabled
     } = useContext(mainContext)
     const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +23,7 @@ const Students = () => {
         fetch(`${serverLink}/api/student/getAllStudents`)
             .then((response) => response.json())
             .then((json) => {
-                setVeri(json)
+                setStudentsData(json)
             })
             .catch((error) => console.log(error));
     }, []);
@@ -53,7 +52,7 @@ const Students = () => {
                     <img src={plus} alt="plus" className="plus"/>
                 </button>
 
-                {veri.length === 0 ? "":
+                {studentsData.length === 0 ? "":
                     <button className="add-students delete-students tooltip" data-tip="Delete All Students"
                             onClick={() => {
                                 setIsDeleteModalOpen(!isDeleteModalOpen)
@@ -63,7 +62,7 @@ const Students = () => {
                     </button>
                 }
 
-                {veri.length === 0 ? <p className="studentsModalError">Nothing to show about students.</p> :
+                {studentsData.length === 0 ? <p className="studentsModalError">Nothing to show about students.</p> :
                     <StudentList/>}
             </div>
         </>

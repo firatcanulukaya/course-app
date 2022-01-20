@@ -6,7 +6,7 @@ import mainContext from "../../MainContext";
 import {CourseBadge} from "../../styledComponents/studentsStyle";
 
 const StudentList = () => {
-    const {veri, setVeri, serverLink, setStudentName, setStudentInfo, setStudentClass} = useContext(mainContext)
+    const {studentsData, setStudentsData, serverLink, setStudentName, setStudentInfo, setStudentClass} = useContext(mainContext)
 
     const [indexID, setIndexID] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +25,7 @@ const StudentList = () => {
         })
             .then((response) => {
                 if (response.status === 200) {
-                    setVeri(veri.filter((item) => item.id !== id));
+                    setStudentsData(studentsData.filter((item) => item.id !== id));
                 }
             })
             .catch((error) => console.log(error));
@@ -68,7 +68,7 @@ const StudentList = () => {
 
                                 </div>
 
-                                {veri.map((item, index) => (
+                                {studentsData.map((item, index) => (
                                     <div className="row" key={index}>
                                         <div className="cell tooltip" data-title="ID"
                                              data-tip={
@@ -108,9 +108,9 @@ const StudentList = () => {
                                             <img src={editIcon} alt="Edit icon" onClick={() => {
                                                 setIsOpen(true);
                                                 studentIndex(index)
-                                                setStudentName(veri[index]?.studentName);
-                                                setStudentInfo(veri[index]?.studentInfo);
-                                                setStudentClass(veri[index]?.studentClassName);
+                                                setStudentName(studentsData[index]?.studentName);
+                                                setStudentInfo(studentsData[index]?.studentInfo);
+                                                setStudentClass(studentsData[index]?.studentClassName);
                                             }}
 
                                             />

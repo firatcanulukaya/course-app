@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Routes, Route } from "react-router-dom";
+import {Routes, Route} from "react-router-dom";
 import "./assets/style/style.css";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
@@ -39,37 +39,50 @@ const App = () => {
         }
     ]
 
+    //TODO sidebar active ise active classı ekle
     const sidebarCollapse = () => {
-        const sidebar = document.querySelector(".sidebar");
-        const mainContent = document.querySelector(".main-content");
-        sidebar.classList.toggle("active");
-        mainContent.classList.toggle("active");
+        document.querySelector(".sidebar").classList.toggle("active");
+        document.querySelector(".main-content").classList.toggle("active");
+        // localStorage.setItem("sidebar", document.querySelector(".sidebar").classList.contains("active"));
     };
-    const [veri, setVeri] = useState([]);
+
+    const [studentsData, setStudentsData] = useState([]);
     const [serverLink, setServerLink] = useState("http://localhost:3001");
     const [isDeleteStudentsModalBtnDisabled, setIsDeleteStudentsModalBtnDisabled] = useState(true)
-    const [studentName, setStudentName] = useState("");
-    const [studentInfo, setStudentInfo] = useState("");
-    const [studentClass, setStudentClass] = useState("");
-    const data = {veri, setVeri, serverLink, isDeleteStudentsModalBtnDisabled, setIsDeleteStudentsModalBtnDisabled, studentName, studentInfo, studentClass, setStudentName, setStudentClass, setStudentInfo };
+    const [studentName, setStudentName] = useState();
+    const [studentInfo, setStudentInfo] = useState();
+    const [studentClass, setStudentClass] = useState();
+    const data = {
+        studentsData,
+        setStudentsData,
+        serverLink,
+        isDeleteStudentsModalBtnDisabled,
+        setIsDeleteStudentsModalBtnDisabled,
+        studentName,
+        studentInfo,
+        studentClass,
+        setStudentName,
+        setStudentClass,
+        setStudentInfo
+    };
 
-  return (
-    <MainContext.Provider value={data}>
-        <div className="wrapper">
-            <Navbar sidebarCollapse={sidebarCollapse}/>
-            <Sidebar sidebarItems={sidebarItems} logo={logo}/>
+    return (
+        <MainContext.Provider value={data}>
+            <div className="wrapper">
+                <Navbar sidebarCollapse={sidebarCollapse}/>
+                <Sidebar sidebarItems={sidebarItems} logo={logo}/>
 
-            <div className="main-content">
-                <Routes>
-                    <Route path="/" element={<HomePage/>}/>
-                    <Route path="students" element={<Students/>}/>
-                    <Route path="student/:id" element={<StudentInfo/>}/>
-                </Routes>
+                <div className="main-content">
+                    <Routes>
+                        <Route path="/" element={<HomePage/>}/>
+                        <Route path="students" element={<Students/>}/>
+                        <Route path="student/:id" element={<StudentInfo/>}/>
+                    </Routes>
+                </div>
+                <Footer logo={logo}/>
             </div>
-            <Footer logo={logo}/>
-        </div>
-    </MainContext.Provider>
-  );
+        </MainContext.Provider>
+    );
 }
 
 export default App;

@@ -4,7 +4,7 @@ import mainContext from "../../MainContext";
 import {ModalFooterBtn} from "../../styledComponents/studentsStyle";
 
 const StudentAddModal = ({isActive, onClose}) => {
-    const {veri, setVeri, serverLink} = useContext(mainContext);
+    const {studentsData, setStudentsData, serverLink} = useContext(mainContext);
 
     const [studentName, setStudentName] = useState("");
     const [studentInfo, setStudentInfo] = useState("");
@@ -42,8 +42,8 @@ const StudentAddModal = ({isActive, onClose}) => {
                     .then((json) => setStudentNewID(json))
                     .catch((error) => console.log(error));
                 if (response.status === 200) {
-                    setVeri([
-                        ...veri,
+                    setStudentsData([
+                        ...studentsData,
                         {
                             studentName: studentName,
                             studentInfo: studentInfo,

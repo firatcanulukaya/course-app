@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {Link, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import bg from "../../assets/img/bg3.svg";
 import {CourseBadge} from "../../styledComponents/studentsStyle";
 
 function StudentInfo() {
-    const [veri, setVeri] = useState(null);
+    const [studentData, setStudentData] = useState(null);
     const {id} = useParams();
 
     useEffect(() => {
@@ -12,7 +12,7 @@ function StudentInfo() {
             .then((response) => response.json())
             .then((json) => {
                 console.log(json);
-                setVeri(json)
+                setStudentData(json)
             })
             .catch((error) => console.log(error));
     }, []);
@@ -46,15 +46,15 @@ function StudentInfo() {
 
                                 <div className="row">
                                     <div className="cell" data-title="ID">
-                                        {veri?.id}
+                                        {studentData?.id}
                                     </div>
                                     <div className="cell" data-title="Student Name">
-                                        <a href={`student/${veri?.id}`}>
-                                            {veri?.studentName.length < 20 ? veri?.studentName : veri?.studentName.substr(0, 20) + "..."}
+                                        <a href={`student/${studentData?.id}`}>
+                                            {studentData?.studentName.length < 20 ? studentData?.studentName : studentData?.studentName.substr(0, 20) + "..."}
                                         </a>
-                                        <p>Age: {veri?.studentInfo.length < 20 ? veri?.studentInfo : veri?.studentInfo.substr(0, 15) + "..."}</p>
+                                        <p>Age: {studentData?.studentInfo.length < 20 ? studentData?.studentInfo : studentData?.studentInfo.substr(0, 15) + "..."}</p>
                                         <p>Class
-                                            Name: {veri?.studentClassName.length < 20 ? veri?.studentClassName : veri?.studentClassName.substr(0, 5) + "..."}</p>
+                                            Name: {studentData?.studentClassName.length < 20 ? studentData?.studentClassName : studentData?.studentClassName.substr(0, 5) + "..."}</p>
                                     </div>
 
                                     <div className="cell" data-title="Courses">
@@ -69,7 +69,7 @@ function StudentInfo() {
                                                     Course 2
                                                 </CourseBadge>
 
-                                                <CourseBadge hex={() => randomHexGenerator}>
+                                                <CourseBadge hex={() => randomHexGenerator || "#000"}>
                                                     Course 3
                                                 </CourseBadge>
                                             </li>

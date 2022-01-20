@@ -12,7 +12,7 @@ const Sidebar = ({sidebarItems, logo}) => {
         <div className="sidebar-items">
             <ul className="sidebar-itemnav">
                 {sidebarItems.map((item, index) => {
-                    return <a href={item.link} key={index}>
+                    return <a href={item.link} key={index} className="" data-tip={item.name}>
                         <img src={item.icon} alt="sidebar item icon"/>
                         <span>{item.name}</span>
 

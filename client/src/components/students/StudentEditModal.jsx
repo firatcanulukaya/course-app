@@ -5,8 +5,8 @@ import {ModalFooterBtn} from "../../styledComponents/studentsStyle";
 
 const StudentEditModal = ({indexID, isActive, onClose}) => {
     const {
-        veri,
-        setVeri,
+        studentsData,
+        setStudentsData,
         serverLink,
         studentName,
         setStudentName,
@@ -16,9 +16,9 @@ const StudentEditModal = ({indexID, isActive, onClose}) => {
         setStudentClass
     } = useContext(mainContext)
 
-    setStudentName(veri[indexID]?.studentName);
-    setStudentInfo(veri[indexID]?.studentInfo);
-    setStudentClass(veri[indexID]?.studentClassName);
+    setStudentName(studentsData[indexID]?.studentName);
+    setStudentInfo(studentsData[indexID]?.studentInfo);
+    setStudentClass(studentsData[indexID]?.studentClassName);
 
     const editStudent = (studentName, studentInfo, studentClass, id) => {
         var myHeaders = new Headers();
@@ -40,7 +40,7 @@ const StudentEditModal = ({indexID, isActive, onClose}) => {
         fetch(`${serverLink}/api/student/editStudent/${id}`, requestOptions)
             .then((response) => {
                 if (response.status === 200) {
-                    setVeri(veri.map((item, index) => {
+                    setStudentsData(studentsData.map((item, index) => {
                         if (index === indexID) {
                             return {
                                 ...item,
@@ -48,6 +48,7 @@ const StudentEditModal = ({indexID, isActive, onClose}) => {
                                 studentInfo: studentInfo,
                                 studentClassName: studentClass,
                             }
+                            console.log(item)
                         } else {
                             return item
                         }
@@ -112,6 +113,8 @@ const StudentEditModal = ({indexID, isActive, onClose}) => {
         },
     ]
 
+    //TODO düzenleme yapıldığında kaydetmiyor
+
     return (
         <div className={"studentModal " + (isActive && "active")}>
             <div className="studentModalheader">
@@ -126,20 +129,19 @@ const StudentEditModal = ({indexID, isActive, onClose}) => {
                 </button>
             </div>
 
-            <form>
                 <div className="studentModalContent">
                     <div className="container">
                         <div className="row">
                             <div className="col-33">
                                 <label className="studentModalLabel">Name</label>
                                 <input type="text" className="studentModalInput" required
-                                       placeholder={veri[indexID]?.studentName}
+                                       placeholder={studentsData[indexID]?.studentName}
                                        onChange={(e) => setStudentName(e.target.value)}/>
                             </div>
                             <div className="col-33">
                                 <label className="studentModalLabel">Age</label>
                                 <input type="number" className="studentModalInput" maxLength="2" required
-                                       placeholder={veri[indexID]?.studentInfo}
+                                       placeholder={studentsData[indexID]?.studentInfo}
                                        onChange={(e) => setStudentInfo(e.target.value)}/>
                             </div>
                             <div className="col-33">
@@ -149,9 +151,9 @@ const StudentEditModal = ({indexID, isActive, onClose}) => {
                                     required
                                     onChange={(e) => setStudentClass(e.target.value)}
                                 >
-                                    <option value="">{veri[indexID]?.studentClassName}</option>
+                                    <option value="">{studentsData[indexID]?.studentClassName}</option>
                                     {classList.map((item) => {
-                                        if (item.className !== veri[indexID]?.studentClassName) {
+                                        if (item.className !== studentsData[indexID]?.studentClassName) {
                                             return (
                                                 <option key={item.id} value={item.className}>{item.className}</option>
                                             )
@@ -165,14 +167,10 @@ const StudentEditModal = ({indexID, isActive, onClose}) => {
 
                 <div className="studentModalfooter">
                     <ModalFooterBtn bgColor="#1E40AF" textColor="#fff"
-                                    onClick={(e) => {
-                                        e.preventDefault()
-                                        editStudent(studentName, studentInfo, studentClass, veri[indexID].id)
-                                    }}>
+                                    onClick={() => editStudent(studentName, studentInfo, studentClass, studentsData[indexID].id) }>
                         Save Changes
                     </ModalFooterBtn>
                 </div>
-            </form>
 
         </div>
     )
