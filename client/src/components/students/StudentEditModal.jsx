@@ -20,6 +20,8 @@ const StudentEditModal = ({indexID, isActive, onClose}) => {
     setStudentInfo(studentsData[indexID]?.studentInfo);
     setStudentClass(studentsData[indexID]?.studentClassName);
 
+    const [studentClasses, setStudentClasses] = useState([]);
+
     const editStudent = (studentName, studentInfo, studentClass, id) => {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -62,56 +64,12 @@ const StudentEditModal = ({indexID, isActive, onClose}) => {
             .catch((error) => console.log("error", error));
     }
 
-    const classList = [
-        {
-            id: 1,
-            className: "1. Sınıf"
-        },
-        {
-            id: 2,
-            className: "2. Sınıf"
-        },
-        {
-            id: 3,
-            className: "3. Sınıf"
-        },
-        {
-            id: 4,
-            className: "4. Sınıf"
-        },
-        {
-            id: 5,
-            className: "5. Sınıf"
-        },
-        {
-            id: 6,
-            className: "6. Sınıf"
-        },
-        {
-            id: 7,
-            className: "7. Sınıf"
-        },
-        {
-            id: 8,
-            className: "8. Sınıf"
-        },
-        {
-            id: 9,
-            className: "9. Sınıf"
-        },
-        {
-            id: 10,
-            className: "10. Sınıf"
-        },
-        {
-            id: 11,
-            className: "11. Sınıf"
-        },
-        {
-            id: 12,
-            className: "12. Sınıf"
-        },
-    ]
+    fetch(`${serverLink}/api/student/getStudentClasses`)
+        .then((response) => response.json())
+        .then((data) => {
+            setStudentClasses(data);
+        })
+        .catch((error) => console.log("error", error));
 
     //TODO düzenleme yapıldığında kaydetmiyor
 
@@ -152,7 +110,7 @@ const StudentEditModal = ({indexID, isActive, onClose}) => {
                                     onChange={(e) => setStudentClass(e.target.value)}
                                 >
                                     <option value="">{studentsData[indexID]?.studentClassName}</option>
-                                    {classList.map((item) => {
+                                    {studentClasses.map((item) => {
                                         if (item.className !== studentsData[indexID]?.studentClassName) {
                                             return (
                                                 <option key={item.id} value={item.className}>{item.className}</option>

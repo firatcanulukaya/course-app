@@ -20,16 +20,15 @@ const Students = () => {
     const {id} = useParams();
 
     useEffect(() => {
-        fetch(`${serverLink}/api/student/getAllStudents`)
-            .then((response) => response.json())
-            .then((json) => {
-                setStudentsData(json)
-            })
-            .catch((error) => console.log(error));
-    }, []);
+        const fetchData = async () => {
+            const response = await fetch(`${serverLink}/api/student/getAllStudents`);
+            const data = await response.json();
+            setStudentsData(data);
+        };
+        fetchData();
+    }, [serverLink, setStudentsData]);
 
     return (
-        <>
             <div className="students-container">
                 <img src={bg} alt="background" className="homepage-bg"/>
                 <StudentAddModal
@@ -65,7 +64,6 @@ const Students = () => {
                 {studentsData.length === 0 ? <p className="studentsModalError">Nothing to show about students.</p> :
                     <StudentList/>}
             </div>
-        </>
     )
 }
 

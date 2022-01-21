@@ -6,7 +6,14 @@ import mainContext from "../../MainContext";
 import {CourseBadge} from "../../styledComponents/studentsStyle";
 
 const StudentList = () => {
-    const {studentsData, setStudentsData, serverLink, setStudentName, setStudentInfo, setStudentClass} = useContext(mainContext)
+    const {
+        studentsData,
+        setStudentsData,
+        serverLink,
+        setStudentName,
+        setStudentInfo,
+        setStudentClass
+    } = useContext(mainContext)
 
     const [indexID, setIndexID] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
@@ -31,13 +38,7 @@ const StudentList = () => {
             .catch((error) => console.log(error));
     }
 
-    const randomHexGenerator = () => {
-        const hex = Math.floor(Math.random() * 16777215).toString(16);
-        return `#00${hex.substr(0, 2)}e3`;
-    }
-
     return (
-
         <>
             <Modal
                 studentIndex={studentIndex} onClose={() => {
@@ -45,6 +46,7 @@ const StudentList = () => {
                 setIndexID(null);
             }}
                 indexID={indexID} isActive={isOpen}/>
+
             <div className="table-container">
 
                 <div className="limiter">
@@ -70,36 +72,26 @@ const StudentList = () => {
 
                                 {studentsData.map((item, index) => (
                                     <div className="row" key={index}>
-                                        <div className="cell tooltip" data-title="ID"
-                                             data-tip={
-                                                 item.updatedAt ? `last edited at ${new Date(item.updatedAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric"})}` : "created at just now"
-                                             } >
+                                        <div className="cell" data-title="ID">
                                             {item.id}
                                         </div>
                                         <div className="cell" data-title="Student Info">
                                             <a href={`student/${item.id}`}>{item.studentName.length < 20 ? item.studentName : item.studentName.substr(0, 20) + "..."}
                                             </a>
 
-                                            <p>Class: {item.studentClassName.length < 20 ? item.studentClassName : item.studentClassName.substr(0, 5) + "..."} -
-                                                Age: {item.studentInfo.length < 20 ? item.studentInfo : item.studentInfo.substr(0, 15) + "..."}</p>
+                                            <p>Class: {item.class.className} <br/>
+                                                Age: {item.studentAge.length < 20 ? item.studentAge : item.studentAge.substr(0, 15) + "..."}</p>
                                         </div>
                                         <div className="cell" data-title="Courses">
 
                                             <ul>
                                                 <li className="student-table-li">
-
-                                                    <CourseBadge hex={() => randomHexGenerator}>
-                                                        Course 1
-                                                    </CourseBadge>
-
-                                                    <CourseBadge hex={() => randomHexGenerator}>
-                                                        Course 2
-                                                    </CourseBadge>
-
-                                                    <CourseBadge hex={() => randomHexGenerator}>
-                                                        Course 3
-                                                    </CourseBadge>
-
+                                                    {item.courses.length > 0 ? item.courses.map((course, index) => (
+                                                            <CourseBadge hex={course.courseColor} key={index}>
+                                                                {course.courseName}
+                                                            </CourseBadge>
+                                                        ))
+                                                    : <CourseBadge hex="#000">Student has no courses yet</CourseBadge>}
                                                 </li>
                                             </ul>
 
@@ -110,7 +102,7 @@ const StudentList = () => {
                                                 studentIndex(index)
                                                 setStudentName(studentsData[index]?.studentName);
                                                 setStudentInfo(studentsData[index]?.studentInfo);
-                                                setStudentClass(studentsData[index]?.studentClassName);
+                                                setStudentClass(studentsData[index]?.class.className);
                                             }}
 
                                             />

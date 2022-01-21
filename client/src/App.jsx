@@ -7,7 +7,12 @@ import HomePage from "./components/HomePage"
 import Footer from "./components/Footer";
 import Students from "./components/students/Students";
 import StudentInfo from "./components/students/StudentInfo";
+import Courses from "./components/courses/Courses";
+import CourseInfo from "./components/courses/CourseInfo";
+import Classes from "./components/classes/Classes";
+import ClassInfo from "./components/classes/ClassInfo";
 import MainContext from "./MainContext";
+
 import logo from "./assets/img/logomorumsu.png";
 import homeOutline from "./assets/img/home-outline.svg";
 import schoolOutline from "./assets/img/school-outline.svg";
@@ -47,14 +52,21 @@ const App = () => {
     };
 
     const [studentsData, setStudentsData] = useState([]);
+    const [coursesData, setCoursesData] = useState([]);
+    const [classesData, setClassesData] = useState([]);
     const [serverLink, setServerLink] = useState("http://localhost:3001");
     const [isDeleteStudentsModalBtnDisabled, setIsDeleteStudentsModalBtnDisabled] = useState(true)
     const [studentName, setStudentName] = useState();
     const [studentInfo, setStudentInfo] = useState();
     const [studentClass, setStudentClass] = useState();
+
     const data = {
         studentsData,
         setStudentsData,
+        coursesData,
+        setCoursesData,
+        classesData,
+        setClassesData,
         serverLink,
         isDeleteStudentsModalBtnDisabled,
         setIsDeleteStudentsModalBtnDisabled,
@@ -77,6 +89,10 @@ const App = () => {
                         <Route path="/" element={<HomePage/>}/>
                         <Route path="students" element={<Students/>}/>
                         <Route path="student/:id" element={<StudentInfo/>}/>
+                        <Route path="courses" element={<Courses/>}/>
+                        <Route path="course/:id" element={<CourseInfo/>}/>
+                        <Route path="classes" element={<Classes/>}/>
+                        <Route path="class/:id" element={<ClassInfo/>}/>
                     </Routes>
                 </div>
                 <Footer logo={logo}/>

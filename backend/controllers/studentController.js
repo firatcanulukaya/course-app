@@ -1,10 +1,12 @@
 const db = require('../models');
 
-module.exports.createStudent = async (req, res) => {
+const createStudent = async (req, res) => {
     try {
         let data = {
             studentName: req.body.studentName,
             studentAge: req.body.studentAge,
+            classId: req.body.classId,
+            courseId: req.body.courseId
         }
         let jsonData = await db.Student.create(data)
         res.status(200).json(jsonData)
@@ -13,13 +15,14 @@ module.exports.createStudent = async (req, res) => {
     }
 }
 
-module.exports.editStudent = async (req, res) => {
+const editStudent = async (req, res) => {
 
     try {
         let data = {
             studentName: req.body.studentName,
-            studentInfo: req.body.studentInfo,
-            studentClassName: req.body.studentClassName
+            studentAge: req.body.studentAge,
+            classId: req.body.classId,
+            courseId: req.body.courseId
         }
 
         await db.Student.update(data, {
@@ -35,31 +38,33 @@ module.exports.editStudent = async (req, res) => {
 
 }
 
-module.exports.getAllStudents = async (req, res) => {
+const getAllStudents = async (req, res) => {
     try {
-        const students = await db.Student.findAll();
+        const students = await db.Student.findAll({
+            include: ["class", "courses"]
+        });
         res.status(200).json(students);
     } catch (error) {
         res.status(500).json({error: error.message});
     }
 }
 
-module.exports.getStudentInfo = async (req, res) => {
+const getStudentInfo = async (req, res) => {
+    let {id} = req.params;
     try {
-        let data = await db.Student.findOne({
+        const student = await db.Student.findOne({
+            include: ["class", "courses"],
             where: {
-                id: req.params.id
+                id: id
             }
         })
-        res.status(200).json(data)
-    } catch (err) {
-        res.status(500).json({
-            message: err.message
-        })
+        res.status(200).json(student)
+    } catch (error) {
+        res.status(500).json({message: error.message})
     }
 }
 
-module.exports.deleteStudent = async (req, res) => {
+const deleteStudent = async (req, res) => {
     try {
         const student = await db.Student.findOne({
             where: {
@@ -82,7 +87,7 @@ module.exports.deleteStudent = async (req, res) => {
     }
 }
 
-module.exports.deleteAllStudents = async (req, res) => {
+const deleteAllStudents = async (req, res) => {
     try {
         await db.Student.destroy({where: {}})
         res.status(200).json({
@@ -93,4 +98,13 @@ module.exports.deleteAllStudents = async (req, res) => {
             message: 'Error deleting all students'
         })
     }
+}
+
+module.exports = {
+    createStudent,
+    editStudent,
+    getAllStudents,
+    getStudentInfo,
+    deleteStudent,
+    deleteAllStudents
 }
