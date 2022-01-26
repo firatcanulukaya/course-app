@@ -375,8 +375,6 @@ button {
 
       }
     }
-
-
   }
 
   .add-students {
@@ -405,7 +403,6 @@ button {
   opacity: 0;
   background: #ffffff;
   width: 722px;
-  min-height: 30%;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   z-index: 10;
@@ -441,9 +438,9 @@ button {
   }
 
   .studentModalfooter {
-    position: absolute;
-    bottom: 13px;
-    right: 13px;
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
   }
 
   .studentModalheader {

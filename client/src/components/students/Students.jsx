@@ -28,42 +28,58 @@ const Students = () => {
         fetchData();
     }, [serverLink, setStudentsData]);
 
-    return (
-            <div className="students-container">
-                <img src={bg} alt="background" className="homepage-bg"/>
-                <StudentAddModal
-                    onClose={() => {
-                        setIsOpen(false);
-                    }} isActive={isOpen}
-                />
-
-                <StudentDeleteModal
-                    onClose={() => {
-                        setIsDeleteModalOpen(false);
-                        setIsDeleteStudentsModalBtnDisabled(true);
-                    }}
-                    isActive={isDeleteModalOpen}
-                />
-
-                <button className="add-students tooltip" data-tip="Add New Student" onClick={() => {
-                    setIsOpen(!isOpen);
-                }}>
-                    <img src={plus} alt="plus" className="plus"/>
-                </button>
-
-                {studentsData.length === 0 ? "":
-                    <button className="add-students delete-students tooltip" data-tip="Delete All Students"
-                            onClick={() => {
-                                setIsDeleteModalOpen(!isDeleteModalOpen)
-                                isDeleteModalOpen ? setIsDeleteStudentsModalBtnDisabled(true) : setIsDeleteStudentsModalBtnDisabled(true)
-                            }}>
-                        <img src={deleteIcon} alt="plus" className="plus"/>
-                    </button>
+    const handleDelete = (id) => {
+        fetch(`${serverLink}/api/student/deleteStudent/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((response) => {
+                if (response.status === 200) {
+                    setStudentsData(studentsData.filter((item) => item.id !== id));
                 }
+            })
+            .catch((error) => console.log(error));
+    }
 
-                {studentsData.length === 0 ? <p className="studentsModalError">Nothing to show about students.</p> :
-                    <StudentList/>}
-            </div>
+    return (
+        <div className="students-container">
+            <img src={bg} alt="background" className="homepage-bg"/>
+            <StudentAddModal
+                onClose={() => {
+                    setIsOpen(false);
+                }} isActive={isOpen}
+            />
+
+            <StudentDeleteModal
+                onClose={() => {
+                    setIsDeleteModalOpen(false);
+                    setIsDeleteStudentsModalBtnDisabled(true);
+                }}
+                isActive={isDeleteModalOpen}
+            />
+
+            <button className="add-students tooltip" data-tip="Add New Student" onClick={() => {
+                setIsOpen(!isOpen);
+            }}>
+                <img src={plus} alt="plus" className="plus"/>
+            </button>
+
+            {studentsData.length === 0 ? "" :
+                <button className="add-students delete-students tooltip" data-tip="Delete All Students"
+                        onClick={() => {
+                            setIsDeleteModalOpen(!isDeleteModalOpen)
+                            isDeleteModalOpen ? setIsDeleteStudentsModalBtnDisabled(true) : setIsDeleteStudentsModalBtnDisabled(true)
+                        }}>
+                    <img src={deleteIcon} alt="plus" className="plus"/>
+                </button>
+            }
+
+            {studentsData.length === 0 ? <p className="studentsModalError">Nothing to show about students.</p> :
+                <StudentList handleDelete={handleDelete}/>}
+
+        </div>
     )
 }
 

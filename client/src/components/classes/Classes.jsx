@@ -1,7 +1,21 @@
 import bg from "../../assets/img/bg4.svg";
 import ClassList from "./ClassList";
+import {useContext, useEffect} from "react";
+import mainContext from "../../MainContext";
 
 const Courses = () => {
+
+    const { classesData, setClassesData, serverLink } = useContext(mainContext);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await fetch(`${serverLink}/api/class/getClasses`);
+            const data = await response.json();
+            setClassesData(data);
+        };
+        fetchData();
+    }, [serverLink, setClassesData]);
+
     return(
         <div className="students-container">
             <img src={bg} alt="background" className="homepage-bg"/>

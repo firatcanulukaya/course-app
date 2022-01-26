@@ -64,8 +64,9 @@ const deleteCourse = async (req, res) => {
 
 const getCourse = async (req, res) => {
     try {
-        const {id} = req.query;
+        const {id} = req.params;
         const course = await db.Course.findOne({
+            include: ["students"],
             where: {
                 id: id
             }

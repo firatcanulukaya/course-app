@@ -2,9 +2,13 @@ import Modal from "../students/StudentEditModal";
 import {CourseBadge} from "../../styledComponents/studentsStyle";
 import editIcon from "../../assets/img/edit.svg";
 import deleteIcon from "../../assets/img/delete.svg";
+import {useContext} from "react";
+import mainContext from "../../MainContext";
 
 const CourseList = () => {
-    return(
+    const {classesData} = useContext(mainContext);
+
+    return (
         <>
             {/*<Modal*/}
             {/*    studentIndex={studentIndex} onClose={() => {*/}
@@ -37,30 +41,43 @@ const CourseList = () => {
                                 </div>
 
 
+                                {classesData.map((item, index) => (
+
                                     <div className="row">
                                         <div className="cell" data-title="ID">
-                                            item id
+                                            {item.id}
                                         </div>
                                         <div className="cell" data-title="Student Info">
-                                            <a href={`student/item id`}>class name
+                                            <a href={`class/${item.id}`}> {item.className}
                                             </a>
 
-                                            <p>Total Student Count: 0</p>
+                                            <p>Total Student Count: {item.students.length}</p>
                                         </div>
                                         <div className="cell" data-title="Courses">
 
                                             <ul>
                                                 <li className="student-table-li">
-                                                   <CourseBadge hex="#000">Class has no students yet</CourseBadge>
+                                                    {item.students.length > 0 ? item.students.map((student, index) => (
+                                                            <CourseBadge hex="#60A5FA"
+                                                                         key={index}>{student.studentName}</CourseBadge>
+                                                        ))
+                                                        :
+                                                        <li className="student-table-li">
+                                                            <CourseBadge hex="#000">Class has no students
+                                                                yet</CourseBadge>
+                                                        </li>
+                                                    }
                                                 </li>
                                             </ul>
 
                                         </div>
                                         <div className="cell" data-title="Edit">
                                             <img src={editIcon} alt="Edit icon"/>
-                                            <img src={deleteIcon}alt="Delete icon"/>
+                                            <img src={deleteIcon} alt="Delete icon"/>
                                         </div>
                                     </div>
+                                ))}
+
                             </div>
                         </div>
                     </div>

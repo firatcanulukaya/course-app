@@ -5,7 +5,7 @@ export const CourseBadge = styled.a`
   background: ${props => props.hex};
   border-radius: 1rem;
   font-size: 15px;
-  margin: 0 1rem;
+  margin-left: .5rem;
   padding: .3rem 1rem;
   font-family: "Plus Jakarta Sans Medium";
   line-height: 1.2;

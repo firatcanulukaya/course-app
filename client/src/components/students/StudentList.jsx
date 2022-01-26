@@ -1,51 +1,25 @@
 import editIcon from "../../assets/img/edit.svg";
 import deleteIcon from "../../assets/img/delete.svg";
-import Modal from "./StudentEditModal";
+import StudentEditModal from "./StudentEditModal";
 import {useContext, useState} from "react";
 import mainContext from "../../MainContext";
 import {CourseBadge} from "../../styledComponents/studentsStyle";
+import DeleteModal from "../DeleteModal";
 
-const StudentList = () => {
-    const {
-        studentsData,
-        setStudentsData,
-        serverLink,
-        setStudentName,
-        setStudentInfo,
-        setStudentClass
-    } = useContext(mainContext)
+const StudentList = ({handleDelete}) => {
+    const {studentsData} = useContext(mainContext)
 
     const [indexID, setIndexID] = useState(null);
-    const [isOpen, setIsOpen] = useState(false);
-
-    const studentIndex = (indexID) => {
-        setIndexID(indexID);
-        setIsOpen(!isOpen);
-    }
-
-    const deleteStudent = (id) => {
-        fetch(`${serverLink}/api/student/deleteStudent/${id}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-            .then((response) => {
-                if (response.status === 200) {
-                    setStudentsData(studentsData.filter((item) => item.id !== id));
-                }
-            })
-            .catch((error) => console.log(error));
-    }
+    const [isOpen, setIsOpen] = useState({
+        add: false,
+        edit: false,
+        delete: false
+    });
 
     return (
         <>
-            <Modal
-                studentIndex={studentIndex} onClose={() => {
-                setIsOpen(false);
-                setIndexID(null);
-            }}
-                indexID={indexID} isActive={isOpen}/>
+            {/*<StudentEditModal onClose={() => { setIsOpen(false); setIndexID(null); }} indexID={indexID} isActive={isOpen}/>*/}
+            <DeleteModal handleDelete={handleDelete} onClose={() => setIsOpen({...isOpen, delete: false})} isActive={isOpen.delete}/>
 
             <div className="table-container">
 
@@ -80,7 +54,8 @@ const StudentList = () => {
                                             </a>
 
                                             <p>Class: {item.class.className} <br/>
-                                                Age: {item.studentAge.length < 20 ? item.studentAge : item.studentAge.substr(0, 15) + "..."}</p>
+                                                Age: {item.studentAge.length < 20 ? item.studentAge : item.studentAge.substr(0, 15) + "..."}
+                                            </p>
                                         </div>
                                         <div className="cell" data-title="Courses">
 
@@ -91,22 +66,18 @@ const StudentList = () => {
                                                                 {course.courseName}
                                                             </CourseBadge>
                                                         ))
-                                                    : <CourseBadge hex="#000">Student has no courses yet</CourseBadge>}
+                                                        : <CourseBadge hex="#000">Student has no courses
+                                                            yet</CourseBadge>}
                                                 </li>
                                             </ul>
 
                                         </div>
                                         <div className="cell" data-title="Edit">
                                             <img src={editIcon} alt="Edit icon" onClick={() => {
-                                                setIsOpen(true);
-                                                studentIndex(index)
-                                                setStudentName(studentsData[index]?.studentName);
-                                                setStudentInfo(studentsData[index]?.studentInfo);
-                                                setStudentClass(studentsData[index]?.class.className);
-                                            }}
-
-                                            />
-                                            <img src={deleteIcon} onClick={() => deleteStudent(item.id)}
+                                                setIsOpen(!isOpen);
+                                                setIndexID(index)
+                                            }}/>
+                                            <img src={deleteIcon} onClick={() => setIsOpen({...isOpen, delete: !isOpen.delete})}
                                                  alt="Delete icon"/>
                                         </div>
                                     </div>
