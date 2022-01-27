@@ -129,8 +129,8 @@ const removeStudentFromCourse = async (req, res) => {
         });
         const studentCourse = await db.StudentCourse.destroy({
             where: {
-                studentId: course.id,
-                courseId:  student.id
+                studentId: student.id,
+                courseId:  course.id
             }
         });
         res.status(200).json({message: 'Student removed from course'});
