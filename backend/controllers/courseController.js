@@ -114,6 +114,35 @@ const addStudentToCourse = async (req, res) => {
     }
 };
 
+const addStudentToMultipleCourse = async (req, res) => {
+    try {
+        const {studentId, courseIds} = req.body;
+        const student = await db.Student.findOne({
+            where: {
+                id: studentId
+            }
+        });
+        const courses = await db.Course.findAll({
+            where: {
+                id: courseIds
+            }
+        });
+        const studentCourses = await db.StudentCourse.bulkCreate(
+            courses.map(course => {
+                return {
+                    studentId: student.id,
+                    courseId: course.id
+                }
+            })
+        );
+
+        !student || !courses ? res.status(404).json({message: 'Student or courses not found'}) : res.status(200).json({message: 'Student added to courses successfully'});
+
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+};
+
 const removeStudentFromCourse = async (req, res) => {
     try {
         const {studentId, courseId} = req.body;
@@ -147,5 +176,6 @@ module.exports = {
     getCourse,
     deleteAllCourses,
     addStudentToCourse,
-    removeStudentFromCourse
+    removeStudentFromCourse,
+    addStudentToMultipleCourse
 }
