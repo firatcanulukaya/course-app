@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const CourseBadge = styled.a`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   color: #ffffff;
   background: ${props => props.hex};
   border-radius: 1rem;
@@ -9,6 +12,15 @@ export const CourseBadge = styled.a`
   padding: .3rem 1rem;
   font-family: "Plus Jakarta Sans Medium", sans-serif;
   line-height: 1.2;
+  
+  a{
+    color: #fff;
+  }
+  
+  button{
+    display: flex;
+    margin-left: 10px;
+  }
 `
 
 export const ModalFooterBtn = styled.button`
