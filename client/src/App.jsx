@@ -56,9 +56,6 @@ const App = () => {
     const [classesData, setClassesData] = useState([]);
     const [serverLink, setServerLink] = useState("http://localhost:3001");
     const [isDeleteStudentsModalBtnDisabled, setIsDeleteStudentsModalBtnDisabled] = useState(true)
-    const [studentName, setStudentName] = useState();
-    const [studentInfo, setStudentInfo] = useState();
-    const [studentClass, setStudentClass] = useState();
 
     const data = {
         studentsData,
@@ -69,13 +66,7 @@ const App = () => {
         setClassesData,
         serverLink,
         isDeleteStudentsModalBtnDisabled,
-        setIsDeleteStudentsModalBtnDisabled,
-        studentName,
-        studentInfo,
-        studentClass,
-        setStudentName,
-        setStudentClass,
-        setStudentInfo
+        setIsDeleteStudentsModalBtnDisabled
     };
 
     return (
