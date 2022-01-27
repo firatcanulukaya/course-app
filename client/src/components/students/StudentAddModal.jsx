@@ -16,8 +16,7 @@ const StudentAddModal = ({isActive, onClose}) => {
     useEffect(() => {
         const fetchData = async () => {
             const response = await axios.get(`${serverLink}/api/student/getAll`);
-            const data = await response.json();
-            setStudentsData(data);
+            setStudentNewID(response.data);
         };
         fetchData();
     }, [serverLink, setStudentsData]);
@@ -25,8 +24,7 @@ const StudentAddModal = ({isActive, onClose}) => {
     useEffect(() => {
         const fetchData = async () => {
             const response = await axios.get(`${serverLink}/api/class/getAll`);
-            const data = await response.json();
-            setClassesData(data);
+            setClassesData(response.data);
         };
         fetchData();
     }, [serverLink, setClassesData]);
