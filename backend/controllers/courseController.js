@@ -103,10 +103,12 @@ const addStudentToCourse = async (req, res) => {
             }
         });
         const studentCourse = await db.StudentCourse.create({
-            studentId: course.id,
-            courseId: student.id
+            studentId: student.id,
+            courseId: course.id
         });
-        res.status(200).json(studentCourse);
+
+        !student || !course ? res.status(404).json({message: 'Student or course not found'}) : res.status(200).json({message: 'Student added to course successfully'});
+
     } catch (error) {
         res.status(500).json({error: error.message});
     }

@@ -3,11 +3,11 @@ const router = express.Router()
 
 const { createClass, getClasses, editClass, deleteClass, getClass, deleteAllClasses } = require('../controllers/classController')
 
-router.post('/createClass', createClass)
-router.get('/getClasses', getClasses)
-router.patch('/editClass/:id', editClass)
-router.delete('/deleteClass/:id', deleteClass)
-router.get('/getClass/:id', getClass)
-router.delete('/deleteAllClasses', deleteAllClasses)
+router.post('/create', createClass)
+router.get('/getAll', getClasses)
+router.patch('/edit/:id', editClass)
+router.delete('/delete/:id', deleteClass)
+router.get('/get/:id', getClass)
+router.delete('/deleteAll', deleteAllClasses)
 
 module.exports = router

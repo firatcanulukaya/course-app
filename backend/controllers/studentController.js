@@ -76,9 +76,15 @@ const deleteStudent = async (req, res) => {
                 message: 'Student not found'
             });
         }
+
+        await db.StudentCourse.destroy({
+            where: {
+                courseId: req.params.id
+            }
+        })
         await student.destroy();
-        return res.status(200).json({
-            message: 'Student deleted'
+        res.status(200).json({
+            message: 'Student deleted successfully'
         });
     } catch (err) {
         return res.status(500).json({
