@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CourseBadge = styled.a`
+export const CourseBadge = styled.span`
   display: flex;
   align-items: center;
   justify-content: space-between;
