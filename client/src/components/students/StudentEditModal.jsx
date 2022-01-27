@@ -20,7 +20,7 @@ const StudentEditModal = ({indexID, isActive, onClose, studentId}) => {
     const saveData = () => {
         var config = {
             method: 'patch',
-            url: `http://localhost:3001/api/student/editStudent/${studentId}`,
+            url: `http://localhost:3001/api/student/edit/${studentId}`,
             headers: {
                 'Content-Type': 'application/json'
             },
