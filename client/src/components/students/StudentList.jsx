@@ -1,13 +1,15 @@
-import editIcon from "../../assets/img/edit.svg";
-import deleteIcon from "../../assets/img/delete.svg";
-import StudentEditModal from "./StudentEditModal";
 import {useContext, useState} from "react";
+import StudentEditModal from "./StudentEditModal";
+import DeleteModal from "../DeleteModal";
 import mainContext from "../../MainContext";
 import {CourseBadge} from "../../styledComponents/studentsStyle";
-import DeleteModal from "../DeleteModal";
+import editIcon from "../../assets/img/edit.svg";
+import deleteIcon from "../../assets/img/delete.svg";
+import timesIcon from "../../assets/img/times.svg";
+import axios from "axios";
 
 const StudentList = ({deleteStudent}) => {
-    const {studentsData} = useContext(mainContext)
+    const {studentsData, setStudentsData, serverLink} = useContext(mainContext)
 
     const [studentIds, setStudentIds] = useState({
         index: 0,
@@ -18,6 +20,30 @@ const StudentList = ({deleteStudent}) => {
         edit: false,
         delete: false
     });
+
+    const removeCourse = (studentId, courseId) => {
+        axios.delete(`${serverLink}/api/course/removeStudentFromCourse`, {
+            data: {
+                studentId: studentId,
+                courseId: courseId
+            }
+        })
+            .then(() => {
+                axios.get(`${serverLink}/api/student/get/${studentId}`)
+                    .then(res => {
+                        const newStudentsData = studentsData.map(student => {
+                            if (student.id === studentId) {
+                                student.courses = res.data.courses;
+                            }
+                            return student;
+                        });
+                        setStudentsData(newStudentsData);
+                    })
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
 
     return (
         <>
@@ -79,7 +105,8 @@ const StudentList = ({deleteStudent}) => {
                                                     }
                                                     {item.courses.length > 0 ? item.courses.map((course, index) => (
                                                             <CourseBadge hex={course.courseColor} key={index}>
-                                                                {course.courseName}
+                                                                <a href={`course/${course.id}`}>{course.courseName.length < 20 ? course.courseName : course.courseName.substr(0, 20) + "..."}</a>
+                                                                <button className="tooltip" data-tip={`Remove ${course.courseName} course from student`} onClick={() => removeCourse(item.id, course.id)}><img src={timesIcon} alt="times icon"/></button>
                                                             </CourseBadge>
                                                         ))
                                                         : <CourseBadge hex="#000">Student has no courses
@@ -89,11 +116,11 @@ const StudentList = ({deleteStudent}) => {
 
                                         </div>
                                         <div className="cell" data-title="Edit">
-                                            <img src={editIcon} alt="Edit icon" onClick={() => {
+                                            <img src={editIcon} style={{cursor: "pointer"}} alt="Edit icon" onClick={() => {
                                                 setStudentIds({id: item.id, index: index});
                                                 setIsOpen({...isOpen, edit: !isOpen.edit})
                                             }}/>
-                                            <img src={deleteIcon} onClick={() => {
+                                            <img src={deleteIcon} style={{cursor: "pointer"}} onClick={() => {
                                                 setIsOpen({...isOpen, delete: !isOpen.delete});
                                                 setStudentIds({...studentIds, id: item.id});
                                             }}
