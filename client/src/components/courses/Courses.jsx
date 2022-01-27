@@ -13,7 +13,7 @@ const Courses = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`${serverLink}/api/course/getCourses`);
+            const response = await fetch(`${serverLink}/api/course/getAll`);
             const data = await response.json();
             setCoursesData(data);
         };
