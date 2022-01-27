@@ -28,7 +28,7 @@ const Students = () => {
         fetchData();
     }, [serverLink, setStudentsData]);
 
-    const handleDelete = (id) => {
+    const deleteStudent = (id) => {
         fetch(`${serverLink}/api/student/deleteStudent/${id}`, {
             method: "DELETE",
             headers: {
@@ -77,7 +77,7 @@ const Students = () => {
             }
 
             {studentsData.length === 0 ? <p className="studentsModalError">Nothing to show about students.</p> :
-                <StudentList handleDelete={handleDelete}/>}
+                <StudentList deleteStudent={deleteStudent}/>}
 
         </div>
     )

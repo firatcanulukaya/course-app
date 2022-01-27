@@ -7,12 +7,12 @@ export const CourseBadge = styled.a`
   font-size: 15px;
   margin-left: .5rem;
   padding: .3rem 1rem;
-  font-family: "Plus Jakarta Sans Medium";
+  font-family: "Plus Jakarta Sans Medium", sans-serif;
   line-height: 1.2;
 `
 
 export const ModalFooterBtn = styled.button`
-  font-family: "Plus Jakarta Sans SemiBold";
+  font-family: "Plus Jakarta Sans SemiBold", sans-serif;
   min-width: 120px;
   height: 45px;
   border-radius: 6px;
@@ -41,3 +41,31 @@ export const ModalFooterBtn = styled.button`
 
   }
 `
+export const InfoCardTag = styled.a`
+  color: ${p => p.textColor};
+  font-family: "Plus Jakarta Sans Medium", sans-serif;
+  margin-right: 20px;
+`
+
+export const InfoButtons = styled.button`
+  display: flex;
+  justify-content: center;
+  padding: 16px 0px;
+  width: 232px;
+  background: ${p => p.bgColor};
+  border-radius: 50px;
+  font-family: "Plus Jakarta Sans Medium", sans-serif;
+  font-size: 15px;
+  margin: 0 16px;
+  color: ${p => p.textColor};
+
+  ${p => {
+    if (p.isHover) {
+      return `
+        &:hover {
+    background: none;
+    color: ${p.bgColor};
+    border: 1px solid ${p.bgColor};
+  }`
+    }
+  }}`

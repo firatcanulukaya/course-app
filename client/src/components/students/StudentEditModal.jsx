@@ -2,8 +2,9 @@ import xIcon from "../../assets/img/xIcon.svg"
 import {useContext, useEffect, useState} from "react";
 import mainContext from "../../MainContext";
 import {ModalFooterBtn} from "../../styledComponents/studentsStyle";
+import axios from "axios";
 
-const StudentEditModal = ({indexID, isActive, onClose}) => {
+const StudentEditModal = ({indexID, isActive, onClose, studentId}) => {
     const {
         studentsData,
         setStudentsData,
@@ -11,43 +12,40 @@ const StudentEditModal = ({indexID, isActive, onClose}) => {
         classesData
     } = useContext(mainContext)
 
-    const [studentName, setStudentName] = useState("")
-    const [studentAge, setStudentAge] = useState("")
-    const [classId, setClassId] = useState(0)
-    const [student, setStudent] = useState({})
+    const [studentValues, setStudentValues] = useState({
+        name: "",
+        age: ""
+    })
 
-    useEffect(() => {
-        setStudentName(studentsData[indexID].name)
-        setStudentAge(studentsData[indexID].age)
-        setClassId(studentsData[indexID].classId)
-        setStudent(studentsData[indexID])
-    }, [studentsData, indexID])
+    const saveData = () => {
+        var config = {
+            method: 'patch',
+            url: `http://localhost:3001/api/student/editStudent/${studentId}`,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data : JSON.stringify({
+                "studentName": studentValues.name,
+                "studentAge": studentValues.age
+            }),
+        };
 
-    const editStudent = (e) => {
-        e.preventDefault()
-
-        const data = {
-            name: studentName,
-            age: studentAge,
-            classId: classId
-        }
-        fetch(`${serverLink}/api/student/editStudent/${student.id}`)
-            .then(res => res.json())
-            .then(res => {
-                if (res.status === "success") {
-                    setStudentsData(studentsData.map(student => {
-                        if (student.id === indexID) {
-                            return {
-                                ...student,
-                                ...data
-                            }
-                        }
-                        return student
-                    }))
-                    onClose()
-                }
+        axios(config)
+            .then((response) =>  {
+                setStudentsData(studentsData.map(student => {
+                    if (student.id === studentId) {
+                        student.studentName = studentValues.name
+                        student.studentAge = studentValues.age
+                    }
+                    return student
+                }))
+                onClose()
             })
+            .catch((error) => {
+                console.log(error);
+            });
     }
+
     return (
         <div className={"studentModal " + (isActive && "active")}>
             <div className="studentModalheader">
@@ -57,19 +55,19 @@ const StudentEditModal = ({indexID, isActive, onClose}) => {
                 </button>
             </div>
 
-            <form>
+            <form onSubmit={(e) =>{ e.preventDefault(); saveData() }}>
                 <div className="studentModalContent">
                     <div className="container">
                         <div className="row">
                             <div className="col-33">
                                 <label className="studentModalLabel">Name</label>
-                                <input type="text" className="studentModalInput" placeholder="type..." />
-                                     />
+                                <input type="text" className="studentModalInput" placeholder="type..." value={studentValues.name} onChange={e => setStudentValues({...studentValues, name: e.target.value})}/>
+
                             </div>
                             <div className="col-33">
                                 <label className="studentModalLabel">Age</label>
-                                <input type="number" className="studentModalInput" maxLength="2" placeholder="type..."/>
-                                      />
+                                <input type="number" className="studentModalInput" maxLength="2" placeholder="type..." value={studentValues.age} onChange={e => setStudentValues({...studentValues, age: e.target.value})}/>
+
                             </div>
                             {/*<div className="col-33">*/}
                             {/*    <label className="studentModalLabel">Class</label>*/}

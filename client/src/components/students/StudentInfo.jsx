@@ -1,89 +1,97 @@
-import React, {useEffect, useState} from "react";
+import {useState, useEffect, useContext} from "react";
 import {useParams} from "react-router-dom";
-import bg from "../../assets/img/bg3.svg";
-import {CourseBadge} from "../../styledComponents/studentsStyle";
+import DeleteModal from "../DeleteModal";
+import mainContext from "../../MainContext";
+import axios from "axios";
+import {InfoButtons, InfoCardTag} from "../../styledComponents/studentsStyle";
+import bg from "../../assets/img/bg4.svg";
+import photo from "../../assets/img/photo.svg";
+import arrowLeft from "../../assets/img/arrowLeft.svg"
+import { useNavigate } from "react-router-dom";
+import StudentEditModal from "./StudentEditModal";
 
-function StudentInfo() {
-    const [studentData, setStudentData] = useState(null);
+const StudentInfo = () => {
+    const {serverLink} = useContext(mainContext)
+    const navigate = useNavigate();
     const {id} = useParams();
 
-    useEffect(() => {
-        fetch("http://localhost:3001/api/student/getStudentInfo/" + id)
-            .then((response) => response.json())
-            .then((json) => {
-                console.log(json);
-                setStudentData(json)
-            })
-            .catch((error) => console.log(error));
-    }, []);
+    const [student, setStudent] = useState({})
+    const [isOpen, setIsOpen] = useState({
+        delete: false,
+        edit: false
+    })
 
-    const randomHexGenerator = () => {
-        const hex = Math.floor(Math.random() * 16777215).toString(16);
-        return `#00${hex.substr(0, 2)}e3`;
+    useEffect(() => {
+        axios.get(`${serverLink}/api/student/getStudentInfo/${id}`)
+            .then(res => {
+                setStudent(res.data)
+            })
+            .catch(err => console.log(err))
+    }, [])
+
+    const deleteStudent = (id) => {
+        axios.delete(`${serverLink}/api/student/deleteStudent/${id}`)
+            .then(res =>  navigate("/students"))
+            .catch(err => console.log(err))
     }
 
     return (
-        <div className="students-container">
-            <img src={bg} alt="background" className="homepage-bg"/>
+        <div className="infoCardContainer">
+            <DeleteModal id={id} isActive={isOpen.delete} onClose={() => setIsOpen({...isOpen, delete: !isOpen.delete})} handleDelete={deleteStudent} type="student"/>
+             <StudentEditModal isActive={isOpen.edit}  onClose={() => setIsOpen({...isOpen, edit: !isOpen.edit})} studentId={id}/>
 
-            <div className="table-container">
-                <div className="limiter">
-                    <div className="container-table100">
-                        <div className="wrap-table100">
-                            <div className="table">
+            <img src={bg} alt="background" className="card-bg"/>
+            <div className="infoCard">
+                <div className="infoCardBanner"/>
 
-                                <div className="row header">
-                                    <div className="cell" style={{width: "140px"}}>
-                                        Student ID
-                                    </div>
-                                    <div className="cell">
-                                        Student Name
-                                    </div>
-                                    <div className="cell">
-                                        Student Course(s)
-                                    </div>
-                                </div>
-
-                                <div className="row">
-                                    <div className="cell" data-title="ID">
-                                        {studentData?.id}
-                                    </div>
-                                    <div className="cell" data-title="Student Name">
-                                        <a href={`student/${studentData?.id}`}>
-                                            {studentData?.studentName.length < 20 ? studentData?.studentName : studentData?.studentName.substr(0, 20) + "..."}
-                                        </a>
-                                        <p>Age: {studentData?.studentInfo.length < 20 ? studentData?.studentInfo : studentData?.studentInfo.substr(0, 15) + "..."}</p>
-                                        <p>Class
-                                            Name: {studentData?.studentClassName.length < 20 ? studentData?.studentClassName : studentData?.studentClassName.substr(0, 5) + "..."}</p>
-                                    </div>
-
-                                    <div className="cell" data-title="Courses">
-                                        <ul>
-                                            <li className="student-table-li">
-
-                                                <CourseBadge hex={() => randomHexGenerator}>
-                                                    Course 1
-                                                </CourseBadge>
-
-                                                <CourseBadge hex={() => randomHexGenerator}>
-                                                    Course 2
-                                                </CourseBadge>
-
-                                                <CourseBadge hex={() => randomHexGenerator || "#000"}>
-                                                    Course 3
-                                                </CourseBadge>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-
-                            </div>
+                <div className="infoCardTop">
+                    <div className="infoCardTopLeft">
+                        <div className="infoCardTopPhoto">
+                            <img src={photo} alt="profile photo"/>
+                        </div>
+                        <div className="infoCardUtils">
+                            <p>{student?.studentName}</p>
+                            <span>age: {student?.studentAge}</span>
                         </div>
                     </div>
                 </div>
-            </div>
 
+                <div className="infoCardContent">
+
+                    <div className="infoCardContent-section">
+                        <p>Class:</p>
+                        <span>{student?.class?.className}</span>
+                    </div>
+
+                    <div className="infoCardContent-section">
+                        <p>Courses (total: {student?.courses?.length}):</p>
+                        <p>
+                            {student?.courses?.length > 0 ? student?.courses.map((course, index) => (
+                                <InfoCardTag key={index} href={`/courses`}
+                                             textColor={course.courseColor}>{course.courseName}</InfoCardTag>
+                            )) : <InfoCardTag textColor={"red"}>Student has not any courses.</InfoCardTag>}
+                        </p>
+                    </div>
+
+                </div>
+
+                <div className="infoCardFooter">
+                    <div className="infoCardFooterSection">
+                        <button onClick={() => navigate("/students")}>
+                            <img src={arrowLeft}/>
+                            <p>Return Back</p>
+                        </button>
+                    </div>
+
+                    <div className="infoCardFooterButtons">
+                        <InfoButtons bgColor="#F1F1F1" textcolor="#23262F" onClick={() => setIsOpen({...isOpen, edit: !isOpen.edit})}>Edit</InfoButtons>
+                        <InfoButtons bgColor="#E53535" textColor="#FCFCFD" isHover={true}
+                                     onClick={() => setIsOpen({...isOpen, delete: !isOpen.delete})}>Delete</InfoButtons>
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
     );

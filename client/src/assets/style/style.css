@@ -7,6 +7,10 @@
   font-family: JakartaMedium;
   src: url("../fonts/PlusJakartaSans-Medium.ttf");
 }
+@font-face {
+  font-family: JakartaLight;
+  src: url("../fonts/PlusJakartaSans-Light.ttf");
+}
 * {
   margin: 0;
   padding: 0;
@@ -225,6 +229,92 @@ button {
   border-radius: 6px;
   color: #fff;
   font-size: 12px;
+}
+
+.infoCardContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 1340px;
+  margin: 41px 0;
+}
+.infoCardContainer .card-bg {
+  border-radius: 22px;
+  width: 1340px;
+}
+.infoCardContainer .infoCard {
+  position: absolute;
+  background: #fff;
+  border-radius: 12px;
+  width: 700px;
+}
+.infoCardContainer .infoCard .infoCardBanner {
+  background: #007856;
+  width: 100%;
+  height: 90px;
+  border-radius: 12px 12px 0 0;
+}
+.infoCardContainer .infoCard .infoCardTop {
+  display: flex;
+  margin: 0 7rem;
+}
+.infoCardContainer .infoCard .infoCardTop .infoCardTopLeft {
+  display: flex;
+  width: 50%;
+  height: 100%;
+}
+.infoCardContainer .infoCard .infoCardTop .infoCardTopLeft .infoCardTopPhoto {
+  position: absolute;
+  left: 24px;
+  top: 60px;
+}
+.infoCardContainer .infoCard .infoCardTop .infoCardTopLeft .infoCardUtils {
+  padding: 0.5rem;
+}
+.infoCardContainer .infoCard .infoCardTop .infoCardTopLeft .infoCardUtils p {
+  color: #23262F;
+  padding: 0.5rem 0;
+}
+.infoCardContainer .infoCard .infoCardTop .infoCardTopLeft .infoCardUtils span {
+  font-family: "Plus Jakarta Sans Medium", sans-serif;
+  color: #87898E;
+}
+.infoCardContainer .infoCard .infoCardContent {
+  display: flex;
+  flex-direction: column;
+  margin: 32px 114px;
+}
+.infoCardContainer .infoCard .infoCardContent .infoCardContent-section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32px;
+}
+.infoCardContainer .infoCard .infoCardContent .infoCardContent-section p {
+  color: #87898E;
+  font-family: "Plus Jakarta Sans Medium", sans-serif;
+}
+.infoCardContainer .infoCard .infoCardFooter {
+  padding-bottom: 32px;
+}
+.infoCardContainer .infoCard .infoCardFooter .infoCardFooterSection {
+  display: flex;
+  align-items: center;
+  margin-left: 114px;
+}
+.infoCardContainer .infoCard .infoCardFooter .infoCardFooterSection button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.infoCardContainer .infoCard .infoCardFooter .infoCardFooterSection button p {
+  color: #3772FF;
+  margin: 0px 10px;
+}
+.infoCardContainer .infoCard .infoCardFooter .infoCardFooterButtons {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .students-container {
@@ -530,6 +620,17 @@ footer {
     font-size: 0.75em;
     margin-left: -5em;
     width: 10em;
+  }
+}
+@keyframes popup-animation {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
 

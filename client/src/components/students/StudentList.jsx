@@ -6,10 +6,13 @@ import mainContext from "../../MainContext";
 import {CourseBadge} from "../../styledComponents/studentsStyle";
 import DeleteModal from "../DeleteModal";
 
-const StudentList = ({handleDelete}) => {
+const StudentList = ({deleteStudent}) => {
     const {studentsData} = useContext(mainContext)
 
-    const [indexID, setIndexID] = useState(null);
+    const [studentIds, setStudentIds] = useState({
+        index: 0,
+        id: 0
+    });
     const [isOpen, setIsOpen] = useState({
         add: false,
         edit: false,
@@ -18,8 +21,14 @@ const StudentList = ({handleDelete}) => {
 
     return (
         <>
-            {/*<StudentEditModal onClose={() => { setIsOpen(false); setIndexID(null); }} indexID={indexID} isActive={isOpen}/>*/}
-            <DeleteModal handleDelete={handleDelete} onClose={() => setIsOpen({...isOpen, delete: false})} isActive={isOpen.delete}/>
+            <StudentEditModal onClose={() => {
+                setIsOpen({...isOpen, edit: false});
+                setStudentIds({...studentIds, index: 0});
+            }} indexID={studentIds.index} studentId={studentIds.id} isActive={isOpen.edit}/>
+            <DeleteModal handleDelete={deleteStudent} onClose={() => {
+                setIsOpen({...isOpen, delete: false});
+                setStudentIds({...studentIds, index: 0});
+            }} id={studentIds.id} isActive={isOpen.delete} type={"student"}/>
 
             <div className="table-container">
 
@@ -50,10 +59,10 @@ const StudentList = ({handleDelete}) => {
                                             {item.id}
                                         </div>
                                         <div className="cell" data-title="Student Info">
-                                            <a href={`student/${item.id}`}>{item.studentName.length < 20 ? item.studentName : item.studentName.substr(0, 20) + "..."}
-                                            </a>
-
-                                            <p>Class: {item.class.className} <br/>
+                                            <a href={`student/${item.id}`}>{item.studentName.length < 20 ? item.studentName : item.studentName.substr(0, 20) + "..."}</a>
+                                            <p>
+                                                Class: {item.class ? item.class.className : "Student has no class"}
+                                                <br/>
                                                 Age: {item.studentAge.length < 20 ? item.studentAge : item.studentAge.substr(0, 15) + "..."}
                                             </p>
                                         </div>
@@ -61,23 +70,33 @@ const StudentList = ({handleDelete}) => {
 
                                             <ul>
                                                 <li className="student-table-li">
+                                                    {
+                                                        item.courses.length > 0 ?
+                                                            <CourseBadge hex="#000">
+                                                                Total: {item.courses.length}
+                                                            </CourseBadge>
+                                                            : ""
+                                                    }
                                                     {item.courses.length > 0 ? item.courses.map((course, index) => (
                                                             <CourseBadge hex={course.courseColor} key={index}>
                                                                 {course.courseName}
                                                             </CourseBadge>
                                                         ))
                                                         : <CourseBadge hex="#000">Student has no courses
-                                                            yet</CourseBadge>}
+                                                            yet </CourseBadge>}
                                                 </li>
                                             </ul>
 
                                         </div>
                                         <div className="cell" data-title="Edit">
                                             <img src={editIcon} alt="Edit icon" onClick={() => {
-                                                setIsOpen(!isOpen);
-                                                setIndexID(index)
+                                                setStudentIds({id: item.id, index: index});
+                                                setIsOpen({...isOpen, edit: !isOpen.edit})
                                             }}/>
-                                            <img src={deleteIcon} onClick={() => setIsOpen({...isOpen, delete: !isOpen.delete})}
+                                            <img src={deleteIcon} onClick={() => {
+                                                setIsOpen({...isOpen, delete: !isOpen.delete});
+                                                setStudentIds({...studentIds, id: item.id});
+                                            }}
                                                  alt="Delete icon"/>
                                         </div>
                                     </div>
