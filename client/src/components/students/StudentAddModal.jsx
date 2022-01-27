@@ -2,6 +2,7 @@ import xIcon from "../../assets/img/xIcon.svg";
 import {useContext, useEffect, useState} from "react";
 import mainContext from "../../MainContext";
 import {ModalFooterBtn} from "../../styledComponents/studentsStyle";
+import axios from "axios";
 
 const StudentAddModal = ({isActive, onClose}) => {
     const {studentsData, setStudentsData, classesData, setClassesData, serverLink} = useContext(mainContext);
@@ -14,7 +15,7 @@ const StudentAddModal = ({isActive, onClose}) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`${serverLink}/api/student/getAllStudents`);
+            const response = await axios.get(`${serverLink}/api/student/getAll`);
             const data = await response.json();
             setStudentsData(data);
         };
@@ -23,7 +24,7 @@ const StudentAddModal = ({isActive, onClose}) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`${serverLink}/api/class/getClasses`);
+            const response = await axios.get(`${serverLink}/api/class/getAll`);
             const data = await response.json();
             setClassesData(data);
         };
@@ -32,37 +33,22 @@ const StudentAddModal = ({isActive, onClose}) => {
 
 
     const sendData = (studentName, studentAge, studentClassId) => {
-        const newStudent = {
+        axios.post(`${serverLink}/api/student/create`, {
             studentName: studentName,
-            studentAge: `${studentAge}`,
+            studentAge: studentAge,
             classId: studentClassId
-        };
-        const fetchData = async () => {
-            const response = await fetch(`${serverLink}/api/student/createStudent`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(newStudent)
-            });
-            const data = await response.json();
-            setStudentNewID(data);
-        };
-        fetchData().then(() => {
+        }).then(res => {
 
-            const fetchData = async () => {
-                const response = await fetch(`${serverLink}/api/student/getAllStudents`);
-                const data = await response.json();
-                setStudentsData(data);
-            };
-            fetchData().then(
-                setStudentValues({
-                    name: "",
-                    age: 0,
-                    classId: 0
-                })
-            );
-                onClose()
+            axios.get(`${serverLink}/api/student/getAll`).then(res => {
+                setStudentsData(res.data);
+            });
+
+            setStudentValues({
+                name: "",
+                age: 0,
+                classId: 0
+            });
+            onClose();
         });
     };
 
@@ -96,7 +82,7 @@ const StudentAddModal = ({isActive, onClose}) => {
                                     required
                                     placeholder="type..."
                                     value={studentValues.name}
-                                    onChange={e => setStudentValues({...studentValues, name: e.target.value}) }
+                                    onChange={e => setStudentValues({...studentValues, name: e.target.value})}
                                 />
                             </div>
                             <div className="col-33">
@@ -116,7 +102,10 @@ const StudentAddModal = ({isActive, onClose}) => {
                                 <select
                                     className="studentModalInput"
                                     required
-                                    onChange={(e) => setStudentValues({...studentValues, classId: parseInt(e.target.value)})}
+                                    onChange={(e) => setStudentValues({
+                                        ...studentValues,
+                                        classId: parseInt(e.target.value)
+                                    })}
                                 >
                                     <option value="">Select Class</option>
                                     {classesData.map((item, index) => (
@@ -131,7 +120,11 @@ const StudentAddModal = ({isActive, onClose}) => {
                 </div>
 
                 <div className="studentModalfooter">
-                    <ModalFooterBtn bgColor="#1E40AF" textColor="#fff" type="submit">
+                    <ModalFooterBtn bgColor="#fff" textColor="#374151" isStroke={true} strokeColor="#E5E7EB"
+                                    onClick={() => onClose()} type="button" tabIndex="1">
+                        Cancel
+                    </ModalFooterBtn>
+                    <ModalFooterBtn bgColor="#1E40AF" textColor="#fff" type="submit" tabIndex="0">
                         Save Changes
                     </ModalFooterBtn>
                 </div>
