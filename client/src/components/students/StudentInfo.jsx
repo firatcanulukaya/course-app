@@ -22,7 +22,7 @@ const StudentInfo = () => {
     })
 
     useEffect(() => {
-        axios.get(`${serverLink}/api/student/getStudentInfo/${id}`)
+        axios.get(`${serverLink}/api/student/get/${id}`)
             .then(res => {
                 setStudent(res.data)
             })
@@ -30,7 +30,7 @@ const StudentInfo = () => {
     }, [])
 
     const deleteStudent = (id) => {
-        axios.delete(`${serverLink}/api/student/deleteStudent/${id}`)
+        axios.delete(`${serverLink}/api/student/delete/${id}`)
             .then(res =>  navigate("/students"))
             .catch(err => console.log(err))
     }
