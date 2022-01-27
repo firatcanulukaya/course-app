@@ -2,11 +2,12 @@ import xIcon from "../../assets/img/xIcon.svg"
 import {useContext, useEffect, useState} from "react";
 import mainContext from "../../MainContext";
 import {ModalFooterBtn} from "../../styledComponents/studentsStyle";
+import axios from "axios";
 
 const StudentDeleteModal = ({isActive, onClose}) => {
     const {
-        veri,
-        setVeri,
+        studentsData,
+        setStudentsData,
         serverLink,
         isDeleteStudentsModalBtnDisabled,
         setIsDeleteStudentsModalBtnDisabled
@@ -30,23 +31,15 @@ const StudentDeleteModal = ({isActive, onClose}) => {
 
 
     const deleteAllStudents = () => {
-        var requestOptions = {
-            method: 'DELETE',
-            redirect: 'follow'
-        };
-
-        fetch(`${serverLink}/api/student/deleteAllStudents`, requestOptions)
-            .then(response => {
-                if (response.status === 200) {
-                    fetch(`${serverLink}/api/student/getAllStudents`)
-                        .then((response) => response.json())
-                        .then((json) => setVeri(json))
-                        .catch((error) => console.log(error));
-                    onClose()
-                    setIsDeleteStudentsModalBtnDisabled(true)
-                }
+        setIsDeleteStudentsModalBtnDisabled(true);
+        axios.delete(`${serverLink}/api/student/deleteAll`)
+            .then(res => {
+                setStudentsData([]);
+                onClose();
             })
-            .catch(error => console.log('error', error));
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     return (
