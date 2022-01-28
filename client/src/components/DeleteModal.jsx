@@ -30,7 +30,7 @@ const DeleteModal = ({handleDelete, isActive, onClose, id, type}) => {
                     </ModalFooterBtn>
 
                     <ModalFooterBtn bgColor="#EF4444" textColor="#fff"
-                                    onClick={() =>{ handleDelete(id, type); onClose(); }}>
+                                    onClick={() =>{ handleDelete(id); onClose(); }}>
                         Delete
                     </ModalFooterBtn>
 
