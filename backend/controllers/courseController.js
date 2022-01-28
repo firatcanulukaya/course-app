@@ -168,6 +168,33 @@ const removeStudentFromCourse = async (req, res) => {
     }
 }
 
+const addMultipleStudentsToCourse = async (req, res) => {
+    try {
+        const {studentIds, courseId} = req.body;
+        const students = await db.Student.findAll({
+            where: {
+                id: studentIds
+            }
+        });
+        const course = await db.Course.findOne({
+            where: {
+                id: courseId
+            }
+        });
+        const studentCourses = await db.StudentCourse.bulkCreate(
+            students.map(student => {
+                return {
+                    studentId: student.id,
+                    courseId: course.id
+                }
+            })
+        );
+        res.status(200).json({message: 'Students added to course'});
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+};
+
 module.exports = {
     createCourse,
     getCourses,
@@ -177,5 +204,6 @@ module.exports = {
     deleteAllCourses,
     addStudentToCourse,
     removeStudentFromCourse,
-    addStudentToMultipleCourse
+    addStudentToMultipleCourse,
+    addMultipleStudentsToCourse
 }
