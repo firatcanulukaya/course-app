@@ -12,17 +12,8 @@ const StudentEditModal = ({indexID, isActive, onClose, studentId}) => {
         setStudentsData,
         serverLink,
         classesData,
-        coursesData,
-        setCoursesData,
+        coursesData
     } = useContext(mainContext)
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await axios.get(`${serverLink}/api/course/getAll`);
-            setCoursesData(response.data);
-        };
-        fetchData();
-    }, [serverLink, setCoursesData]);
 
     const [studentValues, setStudentValues] = useState({
         name: "",
