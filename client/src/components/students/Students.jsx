@@ -13,11 +13,13 @@ const Students = () => {
         studentsData,
         setStudentsData,
         serverLink,
-        setIsDeleteStudentsModalBtnDisabled,
+        setIsModalDeleteBtnDisabled,
         setCoursesData
     } = useContext(mainContext)
-    const [isOpen, setIsOpen] = useState(false);
-    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState({
+        add: false,
+        delete: false
+    })
 
     useEffect(() => {
         const fetchData = async () => {
@@ -49,20 +51,20 @@ return (
         <img src={bg} alt="background" className="homepage-bg"/>
         <StudentAddModal
             onClose={() => {
-                setIsOpen(false);
-            }} isActive={isOpen}
+                setIsOpen({...isOpen, add: false});
+            }} isActive={isOpen.add}
         />
 
         <StudentDeleteModal
             onClose={() => {
-                setIsDeleteModalOpen(false);
-                setIsDeleteStudentsModalBtnDisabled(true);
+                setIsOpen({...isOpen, delete: false});
+                setIsModalDeleteBtnDisabled({...setIsModalDeleteBtnDisabled, student: true});
             }}
-            isActive={isDeleteModalOpen}
+            isActive={isOpen.delete}
         />
 
         <button className="add-students tooltip" data-tip="Add New Student" onClick={() => {
-            setIsOpen(!isOpen);
+            setIsOpen({...isOpen, add: !isOpen.add});
         }}>
             <img src={plus} alt="plus" className="plus"/>
         </button>
@@ -70,8 +72,8 @@ return (
         {studentsData.length === 0 ? "" :
             <button className="add-students delete-students tooltip" data-tip="Delete All Students"
                     onClick={() => {
-                        setIsDeleteModalOpen(!isDeleteModalOpen)
-                        isDeleteModalOpen ? setIsDeleteStudentsModalBtnDisabled(true) : setIsDeleteStudentsModalBtnDisabled(true)
+                        setIsOpen({...isOpen, delete: !isOpen.delete});
+                        isOpen.delete ? setIsModalDeleteBtnDisabled({...setIsModalDeleteBtnDisabled, student: true}) : setIsModalDeleteBtnDisabled({...setIsModalDeleteBtnDisabled, student: true})
                     }}>
                 <img src={deleteIcon} alt="plus" className="plus"/>
             </button>

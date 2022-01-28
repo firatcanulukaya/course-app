@@ -10,7 +10,8 @@ const StudentDeleteModal = ({isActive, onClose}) => {
         setStudentsData,
         serverLink,
         isDeleteStudentsModalBtnDisabled,
-        setIsDeleteStudentsModalBtnDisabled
+        setIsModalDeleteBtnDisabled,
+        isModalDeleteBtnDisabled
     } = useContext(mainContext)
     const [countdown, setCountdown] = useState(5);
 
@@ -21,7 +22,7 @@ const StudentDeleteModal = ({isActive, onClose}) => {
             }, 1000);
             if (countdown === 0) {
                 clearInterval(interval);
-                setIsDeleteStudentsModalBtnDisabled(false)
+                setIsModalDeleteBtnDisabled({...isModalDeleteBtnDisabled, student: false});
             }
             return () => clearInterval(interval);
         } else if (isActive === false) {
@@ -31,7 +32,7 @@ const StudentDeleteModal = ({isActive, onClose}) => {
 
 
     const deleteAllStudents = () => {
-        setIsDeleteStudentsModalBtnDisabled(true);
+        setIsModalDeleteBtnDisabled({...isModalDeleteBtnDisabled, student: true});
         axios.delete(`${serverLink}/api/student/deleteAll`)
             .then(res => {
                 setStudentsData([]);
@@ -72,8 +73,8 @@ const StudentDeleteModal = ({isActive, onClose}) => {
                                     }}>
                         Cancel
                     </ModalFooterBtn>
-                    <ModalFooterBtn bgColor="#EF4444" textColor="#fff" isDisabled={isDeleteStudentsModalBtnDisabled}
-                                    disabled={isDeleteStudentsModalBtnDisabled}
+                    <ModalFooterBtn bgColor="#EF4444" textColor="#fff" isDisabled={isModalDeleteBtnDisabled}
+                                    disabled={isModalDeleteBtnDisabled}
                                     onClick={() => deleteAllStudents()}>
                         {countdown === 0 ? "Yes, Delete All Students" : `Delete in ${countdown}`}
                     </ModalFooterBtn>
