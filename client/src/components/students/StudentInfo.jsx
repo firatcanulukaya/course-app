@@ -12,7 +12,7 @@ import StudentEditModal from "./StudentEditModal";
 import timesIcon from "../../assets/img/times.svg";
 
 const StudentInfo = () => {
-    const {serverLink} = useContext(mainContext)
+    const {serverLink, setCoursesData, setClassesData, setStudentsData, studentsData} = useContext(mainContext)
     const navigate = useNavigate();
     const {id} = useParams();
 
@@ -23,12 +23,33 @@ const StudentInfo = () => {
     })
 
     useEffect(() => {
-        axios.get(`${serverLink}/api/student/get/${id}`)
+        axios.get(`${serverLink}/api/student/getAll`)
             .then(res => {
-                setStudent(res.data)
+                setStudentsData(res.data)
             })
             .catch(err => console.log(err))
-    }, [])
+    }, [serverLink, setStudentsData])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await axios.get(`${serverLink}/api/course/getAll`);
+            setCoursesData(response.data);
+        };
+        fetchData();
+    }, [serverLink, setCoursesData]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await axios.get(`${serverLink}/api/class/getAll`);
+            setClassesData(response.data);
+        };
+        fetchData();
+    }, [serverLink, setClassesData]);
+
+    useEffect(() => {
+        const student = studentsData.find(student => student.id === parseInt(id))
+        setStudent(student)
+    }, [studentsData, id])
 
     const deleteStudent = (id) => {
         axios.delete(`${serverLink}/api/student/delete/${id}`)
