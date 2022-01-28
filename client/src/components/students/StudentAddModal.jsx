@@ -3,20 +3,21 @@ import {useContext, useEffect, useState} from "react";
 import mainContext from "../../MainContext";
 import {ModalFooterBtn} from "../../styledComponents/studentsStyle";
 import axios from "axios";
+import Select from "react-select";
 
 const StudentAddModal = ({isActive, onClose}) => {
-    const {studentsData, setStudentsData, classesData, setClassesData, serverLink} = useContext(mainContext);
+    const { setStudentsData, classesData, setClassesData, coursesData, serverLink} = useContext(mainContext);
     const [studentValues, setStudentValues] = useState({
         name: "",
-        age: 0,
-        classId: 0
+        age: "",
+        classId: "",
+        courseIds: []
     });
-    const [studentNewID, setStudentNewID] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             const response = await axios.get(`${serverLink}/api/student/getAll`);
-            setStudentNewID(response.data);
+            setStudentsData(response.data);
         };
         fetchData();
     }, [serverLink, setStudentsData]);
@@ -29,17 +30,35 @@ const StudentAddModal = ({isActive, onClose}) => {
         fetchData();
     }, [serverLink, setClassesData]);
 
+    const mapCourses = {
+        options: coursesData.map((item) => {
+            return {
+                value: item.id,
+                label: item.courseName,
+                color: item.color
+            }
+        })
+    }
+
 
     const sendData = (studentName, studentAge, studentClassId) => {
         axios.post(`${serverLink}/api/student/create`, {
             studentName: studentName,
             studentAge: studentAge,
             classId: studentClassId
-        }).then(res => {
-
-            axios.get(`${serverLink}/api/student/getAll`).then(res => {
-                setStudentsData(res.data);
-            });
+        }).then((res) => {
+            axios.post(`${serverLink}/api/course/addStudentToCourse`, {
+                studentId: res.data.id,
+                courseIds: studentValues.courseIds
+            })
+                .then(() => {
+                    axios.get(`${serverLink}/api/student/getAll`).then(res => {
+                        setStudentsData(res.data);
+                    });
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
 
             setStudentValues({
                 name: "",
@@ -113,6 +132,16 @@ const StudentAddModal = ({isActive, onClose}) => {
                                     ))}
                                 </select>
                             </div>
+
+                            <div className="col">
+                                <label className="studentModalLabel">Course</label>
+                                <Select options={mapCourses.options} isMulti isSearchable autoFocus
+                                        onChange={(e) => setStudentValues({
+                                            ...studentValues,
+                                            courseIds: e.map((item) => item.value)
+                                        })}/>
+                            </div>
+
                         </div>
                     </div>
                 </div>

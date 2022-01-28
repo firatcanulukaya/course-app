@@ -3,48 +3,87 @@ import {useContext, useEffect, useState} from "react";
 import mainContext from "../../MainContext";
 import {ModalFooterBtn} from "../../styledComponents/studentsStyle";
 import axios from "axios";
+import Select from 'react-select'
+import courses from "../courses/Courses";
 
 const StudentEditModal = ({indexID, isActive, onClose, studentId}) => {
     const {
         studentsData,
         setStudentsData,
         serverLink,
-        classesData
+        classesData,
+        coursesData,
+        setCoursesData,
     } = useContext(mainContext)
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await axios.get(`${serverLink}/api/course/getAll`);
+            setCoursesData(response.data);
+        };
+        fetchData();
+    }, [serverLink, setCoursesData]);
 
     const [studentValues, setStudentValues] = useState({
         name: "",
-        age: ""
+        age: "",
+        classId: "",
+        courseIds: [],
     })
 
     const saveData = () => {
         var config = {
             method: 'patch',
-            url: `http://localhost:3001/api/student/edit/${studentId}`,
+            url: `${serverLink}/api/student/edit/${studentId}`,
             headers: {
                 'Content-Type': 'application/json'
             },
-            data : JSON.stringify({
+            data: JSON.stringify({
                 "studentName": studentValues.name,
-                "studentAge": studentValues.age
+                "studentAge": studentValues.age,
+                "classId": studentValues.classId
             }),
         };
 
         axios(config)
-            .then((response) =>  {
-                setStudentsData(studentsData.map(student => {
-                    if (student.id === studentId) {
-                        student.studentName = studentValues.name
-                        student.studentAge = studentValues.age
-                    }
-                    return student
-                }))
+            .then((response) => {
+                axios.post(`${serverLink}/api/course/addStudentToCourse`, {
+                    studentId: studentId,
+                    courseIds: studentValues.courseIds
+                }).then(() => {
+                    axios.get(`${serverLink}/api/student/get/${studentId}`)
+                        .then((response) => {
+                            setStudentsData(studentsData.map((student) => {
+                                if (student.id === studentId) {
+                                    return response.data
+                                } else {
+                                    return student
+                                }
+                            }))
+                        })
+                })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+
                 onClose()
             })
             .catch((error) => {
                 console.log(error);
             });
     }
+
+    //map the courses to the select options
+    const mapCourses = {
+        options: coursesData.map((item) => {
+            return {
+                value: item.id,
+                label: item.courseName,
+                color: item.color
+            }
+        })
+    }
+
 
     return (
         <div className={"studentModal " + (isActive && "active")}>
@@ -55,33 +94,53 @@ const StudentEditModal = ({indexID, isActive, onClose, studentId}) => {
                 </button>
             </div>
 
-            <form onSubmit={(e) =>{ e.preventDefault(); saveData() }}>
+            <form onSubmit={(e) => {
+                e.preventDefault();
+                saveData()
+            }}>
                 <div className="studentModalContent">
                     <div className="container">
                         <div className="row">
                             <div className="col-33">
-                                <label className="studentModalLabel">Name</label>
-                                <input type="text" className="studentModalInput" placeholder="type..." value={studentValues.name} onChange={e => setStudentValues({...studentValues, name: e.target.value})}/>
+                                <label className="studentModalLabel">Name - Surname</label>
+                                <input type="text" className="studentModalInput" placeholder="type..."
+                                       value={studentValues.name}
+                                       onChange={e => setStudentValues({...studentValues, name: e.target.value})}/>
 
                             </div>
                             <div className="col-33">
                                 <label className="studentModalLabel">Age</label>
-                                <input type="number" className="studentModalInput" maxLength="2" placeholder="type..." value={studentValues.age} onChange={e => setStudentValues({...studentValues, age: e.target.value})}/>
+                                <input type="number" className="studentModalInput" maxLength="2" placeholder="type..."
+                                       value={studentValues.age}
+                                       onChange={e => setStudentValues({...studentValues, age: e.target.value})}/>
 
                             </div>
-                            {/*<div className="col-33">*/}
-                            {/*    <label className="studentModalLabel">Class</label>*/}
-                            {/*    <select className="studentModalInput">*/}
-                            {/*        <option value={studentsData[indexID].classId}>{studentsData[indexID]?.class.className}</option>*/}
-                            {/*        {classesData.map((item, index) => {*/}
-                            {/*            if (item.className !== studentsData[indexID]?.class.className) {*/}
-                            {/*                return (*/}
-                            {/*                    <option key={index} value={item.className}>{item.className}</option>*/}
-                            {/*                )*/}
-                            {/*            }*/}
-                            {/*        })}*/}
-                            {/*    </select>*/}
-                            {/*</div>*/}
+                            <div className="col-33">
+                                <label className="studentModalLabel">Class</label>
+                                <select className="studentModalInput"
+                                        onChange={e => setStudentValues({...studentValues, classId: e.target.value})}>
+                                    <option value="">Select a class</option>
+                                    {classesData.map((item, index) => {
+                                        if (item.className !== studentsData[indexID]?.class.className) {
+                                            return (
+                                                <option key={index} value={item.id}>{item.className}</option>
+                                            )
+                                        }
+                                    })}
+                                </select>
+                            </div>
+
+
+                            <div className="col">
+                                <label className="studentModalLabel">Course</label>
+                                <Select options={mapCourses.options} isMulti isSearchable autoFocus
+                                        onChange={(e) => setStudentValues({
+                                            ...studentValues,
+                                            courseIds: e.map((item) => item.value)
+                                        })}/>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
