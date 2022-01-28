@@ -13,7 +13,8 @@ const Students = () => {
         studentsData,
         setStudentsData,
         serverLink,
-        setIsDeleteStudentsModalBtnDisabled
+        setIsDeleteStudentsModalBtnDisabled,
+        setCoursesData
     } = useContext(mainContext)
     const [isOpen, setIsOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -25,6 +26,14 @@ const Students = () => {
         };
         fetchData();
     }, [serverLink, setStudentsData]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await axios.get(`${serverLink}/api/course/getAll`);
+            setCoursesData(response.data);
+        };
+        fetchData();
+    }, [serverLink, setCoursesData]);
 
     const deleteStudent = (id) => {
         axios.delete(`${serverLink}/api/student/delete/${id}`)
