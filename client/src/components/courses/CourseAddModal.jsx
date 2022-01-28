@@ -3,12 +3,13 @@ import {ModalFooterBtn} from "../../styledComponents/studentsStyle";
 import {useContext, useEffect, useState} from "react";
 import mainContext from "../../MainContext";
 import Select from "react-select";
+import axios from "axios";
 
 const CourseAddModal = ({isActive, onClose}) => {
     const { coursesData, setCoursesData, studentsData, setStudentsData, serverLink } = useContext(mainContext)
     const [courseValues, setCourseValues] = useState({
         courseName: "",
-        students: 0
+        studentIds: []
     });
 
     const randomHexGenerator = () => {
@@ -25,63 +26,40 @@ const CourseAddModal = ({isActive, onClose}) => {
         fetchData();
     }, [serverLink, setStudentsData]);
 
+    const mapStudents = {
+        options: studentsData.map((item) => {
+            return {
+                value: item.id,
+                label: item.studentName
+            }
+        })
+    }
+
+
     const handleSave = (courseValues) => {
-
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        var raw = JSON.stringify({
-            "courseName": courseValues.courseName,
-            "courseColor": randomHexGenerator()
-        });
-
-        console.log(raw)
-
-        var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-        };
-
-        fetch("http://localhost:3001/api/course/createCourse", requestOptions)
-            .then(response =>{
-                console.log(response)
-                if(response.status === 201){
-                    setCoursesData(coursesData.concat(courseValues));
-
-                    // fetch(`${serverLink}/api/course/getCourses`)
-                    //     .then(response => response.json())
-                    //     .then(data => {
-                    //         setCoursesData(data);
-                    //     })
-
-                    console.log(coursesData)
-
-                    // var raw = JSON.stringify({
-                    //     "studentId": courseValues.students,
-                    //     "courseId": coursesData.slice(-1)[0].id
-                    // });
-                    //
-                    // var requestOptions = {
-                    //     method: 'POST',
-                    //     headers: myHeaders,
-                    //     body: raw,
-                    //     redirect: 'follow'
-                    // };
-                    //
-                    // fetch("http://localhost:3001/api/course/addStudentToCourse", requestOptions)
-                    //     .then(response => response.text())
-                    //     .then(result => console.log(result))
-                    //     .catch(error => console.log('error', error));
-
-
-                    onClose();
-                }
-                response.json()
+        axios.post(`${serverLink}/api/course/create`, {
+            courseName: courseValues.courseName,
+            courseColor: randomHexGenerator(),
+        })
+            .then(res => {
+                axios.post(`${serverLink}/api/course/addMultipleStudentsToCourse`, {
+                    courseId: res.data.id,
+                    studentIds: courseValues.studentIds
+                })
+                    .then(() => {
+                        axios.get(`${serverLink}/api/course/getAll`)
+                            .then(res => {
+                                setCoursesData(res.data);
+                            })
+                    })
+                    .catch(err => console.log(err))
+                setCourseValues({
+                    courseName: "",
+                    studentIds: []
+                })
+                onClose();
             })
-            .catch(error => console.log('error', error));
-
+            .catch(err => console.log(err));
     }
 
     return(
@@ -98,7 +76,7 @@ const CourseAddModal = ({isActive, onClose}) => {
                     <div className="container">
                         <div className="row">
                             <div className="col">
-                                <label className="studentModalLabel">Name</label>
+                                <label className="studentModalLabel">Course Name</label>
                                 <input
                                     type="text"
                                     className="studentModalInput"
@@ -108,22 +86,25 @@ const CourseAddModal = ({isActive, onClose}) => {
                                     onChange={(e) => { setCourseValues({...courseValues, courseName: e.target.value}) }}
                                 />
                             </div>
+
                             <div className="col">
-                                <label className="studentModalLabel">Add Students</label>
-                                <select className="studentModalInput" onChange={(e) =>  setCourseValues({...courseValues, students: parseInt(e.target.value)})}>
-                                    <option value="">Select students</option>
-                                    {studentsData.map((item) => (
-                                        <option key={item.id} value={item.id}>
-                                            {item.studentName}
-                                        </option>
-                                    ))}
-                                </select>
+                                <label className="studentModalLabel">Student(s)</label>
+                                <Select options={mapStudents.options} isMulti isSearchable autoFocus
+                                        onChange={(e) => setCourseValues({
+                                            ...courseValues,
+                                            studentIds: e.map((item) => item.value)
+                                        })}/>
                             </div>
+
                         </div>
                     </div>
                 </div>
 
                 <div className="studentModalfooter">
+                    <ModalFooterBtn bgColor="#fff" textColor="#374151" isStroke={true} strokeColor="#E5E7EB"
+                                    onClick={() => onClose()} type="button" tabIndex="1">
+                        Cancel
+                    </ModalFooterBtn>
                     <ModalFooterBtn bgColor="#1E40AF" textColor="#fff" type="submit">
                         Save Changes
                     </ModalFooterBtn>
