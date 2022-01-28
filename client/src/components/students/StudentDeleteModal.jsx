@@ -9,7 +9,6 @@ const StudentDeleteModal = ({isActive, onClose}) => {
         studentsData,
         setStudentsData,
         serverLink,
-        isDeleteStudentsModalBtnDisabled,
         setIsModalDeleteBtnDisabled,
         isModalDeleteBtnDisabled
     } = useContext(mainContext)
@@ -73,8 +72,8 @@ const StudentDeleteModal = ({isActive, onClose}) => {
                                     }}>
                         Cancel
                     </ModalFooterBtn>
-                    <ModalFooterBtn bgColor="#EF4444" textColor="#fff" isDisabled={isModalDeleteBtnDisabled}
-                                    disabled={isModalDeleteBtnDisabled}
+                    <ModalFooterBtn bgColor="#EF4444" textColor="#fff" isDisabled={isModalDeleteBtnDisabled.student}
+                                    disabled={isModalDeleteBtnDisabled.student}
                                     onClick={() => deleteAllStudents()}>
                         {countdown === 0 ? "Yes, Delete All Students" : `Delete in ${countdown}`}
                     </ModalFooterBtn>
