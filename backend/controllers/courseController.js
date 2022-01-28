@@ -89,31 +89,6 @@ const deleteAllCourses = async (req, res) => {
     }
 };
 
-const addStudentToCourse = async (req, res) => {
-    try {
-        const {studentId, courseId} = req.body;
-        const student = await db.Student.findOne({
-            where: {
-                id: studentId
-            }
-        });
-        const course = await db.Course.findOne({
-            where: {
-                id: courseId
-            }
-        });
-        const studentCourse = await db.StudentCourse.create({
-            studentId: student.id,
-            courseId: course.id
-        });
-
-        !student || !course ? res.status(404).json({message: 'Student or course not found'}) : res.status(200).json({message: 'Student added to course successfully'});
-
-    } catch (error) {
-        res.status(500).json({error: error.message});
-    }
-};
-
 const addStudentToMultipleCourse = async (req, res) => {
     try {
         const {studentId, courseIds} = req.body;
@@ -202,7 +177,6 @@ module.exports = {
     deleteCourse,
     getCourse,
     deleteAllCourses,
-    addStudentToCourse,
     removeStudentFromCourse,
     addStudentToMultipleCourse,
     addMultipleStudentsToCourse
