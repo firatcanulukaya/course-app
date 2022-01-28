@@ -4,7 +4,6 @@ import mainContext from "../../MainContext";
 import {ModalFooterBtn} from "../../styledComponents/studentsStyle";
 import axios from "axios";
 import Select from 'react-select'
-import courses from "../courses/Courses";
 
 const StudentEditModal = ({indexID, isActive, onClose, studentId}) => {
     const {
@@ -64,7 +63,6 @@ const StudentEditModal = ({indexID, isActive, onClose, studentId}) => {
             });
     }
 
-    //map the courses to the select options
     const mapCourses = {
         options: coursesData.map((item) => {
             return {
@@ -75,6 +73,16 @@ const StudentEditModal = ({indexID, isActive, onClose, studentId}) => {
         })
     }
 
+    useEffect(() => {
+        if(!isActive){
+            setStudentValues({
+                name: "",
+                age: "",
+                classId: "",
+                courseIds: [],
+            })
+        }
+    }, [isActive])
 
     return (
         <div className={"studentModal " + (isActive && "active")}>
