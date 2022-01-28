@@ -34,8 +34,7 @@ const StudentAddModal = ({isActive, onClose}) => {
         options: coursesData.map((item) => {
             return {
                 value: item.id,
-                label: item.courseName,
-                color: item.color
+                label: item.courseName
             }
         })
     }
