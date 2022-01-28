@@ -49,11 +49,11 @@ const StudentList = ({deleteStudent}) => {
         <>
             <StudentEditModal onClose={() => {
                 setIsOpen({...isOpen, edit: false});
-                setStudentIds({...studentIds, index: 0});
+                setStudentIds({id: 0, index: 0});
             }} indexID={studentIds.index} studentId={studentIds.id} isActive={isOpen.edit}/>
             <DeleteModal handleDelete={deleteStudent} onClose={() => {
                 setIsOpen({...isOpen, delete: false});
-                setStudentIds({...studentIds, index: 0});
+                setStudentIds({id: 0, index: 0});
             }} id={studentIds.id} isActive={isOpen.delete} type={"student"}/>
 
             <div className="table-container">
