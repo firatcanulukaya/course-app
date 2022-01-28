@@ -137,7 +137,11 @@ const StudentEditModal = ({indexID, isActive, onClose, studentId}) => {
                 </div>
 
                 <div className="studentModalfooter">
-                    <ModalFooterBtn bgColor="#1E40AF" textColor="#fff">
+                    <ModalFooterBtn bgColor="#fff" textColor="#374151" isStroke={true} strokeColor="#E5E7EB"
+                                    onClick={() => onClose() } type="button">
+                        Cancel
+                    </ModalFooterBtn>
+                    <ModalFooterBtn bgColor="#1E40AF" textColor="#fff" type="submit">
                         Save Changes
                     </ModalFooterBtn>
                 </div>
