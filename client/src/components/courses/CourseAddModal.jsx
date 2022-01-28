@@ -18,7 +18,7 @@ const CourseAddModal = ({isActive, onClose}) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`${serverLink}/api/student/getAllStudents`);
+            const response = await fetch(`${serverLink}/api/student/getAll`);
             const data = await response.json();
             setStudentsData(data);
         };
