@@ -67,8 +67,7 @@ const StudentEditModal = ({indexID, isActive, onClose, studentId}) => {
         options: coursesData.map((item) => {
             return {
                 value: item.id,
-                label: item.courseName,
-                color: item.color
+                label: item.courseName
             }
         })
     }
