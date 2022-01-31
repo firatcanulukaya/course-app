@@ -29,9 +29,9 @@ const StudentEditModal = ({indexID, isActive, onClose, studentId}) => {
                 'Content-Type': 'application/json'
             },
             data: JSON.stringify({
-                "studentName": studentValues.name,
-                "studentAge": studentValues.age,
-                "classId": studentValues.classId
+                "studentName": studentValues.name.length > 0 ? studentValues.name : studentsData[indexID].studentName,
+                "studentAge": studentValues.age.length > 0 ? studentValues.age : studentsData[indexID].studentAge,
+                "classId": studentValues.classId.length > 0 ? studentValues.classId : studentsData[indexID].classId,
             }),
         };
 
@@ -73,7 +73,7 @@ const StudentEditModal = ({indexID, isActive, onClose, studentId}) => {
     }
 
     useEffect(() => {
-        if(!isActive){
+        if (!isActive) {
             setStudentValues({
                 name: "",
                 age: "",
@@ -145,7 +145,7 @@ const StudentEditModal = ({indexID, isActive, onClose, studentId}) => {
 
                 <div className="studentModalfooter">
                     <ModalFooterBtn bgColor="#fff" textColor="#374151" isStroke={true} strokeColor="#E5E7EB"
-                                    onClick={() => onClose() } type="button">
+                                    onClick={() => onClose()} type="button">
                         Cancel
                     </ModalFooterBtn>
                     <ModalFooterBtn bgColor="#1E40AF" textColor="#fff" type="submit">

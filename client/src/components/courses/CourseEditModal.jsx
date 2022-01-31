@@ -37,7 +37,7 @@ const CourseEditModal = ({indexID, isActive, onClose, courseId}) => {
                 'Content-Type': 'application/json'
             },
             data: JSON.stringify({
-                "courseName": courseValues.courseName,
+                "courseName": courseValues.courseName.length > 0 ? courseValues.courseName : coursesData[indexID].courseName,
             }),
         };
 
