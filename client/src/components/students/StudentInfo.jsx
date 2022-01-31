@@ -92,7 +92,7 @@ const StudentInfo = () => {
                             <img src={photo} alt="profile photo"/>
                         </div>
                         <div className="infoCardUtils">
-                            <p>{student?.studentName.length > 50 ? student?.studentName.substr(0, 50) : student?.studentName}</p>
+                            <p>{student?.studentName?.length > 50 ? student?.studentName.substr(0, 50) : student?.studentName}</p>
                             <span>age: {student?.studentAge}</span>
                         </div>
                     </div>
@@ -112,7 +112,7 @@ const StudentInfo = () => {
                             <li className="student-table-li">
                                 {student?.courses?.length > 0 ? student?.courses.map((course, index) => (
                                     <CourseBadge hex={course.courseColor} key={index}>
-                                        <a href={`course/${course.id}`}>{course.courseName.length < 20 ? course.courseName : course.courseName.substr(0, 20) + "..."}</a>
+                                        <a href={`/course/${course.id}`}>{course.courseName.length < 20 ? course.courseName : course.courseName.substr(0, 20) + "..."}</a>
                                         <button className="tooltip"
                                                 data-tip={`Remove ${course.courseName} course from student`}
                                                 onClick={() => removeCourse(student?.id, course.id)}><img
