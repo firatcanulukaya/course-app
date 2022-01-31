@@ -92,7 +92,7 @@ const StudentInfo = () => {
                             <img src={photo} alt="profile photo"/>
                         </div>
                         <div className="infoCardUtils">
-                            <p>{student?.studentName}</p>
+                            <p>{student?.studentName.length > 50 ? student?.studentName.substr(0, 50) : student?.studentName}</p>
                             <span>age: {student?.studentAge}</span>
                         </div>
                     </div>

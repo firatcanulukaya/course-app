@@ -73,7 +73,7 @@ const CourseInfo = () => {
             <DeleteModal id={id} isActive={isOpen.delete} onClose={() => setIsOpen({...isOpen, delete: !isOpen.delete})}
                          handleDelete={deleteCourse} type="course"/>
             <CourseEditModal isActive={isOpen.edit} onClose={() => setIsOpen({...isOpen, edit: !isOpen.edit})}
-                             studentId={id}/>
+                             courseId={id}/>
 
             <img src={bg} alt="background" className="card-bg"/>
             <div className="infoCard">
@@ -85,7 +85,7 @@ const CourseInfo = () => {
                             <img src={photo} alt="profile photo"/>
                         </div>
                         <div className="infoCardUtils">
-                            <p>{course?.courseName}</p>
+                            <p>{course?.courseName.length > 50 ? course?.courseName.substr(0, 50) : course?.courseName}</p>
                             <span>Created at: {new Date(course?.createdAt).toLocaleDateString("en-US", {
                                     year: "numeric",
                                     month: "long",
