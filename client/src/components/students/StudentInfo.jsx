@@ -21,6 +21,7 @@ const StudentInfo = () => {
         delete: false,
         edit: false
     })
+    const [studentIndex, setStudentIndex] = useState(0)
 
     useEffect(() => {
         axios.get(`${serverLink}/api/student/getAll`)
@@ -48,6 +49,7 @@ const StudentInfo = () => {
 
     useEffect(() => {
         const student = studentsData.find(student => student.id === parseInt(id))
+        setStudentIndex(studentsData.indexOf(student))
         setStudent(student)
     }, [studentsData, id])
 
@@ -80,7 +82,7 @@ const StudentInfo = () => {
             <DeleteModal id={id} isActive={isOpen.delete} onClose={() => setIsOpen({...isOpen, delete: !isOpen.delete})}
                          handleDelete={deleteStudent} type="student"/>
             <StudentEditModal isActive={isOpen.edit} onClose={() => setIsOpen({...isOpen, edit: !isOpen.edit})}
-                              studentId={id}/>
+                              studentId={id} indexID={studentIndex}/>
 
             <img src={bg} alt="background" className="card-bg"/>
             <div className="infoCard">
