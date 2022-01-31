@@ -51,6 +51,12 @@ const editCourse = async (req, res) => {
 const deleteCourse = async (req, res) => {
     try {
         const {id} = req.params;
+
+        await db.StudentCourse.destroy({
+            where: {
+                courseId: req.params.id
+            }
+        })
         const deletedCourse = await db.Course.destroy({
             where: {
                 id: id
@@ -79,6 +85,12 @@ const getCourse = async (req, res) => {
 
 const deleteAllCourses = async (req, res) => {
     try {
+        await db.StudentCourse.destroy({
+            where: {
+                courseId: req.params.id
+            }
+        })
+
         const deletedCourses = await db.Course.destroy({
             where: {},
             truncate: true
