@@ -1,5 +1,5 @@
 import Modal from "../students/StudentEditModal";
-import {CourseBadge} from "../../styledComponents/studentsStyle";
+import {CourseBadge} from "../../styledComponents";
 import editIcon from "../../assets/img/edit.svg";
 import deleteIcon from "../../assets/img/delete.svg";
 import {useContext} from "react";
@@ -43,7 +43,7 @@ const CourseList = () => {
 
                                 {classesData.map((item, index) => (
 
-                                    <div className="row">
+                                    <div className="row" key={index}>
                                         <div className="cell" data-title="ID">
                                             {item.id}
                                         </div>
