@@ -8,6 +8,7 @@ export const CourseBadge = styled.span`
   background: ${props => props.hex};
   border-radius: 1rem;
   font-size: 15px;
+  margin-top: 1rem;
   margin-left: .5rem;
   padding: .3rem 1rem;
   font-family: "Plus Jakarta Sans Medium", sans-serif;
@@ -81,3 +82,10 @@ export const InfoButtons = styled.button`
   }`
     }
   }}`
+
+export const InfoBanner = styled.div`
+  background: ${props => props.bgColor};
+  width: 100%;
+  height: 90px;
+  border-radius: 12px 12px 0 0;
+`
