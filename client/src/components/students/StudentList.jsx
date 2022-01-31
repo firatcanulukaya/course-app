@@ -2,7 +2,7 @@ import {useContext, useState} from "react";
 import StudentEditModal from "./StudentEditModal";
 import DeleteModal from "../DeleteModal";
 import mainContext from "../../MainContext";
-import {CourseBadge} from "../../styledComponents/studentsStyle";
+import {CourseBadge} from "../../styledComponents";
 import editIcon from "../../assets/img/edit.svg";
 import deleteIcon from "../../assets/img/delete.svg";
 import timesIcon from "../../assets/img/times.svg";

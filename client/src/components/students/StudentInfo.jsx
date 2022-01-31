@@ -3,7 +3,7 @@ import {useParams} from "react-router-dom";
 import DeleteModal from "../DeleteModal";
 import mainContext from "../../MainContext";
 import axios from "axios";
-import {CourseBadge, InfoButtons, InfoCardTag} from "../../styledComponents/studentsStyle";
+import {CourseBadge, InfoButtons, InfoCardTag} from "../../styledComponents";
 import bg from "../../assets/img/bg4.svg";
 import photo from "../../assets/img/photo.svg";
 import arrowLeft from "../../assets/img/arrowLeft.svg"

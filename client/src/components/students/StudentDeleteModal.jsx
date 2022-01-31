@@ -1,7 +1,7 @@
 import xIcon from "../../assets/img/xIcon.svg"
 import {useContext, useEffect, useState} from "react";
 import mainContext from "../../MainContext";
-import {ModalFooterBtn} from "../../styledComponents/studentsStyle";
+import {ModalFooterBtn} from "../../styledComponents";
 import axios from "axios";
 
 const StudentDeleteModal = ({isActive, onClose}) => {

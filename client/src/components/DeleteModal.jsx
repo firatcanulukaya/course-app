@@ -1,5 +1,5 @@
 import xIcon from "../assets/img/xIcon.svg";
-import {ModalFooterBtn} from "../styledComponents/studentsStyle";
+import {ModalFooterBtn} from "../styledComponents";
 
 const DeleteModal = ({handleDelete, isActive, onClose, id, type}) => {
     return (

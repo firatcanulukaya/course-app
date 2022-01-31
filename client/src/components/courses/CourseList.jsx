@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from "react";
-import {CourseBadge} from "../../styledComponents/studentsStyle";
+import {CourseBadge} from "../../styledComponents";
 import mainContext from "../../MainContext";
 import CourseEditModal from "./CourseEditModal";
 import editIcon from "../../assets/img/edit.svg";

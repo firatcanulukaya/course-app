@@ -1,5 +1,5 @@
 import xIcon from "../../assets/img/xIcon.svg";
-import {ModalFooterBtn} from "../../styledComponents/studentsStyle";
+import {ModalFooterBtn} from "../../styledComponents";
 import {useContext, useEffect, useState} from "react";
 import mainContext from "../../MainContext";
 import Select from "react-select";
