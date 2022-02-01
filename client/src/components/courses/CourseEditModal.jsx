@@ -30,18 +30,10 @@ const CourseEditModal = ({indexID, isActive, onClose, courseId}) => {
     }
 
     const saveData = () => {
-        var config = {
-            method: 'patch',
-            url: `${serverLink}/api/course/edit/${courseId}`,
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: JSON.stringify({
-                "courseName": courseValues.courseName.length > 0 ? courseValues.courseName : coursesData[indexID].courseName,
-            }),
-        };
 
-        axios(config)
+        axios.patch(`${serverLink}/api/course/edit/${courseId}`, {
+            "courseName": courseValues.courseName.length > 0 ? courseValues.courseName : coursesData[indexID].courseName,
+        })
             .then((response) => {
                 axios.post(`${serverLink}/api/course/addMultipleStudentsToCourse`, {
                     courseId: courseId,
