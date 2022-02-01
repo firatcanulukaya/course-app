@@ -58,7 +58,7 @@ const App = () => {
     const [isModalDeleteBtnDisabled, setIsModalDeleteBtnDisabled] = useState({
         student: true,
         course: true,
-        class: true
+        classes: true
     });
 
     const data = {
