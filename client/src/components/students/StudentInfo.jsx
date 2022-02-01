@@ -117,8 +117,8 @@ const StudentInfo = () => {
                                         <a href={`/course/${course.id}`}>{course.courseName.length < 20 ? course.courseName : course.courseName.substr(0, 20) + "..."}</a>
                                         <button className="tooltip"
                                                 data-tip={`Remove ${course.courseName} course from student`}
-                                                onClick={() => removeCourse(student?.id, course.id)}><img
-                                            src={timesIcon} alt="times icon"/></button>
+                                                onClick={() => removeCourse(student?.id, course.id)}>
+                                            <img src={timesIcon} style={{mixBlendMode: "luminosity"}} alt="times icon"/></button>
                                     </CourseBadge>
                                 )) : <InfoCardTag textColor={"red"}>Student has not any courses.</InfoCardTag>}
                             </li>

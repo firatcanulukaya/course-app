@@ -96,7 +96,7 @@ const CourseList = ({deleteCourse}) => {
                                                                 <button className="tooltip"
                                                                         data-tip={`Remove ${student.studentName} student from course`}
                                                                         onClick={() => removeStudent(student.id, item.id)}>
-                                                                    <img src={timesIcon} alt="times icon"/></button>
+                                                                    <img src={timesIcon} style={{mixBlendMode: "luminosity"}} alt="times icon"/></button>
                                                             </CourseBadge>
                                                         )) : <CourseBadge hex="#B91C1C">
                                                             Course has not any students yet

@@ -98,7 +98,7 @@ const StudentList = ({deleteStudent}) => {
                                                 <li className="student-table-li">
                                                     {
                                                         item.courses.length > 0 ?
-                                                            <CourseBadge hex="#000">
+                                                            <CourseBadge hex="#011F3B">
                                                                 Total: {item.courses.length}
                                                             </CourseBadge>
                                                             : ""
@@ -106,10 +106,10 @@ const StudentList = ({deleteStudent}) => {
                                                     {item.courses.length > 0 ? item.courses.map((course, index) => (
                                                             <CourseBadge hex={course.courseColor} key={index}>
                                                                 <a href={`course/${course.id}`}>{course.courseName.length < 20 ? course.courseName : course.courseName.substr(0, 20) + "..."}</a>
-                                                                <button className="tooltip" data-tip={`Remove ${course.courseName} course from student`} onClick={() => removeCourse(item.id, course.id)}><img src={timesIcon} alt="times icon"/></button>
+                                                                <button className="tooltip" data-tip={`Remove ${course.courseName} course from student`} onClick={() => removeCourse(item.id, course.id)}><img src={timesIcon} style={{mixBlendMode: "luminosity"}} alt="times icon"/></button>
                                                             </CourseBadge>
                                                         ))
-                                                        : <CourseBadge hex="#000">Student has no courses
+                                                        : <CourseBadge hex="#011F3B">Student has no courses
                                                             yet </CourseBadge>}
                                                 </li>
                                             </ul>
