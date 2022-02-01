@@ -74,7 +74,7 @@ const ClassList = ({deleteClass}) => {
                                             {item.id}
                                         </div>
                                         <div className="cell" data-title="Course Info">
-                                            <a href={`course/${item.id}`}> {item.className} </a>
+                                            <a href={`class/${item.id}`}> {item.className} </a>
                                             <p>Total Student Count: {item.students.length}</p>
                                         </div>
                                         <div className="cell" data-title="Students">
