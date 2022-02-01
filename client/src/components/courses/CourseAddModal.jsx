@@ -13,8 +13,8 @@ const CourseAddModal = ({isActive, onClose}) => {
     });
 
     const randomHexGenerator = () => {
-        const hex = Math.floor(Math.random() * 16777215).toString(16);
-        return `#00${hex.substr(0, 2)}e3`;
+        const hex = Math.floor(Math.random()*16777215).toString(16);
+        return `#${hex}`;
     }
 
     useEffect(() => {
