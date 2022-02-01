@@ -58,7 +58,7 @@ const Classes = () => {
                 isActive={isOpen.delete}
             />
 
-            <button className="add-students tooltip blur" data-tip="Add New Course" onClick={() => {
+            <button className="add-students tooltip blur" data-tip="Add New Class" onClick={() => {
                 setIsOpen({...isOpen, add: !isOpen.add});
             }}>
                 <img src={plus} alt="plus" className="plus"/>
