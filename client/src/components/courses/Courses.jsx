@@ -18,16 +18,15 @@ const Courses = () => {
     useEffect(() => {
         const fetchData = async () => {
             const response = await axios.get(`${serverLink}/api/course/getAll`);
-            const data = await response.json();
-            setCoursesData(data);
+            setCoursesData(response.data);
         };
         fetchData();
     }, [serverLink, setCoursesData]);
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await axios.get(`${serverLink}/api/student/getAll`);
-            setStudentsData(result.data);
+            const response = await axios.get(`${serverLink}/api/student/getAll`);
+            setStudentsData(response.data);
         };
         fetchData();
     }, [serverLink, setStudentsData]);
