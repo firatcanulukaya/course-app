@@ -15,7 +15,8 @@ export const CourseBadge = styled.span`
   line-height: 1.2;
   
   a{
-    color: #fff;
+    color: #690000;
+    mix-blend-mode: luminosity;
   }
   
   button{
