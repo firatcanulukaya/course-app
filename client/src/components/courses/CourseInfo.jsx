@@ -29,7 +29,7 @@ const CourseInfo = () => {
                 setCoursesData(res.data)
             })
             .catch(err => console.log(err))
-    }, [serverLink, setCoursesData])
+    }, [serverLink, coursesData])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -37,7 +37,7 @@ const CourseInfo = () => {
             setStudentsData(response.data);
         };
         fetchData();
-    }, [serverLink, setStudentsData]);
+    }, [serverLink, studentsData]);
 
     useEffect(() => {
         const course = coursesData.find(course => course.id === parseInt(id))
@@ -108,7 +108,7 @@ const CourseInfo = () => {
                                         <button className="tooltip"
                                                 data-tip={`Remove ${student.studentName} student from course`}
                                                 onClick={() => removeStudent(course?.id, student.id)}>
-                                            <img src={timesIcon} alt="times icon"/></button>
+                                            <img src={timesIcon} style={{mixBlendMode: "luminosity"}} alt="times icon"/></button>
                                     </CourseBadge>
                                 )) : <InfoCardTag textColor={"red"}>Course has not any students.</InfoCardTag>}
                             </li>

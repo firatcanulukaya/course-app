@@ -12,7 +12,7 @@ import StudentEditModal from "./StudentEditModal";
 import timesIcon from "../../assets/img/times.svg";
 
 const StudentInfo = () => {
-    const {serverLink, setCoursesData, setClassesData, setStudentsData, studentsData} = useContext(mainContext)
+    const {serverLink, coursesData, setCoursesData, setClassesData, setStudentsData, studentsData} = useContext(mainContext)
     const navigate = useNavigate();
     const {id} = useParams();
 
@@ -29,7 +29,7 @@ const StudentInfo = () => {
                 setStudentsData(res.data)
             })
             .catch(err => console.log(err))
-    }, [serverLink, setStudentsData])
+    }, [serverLink, studentsData])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -37,7 +37,7 @@ const StudentInfo = () => {
             setCoursesData(response.data);
         };
         fetchData();
-    }, [serverLink, setCoursesData]);
+    }, [serverLink, coursesData]);
 
     useEffect(() => {
         const fetchData = async () => {
