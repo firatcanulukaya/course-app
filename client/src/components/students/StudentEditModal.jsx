@@ -20,22 +20,26 @@ const StudentEditModal = ({indexID, isActive, onClose, studentId}) => {
         classId: "",
         courseIds: [],
     })
+    const [loading, setLoading] = useState(false)
+
+    const handleSubmit = async (e) => {
+        setLoading(true)
+        e.propertyIsEnumerable()
+        const {name, age, classId, courseIds} = studentValues
+        await axios.patch(`${serverLink}/api/student/edit/${studentId}`, {
+            name,
+            age,
+            classId,
+            courseIds
+        })
+    }
 
     const saveData = () => {
-        var config = {
-            method: 'patch',
-            url: `${serverLink}/api/student/edit/${studentId}`,
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: JSON.stringify({
-                "studentName": studentValues.name.length > 0 ? studentValues.name : studentsData[indexID].studentName,
-                "studentAge": studentValues.age.length > 0 ? studentValues.age : studentsData[indexID].studentAge,
-                "classId": studentValues.classId.length > 0 ? studentValues.classId : studentsData[indexID].classId,
-            }),
-        };
-
-        axios(config)
+        axios.patch(`${serverLink}/api/student/edit/${studentId}`, {
+            "studentName": studentValues.name.length > 0 ? studentValues.name : studentsData[indexID].studentName,
+            "studentAge": studentValues.age.length > 0 ? studentValues.age : studentsData[indexID].studentAge,
+            "classId": studentValues.classId.length > 0 ? studentValues.classId : studentsData[indexID].classId,
+        })
             .then((response) => {
                 axios.post(`${serverLink}/api/course/addStudentToCourse`, {
                     studentId: studentId,
