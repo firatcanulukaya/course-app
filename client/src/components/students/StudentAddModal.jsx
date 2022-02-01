@@ -6,7 +6,7 @@ import axios from "axios";
 import Select from "react-select";
 
 const StudentAddModal = ({isActive, onClose}) => {
-    const { setStudentsData, classesData, setClassesData, coursesData, serverLink} = useContext(mainContext);
+    const {setStudentsData, classesData, setClassesData, coursesData, serverLink} = useContext(mainContext);
     const [studentValues, setStudentValues] = useState({
         name: "",
         age: "",
@@ -138,7 +138,12 @@ const StudentAddModal = ({isActive, onClose}) => {
                                         onChange={(e) => setStudentValues({
                                             ...studentValues,
                                             courseIds: e.map((item) => item.value)
-                                        })}/>
+                                        })}
+                                        value={studentValues.courseIds ? studentValues.courseIds.map((item) => ({
+                                            value: item,
+                                            label: mapCourses.options.find((option) => option.value === item).label
+                                        })) : []}
+                                />
                             </div>
 
                         </div>

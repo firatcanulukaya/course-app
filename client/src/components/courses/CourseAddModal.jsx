@@ -6,14 +6,14 @@ import Select from "react-select";
 import axios from "axios";
 
 const CourseAddModal = ({isActive, onClose}) => {
-    const { coursesData, setCoursesData, studentsData, setStudentsData, serverLink } = useContext(mainContext)
+    const {coursesData, setCoursesData, studentsData, setStudentsData, serverLink} = useContext(mainContext)
     const [courseValues, setCourseValues] = useState({
         courseName: "",
         studentIds: []
     });
 
     const randomHexGenerator = () => {
-        const hex = Math.floor(Math.random()*16777215).toString(16);
+        const hex = Math.floor(Math.random() * 16777215).toString(16);
         return `#${hex}`;
     }
 
@@ -62,16 +62,21 @@ const CourseAddModal = ({isActive, onClose}) => {
             .catch(err => console.log(err));
     }
 
-    return(
+    return (
         <div className={"studentModal " + (isActive && "active")} id="studentAddModal">
             <div className="studentModalheader">
                 <h2>Create New Course</h2>
-                <button className="studentModalclose" onClick={() => { onClose(); }} >
+                <button className="studentModalclose" onClick={() => {
+                    onClose();
+                }}>
                     <img src={xIcon} alt="X icon"/>
                 </button>
             </div>
 
-            <form onSubmit={(e) => {e.preventDefault(); handleSave(courseValues)}}>
+            <form onSubmit={(e) => {
+                e.preventDefault();
+                handleSave(courseValues)
+            }}>
                 <div className="studentModalContent">
                     <div className="container">
                         <div className="row">
@@ -83,7 +88,9 @@ const CourseAddModal = ({isActive, onClose}) => {
                                     required
                                     placeholder="type..."
                                     value={courseValues.courseName}
-                                    onChange={(e) => { setCourseValues({...courseValues, courseName: e.target.value}) }}
+                                    onChange={(e) => {
+                                        setCourseValues({...courseValues, courseName: e.target.value})
+                                    }}
                                 />
                             </div>
 
@@ -93,7 +100,14 @@ const CourseAddModal = ({isActive, onClose}) => {
                                         onChange={(e) => setCourseValues({
                                             ...courseValues,
                                             studentIds: e.map((item) => item.value)
-                                        })}/>
+                                        })}
+                                        value={courseValues.studentIds ? courseValues.studentIds.map((item) => {
+                                            return {
+                                                value: item,
+                                                label: studentsData.find((student) => student.id === item).studentName
+                                            }
+                                        }) : []}
+                                />
                             </div>
 
                         </div>
