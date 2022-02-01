@@ -105,6 +105,24 @@ const addMultipleStudentsToClass = async (req, res) => {
     }
 }
 
+const removeStudentFromClass = async (req, res) => {
+    try {
+        const {studentId} = req.params;
+
+        if (!studentId) {
+            res.status(400).json({message: 'Student id is required'});
+        }
+
+        const updatedStudent = await db.Student.update(
+            {classId: null},
+            {where: {id: studentId}}
+        );
+        res.status(200).json({message: 'Student removed from class successfully', updatedStudent});
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+}
+
 module.exports = {
     createClass,
     getClasses,
@@ -112,5 +130,6 @@ module.exports = {
     deleteClass,
     getClass,
     deleteAllClasses,
-    addMultipleStudentsToClass
+    addMultipleStudentsToClass,
+    removeStudentFromClass
 }
