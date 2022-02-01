@@ -44,9 +44,9 @@ const ClassInfo = () => {
         setClas(classe)
     }, [classesData, id])
 
-    const deleteCourse = (id) => {
-        axios.delete(`${serverLink}/api/course/delete/${id}`)
-            .then(res => navigate("/courses"))
+    const deleteClass = (id) => {
+        axios.delete(`${serverLink}/api/class/delete/${id}`)
+            .then(res => navigate("/classes"))
             .catch(err => console.log(err))
     }
 
@@ -67,7 +67,7 @@ const ClassInfo = () => {
     return (
         <div className="infoCardContainer">
             <DeleteModal id={id} isActive={isOpen.delete} onClose={() => setIsOpen({...isOpen, delete: !isOpen.delete})}
-                         handleDelete={deleteCourse} type="course"/>
+                         handleDelete={deleteClass} type="course"/>
             <ClassEditModal isActive={isOpen.edit} onClose={() => setIsOpen({...isOpen, edit: !isOpen.edit})}
                              classId={id}/>
 
@@ -115,7 +115,7 @@ const ClassInfo = () => {
 
                 <div className="infoCardFooter">
                     <div className="infoCardFooterSection">
-                        <button onClick={() => navigate("/courses")}>
+                        <button onClick={() => navigate("/classes")}>
                             <img src={arrowLeft}/>
                             <p>Return Back</p>
                         </button>
