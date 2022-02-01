@@ -92,11 +92,25 @@ const deleteAllClasses = async (req, res) => {
     }
 };
 
+const addMultipleStudentsToClass = async (req, res) => {
+    try {
+        const {studentIds, classId} = req.body;
+        const updatedStudents = await db.Student.update(
+            {classId},
+            {where: {id: studentIds}}
+        );
+        res.status(200).json({message: 'Students added to class successfully', updatedStudents});
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+}
+
 module.exports = {
     createClass,
     getClasses,
     editClass,
     deleteClass,
     getClass,
-    deleteAllClasses
+    deleteAllClasses,
+    addMultipleStudentsToClass
 }
