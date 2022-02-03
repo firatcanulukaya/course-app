@@ -4,6 +4,7 @@ import mainContext from "../../MainContext";
 import {ModalFooterBtn} from "../../styledComponents";
 import axios from "axios";
 import Select from 'react-select'
+import {handleChange} from "../../utils/utilFunctions";
 
 const CourseEditModal = ({indexID, isActive, onClose, courseId}) => {
     const { coursesData, setCoursesData, studentsData, setStudentsData, serverLink } = useContext(mainContext)
@@ -90,7 +91,8 @@ const CourseEditModal = ({indexID, isActive, onClose, courseId}) => {
                                 <label className="studentModalLabel">Name</label>
                                 <input type="text" className="studentModalInput" placeholder="type..."
                                        value={courseValues.courseName}
-                                       onChange={e => setCourseValues({...courseValues, courseName: e.target.value})}/>
+                                       name={'courseName'}
+                                       onChange={(e) => handleChange(e, setCourseValues, courseValues)}/>
 
                             </div>
 

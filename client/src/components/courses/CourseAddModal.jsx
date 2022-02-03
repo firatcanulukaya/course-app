@@ -4,6 +4,7 @@ import {useContext, useEffect, useState} from "react";
 import mainContext from "../../MainContext";
 import Select from "react-select";
 import axios from "axios";
+import {handleChange} from "../../utils/utilFunctions";
 
 const CourseAddModal = ({isActive, onClose}) => {
     const {coursesData, setCoursesData, studentsData, setStudentsData, serverLink} = useContext(mainContext)
@@ -88,9 +89,8 @@ const CourseAddModal = ({isActive, onClose}) => {
                                     required
                                     placeholder="type..."
                                     value={courseValues.courseName}
-                                    onChange={(e) => {
-                                        setCourseValues({...courseValues, courseName: e.target.value})
-                                    }}
+                                    name={'courseName'}
+                                    onChange={(e) => handleChange(e, setCourseValues, courseValues)}
                                 />
                             </div>
 

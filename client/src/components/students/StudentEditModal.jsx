@@ -4,6 +4,7 @@ import mainContext from "../../MainContext";
 import {ModalFooterBtn} from "../../styledComponents";
 import axios from "axios";
 import Select from 'react-select'
+import {handleChange} from "../../utils/utilFunctions";
 
 const StudentEditModal = ({indexID, isActive, onClose, studentId}) => {
     const {
@@ -94,20 +95,23 @@ const StudentEditModal = ({indexID, isActive, onClose, studentId}) => {
                                 <label className="studentModalLabel">Name - Surname</label>
                                 <input type="text" className="studentModalInput" placeholder="type..."
                                        value={studentValues.name}
-                                       onChange={e => setStudentValues({...studentValues, name: e.target.value})}/>
+                                       name={'name'}
+                                       onChange={(e) => handleChange(e, setStudentValues, studentValues)}/>
 
                             </div>
                             <div className="col-33">
                                 <label className="studentModalLabel">Age</label>
                                 <input type="number" className="studentModalInput" maxLength="2" placeholder="type..."
                                        value={studentValues.age}
-                                       onChange={e => setStudentValues({...studentValues, age: e.target.value})}/>
+                                       name={'age'}
+                                       onChange={(e) => handleChange(e, setStudentValues, studentValues)}/>
 
                             </div>
                             <div className="col-33">
                                 <label className="studentModalLabel">Class</label>
                                 <select className="studentModalInput"
-                                        onChange={e => setStudentValues({...studentValues, classId: e.target.value})}>
+                                        name={'classId'}
+                                        onChange={(e) => handleChange(e, setStudentValues, studentValues)}>
                                     <option value="">Select a class</option>
                                     {classesData.map((item, index) => {
                                         <option key={index} value={item.id}>{item.className}</option>

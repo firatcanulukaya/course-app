@@ -4,7 +4,7 @@ import mainContext from "../../MainContext";
 import {ModalFooterBtn} from "../../styledComponents";
 import axios from "axios";
 import Select from "react-select";
-import {getAll} from "../../utils/utilFunctions";
+import {getAll, handleChange} from "../../utils/utilFunctions";
 
 const StudentAddModal = ({isActive, onClose}) => {
     const {setStudentsData, classesData, setClassesData, coursesData, setCoursesData, serverLink} = useContext(mainContext);
@@ -89,7 +89,8 @@ const StudentAddModal = ({isActive, onClose}) => {
                                     required
                                     placeholder="type..."
                                     value={studentValues.name}
-                                    onChange={e => setStudentValues({...studentValues, name: e.target.value})}
+                                    name={'name'}
+                                    onChange={(e) => handleChange(e, setStudentValues, studentValues)}
                                 />
                             </div>
                             <div className="col-33">
@@ -100,7 +101,8 @@ const StudentAddModal = ({isActive, onClose}) => {
                                     required
                                     placeholder="type..."
                                     value={studentValues.age}
-                                    onChange={e => setStudentValues({...studentValues, age: parseInt(e.target.value)})}
+                                    name={'age'}
+                                    onChange={(e) => handleChange(e, setStudentValues, studentValues)}
                                 />
                             </div>
                             <div className="col-33">
@@ -109,10 +111,8 @@ const StudentAddModal = ({isActive, onClose}) => {
                                 <select
                                     className="studentModalInput"
                                     required
-                                    onChange={(e) => setStudentValues({
-                                        ...studentValues,
-                                        classId: parseInt(e.target.value)
-                                    })}
+                                    name={'classId'}
+                                    onChange={(e) => handleChange(e, setStudentValues, studentValues)}
                                 >
                                     <option value="">Select Class</option>
                                     {classesData.map((item, index) => (
