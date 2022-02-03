@@ -7,7 +7,7 @@ import Select from 'react-select'
 import {getAll, handleChange} from "../../utils/utilFunctions";
 
 const CourseEditModal = ({indexID, isActive, onClose, courseId}) => {
-    const { coursesData, setCoursesData, studentsData, setStudentsData, serverLink } = useContext(mainContext)
+    const {coursesData, setCoursesData, studentsData, setStudentsData, serverLink} = useContext(mainContext)
     const [courseValues, setCourseValues] = useState({
         courseName: "",
         studentIds: []
@@ -59,7 +59,7 @@ const CourseEditModal = ({indexID, isActive, onClose, courseId}) => {
     }
 
     useEffect(() => {
-        if(!isActive){
+        if (!isActive) {
             setCourseValues({
                 courseName: "",
                 studentIds: []
@@ -67,7 +67,7 @@ const CourseEditModal = ({indexID, isActive, onClose, courseId}) => {
         }
     }, [isActive])
 
-    return(
+    return (
         <div className={"studentModal " + (isActive && "active")}>
             <div className="studentModalheader">
                 <h2>Edit Course</h2>
@@ -98,9 +98,14 @@ const CourseEditModal = ({indexID, isActive, onClose, courseId}) => {
                                         onChange={(e) => setCourseValues({
                                             ...courseValues,
                                             studentIds: e.map((item) => item.value)
-                                        })}/>
+                                        })}
+                                        value={courseValues.studentIds ? courseValues.studentIds.map((item) => {
+                                            return {
+                                                value: item,
+                                                label: studentsData.find((student) => student.id === item).studentName
+                                            }
+                                        }) : []}/>
                             </div>
-
 
                         </div>
                     </div>
@@ -108,7 +113,7 @@ const CourseEditModal = ({indexID, isActive, onClose, courseId}) => {
 
                 <div className="studentModalfooter">
                     <ModalFooterBtn bgColor="#fff" textColor="#374151" isStroke={true} strokeColor="#E5E7EB"
-                                    onClick={() => onClose() } type="button">
+                                    onClick={() => onClose()} type="button">
                         Cancel
                     </ModalFooterBtn>
                     <ModalFooterBtn bgColor="#1E40AF" textColor="#fff" type="submit">

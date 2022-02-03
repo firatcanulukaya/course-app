@@ -119,16 +119,18 @@ const StudentEditModal = ({indexID, isActive, onClose, studentId}) => {
                                 </select>
                             </div>
 
-
                             <div className="col">
                                 <label className="studentModalLabel">Course</label>
                                 <Select options={mapCourses.options} isMulti isSearchable autoFocus
                                         onChange={(e) => setStudentValues({
                                             ...studentValues,
                                             courseIds: e.map((item) => item.value)
-                                        })}/>
+                                        })}
+                                        value={studentValues.courseIds ? studentValues.courseIds.map((item) => ({
+                                            value: item,
+                                            label: mapCourses.options.find((option) => option.value === item).label
+                                        })) : []}/>
                             </div>
-
 
                         </div>
                     </div>

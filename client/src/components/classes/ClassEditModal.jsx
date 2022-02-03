@@ -88,7 +88,13 @@ const ClassEditModal = ({indexID, isActive, onClose, classId}) => {
                                         onChange={(e) => setClassValues({
                                             ...classValues,
                                             studentIds: e.map((item) => item.value)
-                                        })}/>
+                                        })}
+                                        value={classValues.studentIds ? classValues.studentIds.map((item) => {
+                                            return {
+                                                value: item,
+                                                label: studentsData.find((student) => student.id === item).studentName
+                                            }
+                                        }) : []}/>
                             </div>
 
 
