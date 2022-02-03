@@ -7,6 +7,7 @@ import StudentDeleteModal from "./StudentDeleteModal";
 import bg from "../../assets/img/bg2.svg";
 import plus from "../../assets/img/plus.svg";
 import deleteIcon from "../../assets/img/delete.svg";
+import {fetchStudents, getAll} from "../../utils/GetFunctions";
 
 const Students = () => {
     const {
@@ -14,7 +15,8 @@ const Students = () => {
         setStudentsData,
         serverLink,
         setIsModalDeleteBtnDisabled,
-        setCoursesData
+        setCoursesData,
+        setClassesData
     } = useContext(mainContext)
     const [isOpen, setIsOpen] = useState({
         add: false,
@@ -22,20 +24,10 @@ const Students = () => {
     })
 
     useEffect(() => {
-        const fetchData = async () => {
-            const result = await axios(`${serverLink}/api/student/getAll`);
-            setStudentsData(result.data);
-        };
-        fetchData();
-    }, [serverLink, setStudentsData]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await axios.get(`${serverLink}/api/course/getAll`);
-            setCoursesData(response.data);
-        };
-        fetchData();
-    }, [serverLink, setCoursesData]);
+        getAll(serverLink, setStudentsData, "student");
+        getAll(serverLink, setCoursesData, "course");
+        getAll(serverLink, setClassesData, "class");
+    }, [])
 
     const deleteStudent = (id) => {
         axios.delete(`${serverLink}/api/student/delete/${id}`)
