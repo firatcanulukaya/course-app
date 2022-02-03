@@ -7,6 +7,7 @@ import plus from "../../assets/img/plus.svg";
 import bg from "../../assets/img/bg4.svg";
 import axios from "axios";
 import deleteIcon from "../../assets/img/delete.svg";
+import {getAll, handleDelete} from "../../utils/utilFunctions";
 
 const Courses = () => {
     const {coursesData, setCoursesData, studentsData, setStudentsData, serverLink, setIsModalDeleteBtnDisabled} = useContext(mainContext);
@@ -16,28 +17,12 @@ const Courses = () => {
     });
 
     useEffect(() => {
-        const fetchData = async () => {
-            const response = await axios.get(`${serverLink}/api/course/getAll`);
-            setCoursesData(response.data);
-        };
-        fetchData();
-    }, [serverLink, setCoursesData]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await axios.get(`${serverLink}/api/student/getAll`);
-            setStudentsData(response.data);
-        };
-        fetchData();
-    }, [serverLink, setStudentsData]);
+        getAll(serverLink, setStudentsData, "student");
+        getAll(serverLink, setCoursesData, "course");
+    }, [])
 
     const deleteCourse = (id) => {
-        axios.delete(`${serverLink}/api/course/delete/${id}`)
-            .then(() => {
-                const newCoursesData = coursesData.filter(course => course.id !== id);
-                setCoursesData(newCoursesData);
-            })
-            .catch(error => console.log(error));
+        handleDelete(serverLink, id, setCoursesData, coursesData, "course");
     }
 
     return(

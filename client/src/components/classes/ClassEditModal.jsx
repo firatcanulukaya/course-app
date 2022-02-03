@@ -4,7 +4,7 @@ import mainContext from "../../MainContext";
 import {ModalFooterBtn} from "../../styledComponents";
 import axios from "axios";
 import Select from 'react-select'
-import {handleChange} from "../../utils/utilFunctions";
+import {getAll, handleChange} from "../../utils/utilFunctions";
 
 const ClassEditModal = ({indexID, isActive, onClose, classId}) => {
     const { classesData, setClassesData, studentsData, setStudentsData, serverLink } = useContext(mainContext)
@@ -14,12 +14,8 @@ const ClassEditModal = ({indexID, isActive, onClose, classId}) => {
     });
 
     useEffect(() => {
-        const fetchData = async () => {
-            const response = await axios.get(`${serverLink}/api/student/getAll`);
-            setStudentsData(response.data);
-        };
-        fetchData();
-    }, [serverLink, setStudentsData]);
+        getAll(serverLink, setStudentsData, "student");
+    }, [])
 
     const mapStudents = {
         options: studentsData.map((item) => {

@@ -7,6 +7,7 @@ import plus from "../../assets/img/plus.svg";
 import bg from "../../assets/img/bg1.svg";
 import deleteIcon from "../../assets/img/delete.svg";
 import axios from "axios";
+import {getAll, handleDelete} from "../../utils/utilFunctions";
 
 const Classes = () => {
     const {classesData, setClassesData, setStudentsData, serverLink, setIsModalDeleteBtnDisabled} = useContext(mainContext);
@@ -16,28 +17,12 @@ const Classes = () => {
     });
 
     useEffect(() => {
-        const fetchData = async () => {
-            const response = await axios.get(`${serverLink}/api/class/getAll`);
-            setClassesData(response.data);
-        };
-        fetchData();
-    }, [serverLink, setClassesData]);
+        getAll(serverLink, setStudentsData, "student");
+        getAll(serverLink, setClassesData, "class");
+    }, [])
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await axios.get(`${serverLink}/api/student/getAll`);
-            setStudentsData(response.data);
-        };
-        fetchData();
-    }, [serverLink, setStudentsData]);
-
-    const deleteCourse = (id) => {
-        axios.delete(`${serverLink}/api/class/delete/${id}`)
-            .then(() => {
-                const newClassesData = classesData.filter(classes => classes.id !== id);
-                setClassesData(newClassesData);
-            })
-            .catch(error => console.log(error));
+    const deleteClass = (id) => {
+        handleDelete(serverLink, id, setClassesData, classesData, "class");
     }
 
     return(
@@ -75,7 +60,7 @@ const Classes = () => {
             }
 
             {classesData.length === 0 ? <p className="studentsModalError">Nothing to show about classes.</p> :
-                <ClassList deleteClass={deleteCourse}/>}
+                <ClassList deleteClass={deleteClass}/>}
         </div>
     )
 }

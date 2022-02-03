@@ -4,7 +4,7 @@ import {useContext, useEffect, useState} from "react";
 import mainContext from "../../MainContext";
 import Select from "react-select";
 import axios from "axios";
-import {handleChange} from "../../utils/utilFunctions";
+import {getAll, handleChange} from "../../utils/utilFunctions";
 
 const CourseAddModal = ({isActive, onClose}) => {
     const {coursesData, setCoursesData, studentsData, setStudentsData, serverLink} = useContext(mainContext)
@@ -19,13 +19,8 @@ const CourseAddModal = ({isActive, onClose}) => {
     }
 
     useEffect(() => {
-        const fetchData = async () => {
-            const response = await fetch(`${serverLink}/api/student/getAll`);
-            const data = await response.json();
-            setStudentsData(data);
-        };
-        fetchData();
-    }, [serverLink, setStudentsData]);
+        getAll(serverLink, setStudentsData, "student");
+    }, [])
 
     const mapStudents = {
         options: studentsData.map((item) => {
