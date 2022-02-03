@@ -3,7 +3,7 @@ import {useParams} from "react-router-dom";
 import DeleteModal from "../DeleteModal";
 import mainContext from "../../MainContext";
 import axios from "axios";
-import {CourseBadge, InfoButtons, InfoCardTag} from "../../styledComponents";
+import {CourseBadge, InfoButtons, InfoCardTag, InfoCardTopPhoto} from "../../styledComponents";
 import bg from "../../assets/img/bg4.svg";
 import photo from "../../assets/img/photo.svg";
 import arrowLeft from "../../assets/img/arrowLeft.svg"
@@ -81,9 +81,9 @@ const CourseInfo = () => {
 
                 <div className="infoCardTop">
                     <div className="infoCardTopLeft">
-                        <div className="infoCardTopPhoto">
-                            <img src={photo} alt="profile photo"/>
-                        </div>
+                        <InfoCardTopPhoto bgColor={course?.courseColor}>
+                            <p className="infoCardTopName">{course?.courseName?.substr(0, 1)}</p>
+                        </InfoCardTopPhoto>
                         <div className="infoCardUtils">
                             <p>{course?.courseName?.length > 50 ? course?.courseName.substr(0, 50) : course?.courseName}</p>
                             <span>Created at: {new Date(course?.createdAt).toLocaleDateString("en-US", {

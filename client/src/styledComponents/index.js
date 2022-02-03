@@ -9,7 +9,7 @@ export const CourseBadge = styled.span`
   border-radius: 1rem;
   font-size: 15px;
   margin-top: 1rem;
-  margin-left: .5rem;
+  margin-right: .5rem;
   padding: .3rem 1rem;
   font-family: "Plus Jakarta Sans Medium", sans-serif;
   line-height: 1.2;
@@ -90,3 +90,24 @@ export const InfoBanner = styled.div`
   height: 90px;
   border-radius: 12px 12px 0 0;
 `
+
+export const InfoCardTopPhoto = styled.div`
+  position: absolute;
+  left: 24px;
+  top: 60px;
+  background: ${p => p.bgColor};
+  border-radius: 50%;
+  height: 80px;
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+  .infoCardTopName {
+    color: #690000;
+    font-size: 33px;
+    text-transform: uppercase;
+    mix-blend-mode: luminosity;
+
+  }`

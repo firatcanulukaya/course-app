@@ -11,6 +11,7 @@ import {useNavigate} from "react-router-dom";
 import StudentEditModal from "./StudentEditModal";
 import timesIcon from "../../assets/img/times.svg";
 import {getAll, getInfo} from "../../utils/utilFunctions";
+import {InfoCardTopPhoto} from "../../styledComponents";
 
 const StudentInfo = () => {
     const {serverLink, coursesData, setCoursesData, classesData, setClassesData, setStudentsData, studentsData} = useContext(mainContext)
@@ -74,9 +75,9 @@ const StudentInfo = () => {
 
                 <div className="infoCardTop">
                     <div className="infoCardTopLeft">
-                        <div className="infoCardTopPhoto">
-                            <img src={photo} alt="profile photo"/>
-                        </div>
+                        <InfoCardTopPhoto bgColor="#059669">
+                            <p className="infoCardTopName">{student?.studentName?.substr(0, 1)}</p>
+                        </InfoCardTopPhoto>
                         <div className="infoCardUtils">
                             <p>{student?.studentName?.length > 50 ? student?.studentName.substr(0, 50) : student?.studentName}</p>
                             <span>age: {student?.studentAge}</span>
@@ -88,7 +89,7 @@ const StudentInfo = () => {
 
                     <div className="infoCardContent-section">
                         <p>Class:</p>
-                        <span>{student?.class?.className ? student?.class?.className : "Student has no class"}</span>
+                        <a href={`/class/${student?.class?.id}`} style={{color: "#011F3B"}}>{student?.class?.className ? student?.class?.className : "Student has no class"}</a>
                     </div>
 
                     <div className="infoCardContent-section">

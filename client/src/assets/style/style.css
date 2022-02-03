@@ -278,11 +278,6 @@ button {
   width: 50%;
   height: 100%;
 }
-.infoCardContainer .infoCard .infoCardTop .infoCardTopLeft .infoCardTopPhoto {
-  position: absolute;
-  left: 24px;
-  top: 60px;
-}
 .infoCardContainer .infoCard .infoCardTop .infoCardTopLeft .infoCardUtils {
   padding: 0.5rem;
 }
