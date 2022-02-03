@@ -10,7 +10,7 @@ import DeleteModal from "../DeleteModal";
 
 
 const CourseList = ({deleteCourse}) => {
-    const {coursesData, setCoursesData, serverLink} = useContext(mainContext);
+    const {coursesData, setCoursesData, serverLink, setIsBlur} = useContext(mainContext);
 
     const [courseIds, setCourseIds] = useState({
         index: 0,
@@ -52,11 +52,13 @@ const CourseList = ({deleteCourse}) => {
             <CourseEditModal onClose={() => {
                 setIsOpen({...isOpen, edit: false});
                 setCourseIds({id: 0, index: 0});
+                setIsBlur(false);
             }} indexID={courseIds.index} courseId={courseIds.id} isActive={isOpen.edit}/>
 
             <DeleteModal handleDelete={deleteCourse} onClose={() => {
                 setIsOpen({...isOpen, delete: false});
                 setCourseIds({id: 0, index: 0});
+                setIsBlur(false);
             }} id={courseIds.id} isActive={isOpen.delete} type={"course"}/>
 
             <div className="table-container">
@@ -110,10 +112,12 @@ const CourseList = ({deleteCourse}) => {
                                                  onClick={() => {
                                                      setCourseIds({id: item.id, index: index});
                                                      setIsOpen({...isOpen, edit: !isOpen.edit})
+                                                     setIsBlur(true);
                                                  }}/>
                                             <img src={deleteIcon} style={{cursor: "pointer"}} onClick={() => {
                                                 setIsOpen({...isOpen, delete: !isOpen.delete});
                                                 setCourseIds({...courseIds, id: item.id});
+                                                setIsBlur(true);
                                             }}
                                                  alt="Delete icon"/>
                                         </div>

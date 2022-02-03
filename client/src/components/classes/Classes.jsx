@@ -10,7 +10,7 @@ import axios from "axios";
 import {getAll, handleDelete} from "../../utils/utilFunctions";
 
 const Classes = () => {
-    const {classesData, setClassesData, setStudentsData, serverLink, setIsModalDeleteBtnDisabled} = useContext(mainContext);
+    const {classesData, setClassesData, setStudentsData, serverLink, setIsModalDeleteBtnDisabled, setIsBlur} = useContext(mainContext);
     const [isOpen, setIsOpen] = useState({
         add: false,
         delete: false
@@ -32,6 +32,7 @@ const Classes = () => {
             <ClassAddModal
                 onClose={() => {
                     setIsOpen({...isOpen, add: false});
+                    setIsBlur(false);
                 }} isActive={isOpen.add}
             />
 
@@ -39,12 +40,14 @@ const Classes = () => {
                 onClose={() => {
                     setIsOpen({...isOpen, delete: false});
                     setIsModalDeleteBtnDisabled({...setIsModalDeleteBtnDisabled, classes: true});
+                    setIsBlur(false);
                 }}
                 isActive={isOpen.delete}
             />
 
-            <button className="add-students tooltip blur" data-tip="Add New Class" onClick={() => {
+            <button className="add-students tooltip" data-tip="Add New Class" onClick={() => {
                 setIsOpen({...isOpen, add: !isOpen.add});
+                setIsBlur(true);
             }}>
                 <img src={plus} alt="plus" className="plus"/>
             </button>
@@ -54,6 +57,7 @@ const Classes = () => {
                         onClick={() => {
                             setIsOpen({...isOpen, delete: !isOpen.delete});
                             isOpen.delete ? setIsModalDeleteBtnDisabled({...setIsModalDeleteBtnDisabled, classes: true}) : setIsModalDeleteBtnDisabled({...setIsModalDeleteBtnDisabled, classes: true})
+                            setIsBlur(true);
                         }}>
                     <img src={deleteIcon} alt="plus" className="plus"/>
                 </button>

@@ -10,7 +10,7 @@ import DeleteModal from "../DeleteModal";
 
 
 const ClassList = ({deleteClass}) => {
-    const {classesData, setClassesData, serverLink} = useContext(mainContext);
+    const {classesData, setClassesData, serverLink, setIsBlur} = useContext(mainContext);
 
     const [classIds, setClassIds] = useState({
         index: 0,
@@ -43,11 +43,13 @@ const ClassList = ({deleteClass}) => {
             <ClassEditModal onClose={() => {
                 setIsOpen({...isOpen, edit: false});
                 setClassIds({id: 0, index: 0});
+                setIsBlur(false);
             }} indexID={classIds.index} classId={classIds.id} isActive={isOpen.edit}/>
 
             <DeleteModal handleDelete={deleteClass} onClose={() => {
                 setIsOpen({...isOpen, delete: false});
                 setClassIds({id: 0, index: 0});
+                setIsBlur(false);
             }} id={classIds.id} isActive={isOpen.delete} type={"class"}/>
 
             <div className="table-container">
@@ -101,10 +103,12 @@ const ClassList = ({deleteClass}) => {
                                                  onClick={() => {
                                                      setClassIds({id: item.id, index: index});
                                                      setIsOpen({...isOpen, edit: !isOpen.edit})
+                                                     setIsBlur(true);
                                                  }}/>
                                             <img src={deleteIcon} style={{cursor: "pointer"}} onClick={() => {
                                                 setIsOpen({...isOpen, delete: !isOpen.delete});
                                                 setClassIds({...classIds, id: item.id});
+                                                setIsBlur(true);
                                             }}
                                                  alt="Delete icon"/>
                                         </div>

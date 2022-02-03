@@ -15,7 +15,8 @@ const Students = () => {
         serverLink,
         setIsModalDeleteBtnDisabled,
         setCoursesData,
-        setClassesData
+        setClassesData,
+        setIsBlur
     } = useContext(mainContext)
     const [isOpen, setIsOpen] = useState({
         add: false,
@@ -38,6 +39,7 @@ return (
         <StudentAddModal
             onClose={() => {
                 setIsOpen({...isOpen, add: false});
+                setIsBlur(false);
             }} isActive={isOpen.add}
         />
 
@@ -45,12 +47,14 @@ return (
             onClose={() => {
                 setIsOpen({...isOpen, delete: false});
                 setIsModalDeleteBtnDisabled({...setIsModalDeleteBtnDisabled, student: true});
+                setIsBlur(false);
             }}
             isActive={isOpen.delete}
         />
 
         <button className="add-students tooltip" data-tip="Add New Student" onClick={() => {
             setIsOpen({...isOpen, add: !isOpen.add});
+            setIsBlur(true);
         }}>
             <img src={plus} alt="plus" className="plus"/>
         </button>
@@ -60,6 +64,7 @@ return (
                     onClick={() => {
                         setIsOpen({...isOpen, delete: !isOpen.delete});
                         isOpen.delete ? setIsModalDeleteBtnDisabled({...setIsModalDeleteBtnDisabled, student: true}) : setIsModalDeleteBtnDisabled({...setIsModalDeleteBtnDisabled, student: true})
+                        setIsBlur(true)
                     }}>
                 <img src={deleteIcon} alt="plus" className="plus"/>
             </button>

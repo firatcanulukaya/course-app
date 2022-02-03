@@ -9,7 +9,7 @@ import timesIcon from "../../assets/img/times.svg";
 import axios from "axios";
 
 const StudentList = ({deleteStudent}) => {
-    const {studentsData, setStudentsData, serverLink} = useContext(mainContext)
+    const {studentsData, setStudentsData, serverLink, setIsBlur} = useContext(mainContext)
 
     const [studentIds, setStudentIds] = useState({
         index: 0,
@@ -50,10 +50,12 @@ const StudentList = ({deleteStudent}) => {
             <StudentEditModal onClose={() => {
                 setIsOpen({...isOpen, edit: false});
                 setStudentIds({id: 0, index: 0});
+                setIsBlur(false);
             }} indexID={studentIds.index} studentId={studentIds.id} isActive={isOpen.edit}/>
             <DeleteModal handleDelete={deleteStudent} onClose={() => {
                 setIsOpen({...isOpen, delete: false});
                 setStudentIds({id: 0, index: 0});
+                setIsBlur(false);
             }} id={studentIds.id} isActive={isOpen.delete} type={"student"}/>
 
             <div className="table-container">
@@ -106,7 +108,12 @@ const StudentList = ({deleteStudent}) => {
                                                     {item.courses.length > 0 ? item.courses.map((course, index) => (
                                                             <CourseBadge hex={course.courseColor} key={index}>
                                                                 <a href={`course/${course.id}`}>{course.courseName.length < 20 ? course.courseName : course.courseName.substr(0, 20) + "..."}</a>
-                                                                <button className="tooltip" data-tip={`Remove ${course.courseName} course from student`} onClick={() => removeCourse(item.id, course.id)}><img src={timesIcon} style={{mixBlendMode: "luminosity"}} alt="times icon"/></button>
+                                                                <button className="tooltip"
+                                                                        data-tip={`Remove ${course.courseName} course from student`}
+                                                                        onClick={() => removeCourse(item.id, course.id)}>
+                                                                    <img src={timesIcon}
+                                                                         style={{mixBlendMode: "luminosity"}}
+                                                                         alt="times icon"/></button>
                                                             </CourseBadge>
                                                         ))
                                                         : <CourseBadge hex="#011F3B">Student has no courses
@@ -116,13 +123,16 @@ const StudentList = ({deleteStudent}) => {
 
                                         </div>
                                         <div className="cell" data-title="Edit">
-                                            <img src={editIcon} style={{cursor: "pointer"}} alt="Edit icon" onClick={() => {
-                                                setStudentIds({id: item.id, index: index});
-                                                setIsOpen({...isOpen, edit: !isOpen.edit})
-                                            }}/>
+                                            <img src={editIcon} style={{cursor: "pointer"}} alt="Edit icon"
+                                                 onClick={() => {
+                                                     setStudentIds({id: item.id, index: index});
+                                                     setIsOpen({...isOpen, edit: !isOpen.edit});
+                                                     setIsBlur(true);
+                                                 }}/>
                                             <img src={deleteIcon} style={{cursor: "pointer"}} onClick={() => {
                                                 setIsOpen({...isOpen, delete: !isOpen.delete});
                                                 setStudentIds({...studentIds, id: item.id});
+                                                setIsBlur(true);
                                             }}
                                                  alt="Delete icon"/>
                                         </div>

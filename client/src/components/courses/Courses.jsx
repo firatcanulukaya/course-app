@@ -10,7 +10,7 @@ import deleteIcon from "../../assets/img/delete.svg";
 import {getAll, handleDelete} from "../../utils/utilFunctions";
 
 const Courses = () => {
-    const {coursesData, setCoursesData, studentsData, setStudentsData, serverLink, setIsModalDeleteBtnDisabled} = useContext(mainContext);
+    const {coursesData, setCoursesData, studentsData, setStudentsData, serverLink, setIsModalDeleteBtnDisabled, setIsBlur} = useContext(mainContext);
     const [isOpen, setIsOpen] = useState({
         add: false,
         delete: false
@@ -32,6 +32,7 @@ const Courses = () => {
             <CourseAddModal
                 onClose={() => {
                     setIsOpen({...isOpen, add: false});
+                    setIsBlur(false);
                 }} isActive={isOpen.add}
             />
 
@@ -39,12 +40,14 @@ const Courses = () => {
                 onClose={() => {
                     setIsOpen({...isOpen, delete: false});
                     setIsModalDeleteBtnDisabled({...setIsModalDeleteBtnDisabled, course: true});
+                    setIsBlur(false);
                 }}
                 isActive={isOpen.delete}
             />
 
-            <button className="add-students tooltip blur" data-tip="Add New Course" onClick={() => {
+            <button className="add-students tooltip" data-tip="Add New Course" onClick={() => {
                 setIsOpen({...isOpen, add: !isOpen.add});
+                setIsBlur(true);
             }}>
                 <img src={plus} alt="plus" className="plus"/>
             </button>
@@ -54,6 +57,7 @@ const Courses = () => {
                         onClick={() => {
                             setIsOpen({...isOpen, delete: !isOpen.delete});
                             isOpen.delete ? setIsModalDeleteBtnDisabled({...setIsModalDeleteBtnDisabled, course: true}) : setIsModalDeleteBtnDisabled({...setIsModalDeleteBtnDisabled, course: true})
+                            setIsBlur(true);
                         }}>
                     <img src={deleteIcon} alt="plus" className="plus"/>
                 </button>
