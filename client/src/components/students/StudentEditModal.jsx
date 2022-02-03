@@ -113,9 +113,9 @@ const StudentEditModal = ({indexID, isActive, onClose, studentId}) => {
                                         name={'classId'}
                                         onChange={(e) => handleChange(e, setStudentValues, studentValues)}>
                                     <option value="">Select a class</option>
-                                    {classesData.map((item, index) => {
+                                    {classesData.map((item, index) => (
                                         <option key={index} value={item.id}>{item.className}</option>
-                                    })}
+                                    ))}
                                 </select>
                             </div>
 
