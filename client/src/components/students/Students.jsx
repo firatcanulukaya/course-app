@@ -1,6 +1,5 @@
 import {useContext, useEffect, useState} from "react";
 import mainContext from "../../MainContext";
-import axios from "axios";
 import StudentAddModal from "./StudentAddModal";
 import StudentList from "./StudentList";
 import StudentDeleteModal from "./StudentDeleteModal";
@@ -32,7 +31,6 @@ const Students = () => {
     const deleteStudent = (id) => {
         handleDelete(serverLink, id, setStudentsData, studentsData, "student");
     }
-
 
 return (
     <div className="students-container">

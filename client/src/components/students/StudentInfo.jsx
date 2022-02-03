@@ -10,9 +10,10 @@ import arrowLeft from "../../assets/img/arrowLeft.svg"
 import {useNavigate} from "react-router-dom";
 import StudentEditModal from "./StudentEditModal";
 import timesIcon from "../../assets/img/times.svg";
+import {getAll, getInfo} from "../../utils/utilFunctions";
 
 const StudentInfo = () => {
-    const {serverLink, coursesData, setCoursesData, setClassesData, setStudentsData, studentsData} = useContext(mainContext)
+    const {serverLink, coursesData, setCoursesData, classesData, setClassesData, setStudentsData, studentsData} = useContext(mainContext)
     const navigate = useNavigate();
     const {id} = useParams();
 
@@ -24,28 +25,14 @@ const StudentInfo = () => {
     const [studentIndex, setStudentIndex] = useState(0)
 
     useEffect(() => {
-        axios.get(`${serverLink}/api/student/getAll`)
-            .then(res => {
-                setStudentsData(res.data)
-            })
-            .catch(err => console.log(err))
-    }, [serverLink, studentsData])
+        getAll(serverLink, setStudentsData, "student")
+        getAll(serverLink, setClassesData, "class")
+        getAll(serverLink, setCoursesData, "course")
+    }, [])
 
     useEffect(() => {
-        const fetchData = async () => {
-            const response = await axios.get(`${serverLink}/api/course/getAll`);
-            setCoursesData(response.data);
-        };
-        fetchData();
-    }, [serverLink, coursesData]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await axios.get(`${serverLink}/api/class/getAll`);
-            setClassesData(response.data);
-        };
-        fetchData();
-    }, [serverLink, setClassesData]);
+        getAll(serverLink, setStudentsData, "student")
+    }, [isOpen.edit])
 
     useEffect(() => {
         const student = studentsData.find(student => student.id === parseInt(id))
@@ -67,10 +54,7 @@ const StudentInfo = () => {
             }
         })
             .then(() => {
-                axios.get(`${serverLink}/api/student/get/${studentId}`)
-                    .then(res => {
-                        setStudent(res.data)
-                    })
+                getInfo(serverLink, studentId, setStudent, "student")
             })
             .catch(err => {
                 console.log(err);
