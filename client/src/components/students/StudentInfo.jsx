@@ -88,7 +88,7 @@ const StudentInfo = () => {
 
                     <div className="infoCardContent-section">
                         <p>Class:</p>
-                        <span>{student?.class?.className}</span>
+                        <span>{student?.class?.className ? student?.class?.className : "Student has no class"}</span>
                     </div>
 
                     <div className="infoCardContent-section">
