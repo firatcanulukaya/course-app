@@ -95,11 +95,7 @@ const deleteStudent = async (req, res) => {
 
 const deleteAllStudents = async (req, res) => {
     try {
-        await db.StudentCourse.destroy({
-            where: {
-                studentId: req.params.id
-            }
-        })
+        await db.StudentCourse.destroy({where: {}})
 
         await db.Student.destroy({where: {}})
         res.status(200).json({
