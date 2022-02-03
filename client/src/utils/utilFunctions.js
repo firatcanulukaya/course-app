@@ -22,3 +22,10 @@ export const getInfo = (serverLink, id, setData, type) => {
         })
         .catch(error => console.log(error));
 };
+
+export const handleChange = (e, setValues, values) => {
+    setValues({
+        ...values,
+        [e.target.name]: e.target.value
+    })
+}
