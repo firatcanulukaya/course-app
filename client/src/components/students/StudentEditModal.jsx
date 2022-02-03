@@ -20,19 +20,6 @@ const StudentEditModal = ({indexID, isActive, onClose, studentId}) => {
         classId: "",
         courseIds: [],
     })
-    const [loading, setLoading] = useState(false)
-
-    const handleSubmit = async (e) => {
-        setLoading(true)
-        e.propertyIsEnumerable()
-        const {name, age, classId, courseIds} = studentValues
-        await axios.patch(`${serverLink}/api/student/edit/${studentId}`, {
-            name,
-            age,
-            classId,
-            courseIds
-        })
-    }
 
     const saveData = () => {
         axios.patch(`${serverLink}/api/student/edit/${studentId}`, {
