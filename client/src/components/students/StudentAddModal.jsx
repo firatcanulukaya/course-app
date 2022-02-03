@@ -4,9 +4,10 @@ import mainContext from "../../MainContext";
 import {ModalFooterBtn} from "../../styledComponents";
 import axios from "axios";
 import Select from "react-select";
+import {getAll} from "../../utils/utilFunctions";
 
 const StudentAddModal = ({isActive, onClose}) => {
-    const {setStudentsData, classesData, setClassesData, coursesData, serverLink} = useContext(mainContext);
+    const {setStudentsData, classesData, setClassesData, coursesData, setCoursesData, serverLink} = useContext(mainContext);
     const [studentValues, setStudentValues] = useState({
         name: "",
         age: "",
@@ -15,20 +16,10 @@ const StudentAddModal = ({isActive, onClose}) => {
     });
 
     useEffect(() => {
-        const fetchData = async () => {
-            const response = await axios.get(`${serverLink}/api/student/getAll`);
-            setStudentsData(response.data);
-        };
-        fetchData();
-    }, [serverLink, setStudentsData]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await axios.get(`${serverLink}/api/class/getAll`);
-            setClassesData(response.data);
-        };
-        fetchData();
-    }, [serverLink, setClassesData]);
+        getAll(serverLink, setStudentsData, "student");
+        getAll(serverLink, setCoursesData, "course");
+        getAll(serverLink, setClassesData, "class");
+    }, [isActive]);
 
     const mapCourses = {
         options: coursesData.map((item) => {

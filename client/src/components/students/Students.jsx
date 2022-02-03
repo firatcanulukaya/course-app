@@ -7,7 +7,7 @@ import StudentDeleteModal from "./StudentDeleteModal";
 import bg from "../../assets/img/bg2.svg";
 import plus from "../../assets/img/plus.svg";
 import deleteIcon from "../../assets/img/delete.svg";
-import {fetchStudents, getAll} from "../../utils/GetFunctions";
+import {getAll, handleDelete} from "../../utils/utilFunctions";
 
 const Students = () => {
     const {
@@ -30,13 +30,9 @@ const Students = () => {
     }, [])
 
     const deleteStudent = (id) => {
-        axios.delete(`${serverLink}/api/student/delete/${id}`)
-            .then(() => {
-                const newStudentsData = studentsData.filter(student => student.id !== id);
-                setStudentsData(newStudentsData);
-            })
-            .catch(error => console.log(error));
-    };
+        handleDelete(serverLink, id, setStudentsData, studentsData, "student");
+    }
+
 
 return (
     <div className="students-container">
