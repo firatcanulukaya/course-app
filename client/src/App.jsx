@@ -61,6 +61,8 @@ const App = () => {
         classes: true
     });
 
+    const [isBlur, setIsBlur] = useState(false);
+
     const data = {
         studentsData,
         setStudentsData,
@@ -70,12 +72,15 @@ const App = () => {
         setClassesData,
         serverLink,
         isModalDeleteBtnDisabled,
-        setIsModalDeleteBtnDisabled
+        setIsModalDeleteBtnDisabled,
+        isBlur,
+        setIsBlur
     };
 
     return (
         <MainContext.Provider value={data}>
             <div className="wrapper">
+            <div className={"blur " + (isBlur && "active")}/>
                 <Navbar sidebarCollapse={sidebarCollapse}/>
                 <Sidebar sidebarItems={sidebarItems} logo={logo}/>
 
