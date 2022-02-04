@@ -53,12 +53,14 @@ const deleteClass = async (req, res) => {
     try {
         const {id} = req.params;
         const students = await db.Student.findAll({where: {classId: id}});
-        for (let i = 0; i < students.length; i++) {
+
+        students.map(async (student) => {
             await db.Student.update(
                 {classId: null},
-                {where: {id: students[i].id}}
+                {where: {id: student.id}}
             );
-        }
+        });
+
         const deletedClass = await db.Class.destroy({
             where: {id}
         });
@@ -90,19 +92,16 @@ const getClass = async (req, res) => {
 const deleteAllClasses = async (req, res) => {
     try {
         const classes = await db.Class.findAll();
-        for (let i = 0; i < classes.length; i++) {
-            const students = await db.Student.findAll({
-                where: {
-                    classId: classes[i].id
-                }
-            });
-            for (let j = 0; j < students.length; j++) {
+
+        classes.forEach(async (classInfo) => {
+            const students = await db.Student.findAll({where: {classId: classInfo.id}});
+            students.map(async (student) => {
                 await db.Student.update(
                     {classId: null},
-                    {where: {id: students[j].id}}
-                )
-            }
-        }
+                    {where: {id: student.id}}
+                );
+            });
+        });
 
         const deletedClasses = await db.Class.destroy({
             where: {},
