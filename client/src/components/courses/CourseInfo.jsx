@@ -11,6 +11,7 @@ import {useNavigate} from "react-router-dom";
 import CourseEditModal from "./CourseEditModal";
 import timesIcon from "../../assets/img/times.svg";
 import {InfoBanner} from "../../styledComponents";
+import {getAll} from "../../utils/utilFunctions";
 
 const CourseInfo = () => {
     const {serverLink, setCoursesData, coursesData, setClassesData, setStudentsData, studentsData} = useContext(mainContext)
@@ -24,20 +25,9 @@ const CourseInfo = () => {
     })
 
     useEffect(() => {
-        axios.get(`${serverLink}/api/course/getAll`)
-            .then(res => {
-                setCoursesData(res.data)
-            })
-            .catch(err => console.log(err))
-    }, [serverLink, coursesData])
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await axios.get(`${serverLink}/api/student/getAll`);
-            setStudentsData(response.data);
-        };
-        fetchData();
-    }, [serverLink, studentsData]);
+        getAll(serverLink, setStudentsData, "student");
+        getAll(serverLink, setCoursesData, "course");
+    }, [])
 
     useEffect(() => {
         const course = coursesData.find(course => course.id === parseInt(id))
