@@ -26,8 +26,6 @@
   scroll-behavior: smooth;
   font-family: "JakartaBold", sans-serif;
   transition: all 0.4s ease-in-out;
-  scrollbar-width: auto;
-  scrollbar-color: #d1d1d1 #ffffff;
 }
 
 /* Chrome, Edge, and Safari */
@@ -153,6 +151,8 @@ button {
 }
 
 .main-content {
+  display: flex;
+  justify-content: center;
   margin-left: 24rem;
 
   &.active {
@@ -183,7 +183,12 @@ button {
       display: flex;
       align-items: center;
 
+      .sidebarToggle {
+        display: none;
+      }
+
       p {
+        white-space: nowrap;
         font-size: 18px;
         color: #011f3b;
       }
@@ -371,7 +376,7 @@ button {
 
           p {
             color: #3772FF;
-            margin: 0px 10px;
+            margin: 0 10px;
           }
         }
       }
@@ -595,19 +600,18 @@ button {
 
 
 .row .cell {
-  font-family: "Plus Jakarta Sans Medium";
+  font-family: "Plus Jakarta Sans Medium", sans-serif;
   font-size: 15px;
   color: #666666;
   line-height: 1.2;
   font-weight: unset !important;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px;
   border-bottom: 1px solid #E4E4EF;
 }
 
 .row.header {
   .cell {
-    font-family: "Plus Jakarta Sans Medium";
+    font-family: "Plus Jakarta Sans Medium", sans-serif;
     font-size: 18px;
     color: #000000;
     padding-left: 1rem;
@@ -631,7 +635,7 @@ button {
   .row {
     .header {
       padding: 0;
-      height: 0px;
+      height: 0;
     }
   }
 
@@ -640,7 +644,7 @@ button {
   }
 
   .row .cell:before {
-    font-family: "Plus Jakarta Sans Light";
+    font-family: "Plus Jakarta Sans Light", sans-serif;
     font-size: 12px;
     color: #808080;
     line-height: 1.2;
@@ -680,7 +684,7 @@ button {
   }
 
   .row .cell {
-    font-family: JakartaBold;
+    font-family: JakartaBold, sans-serif;
     font-size: 18px;
     color: #555555;
     line-height: 1.2;
@@ -751,7 +755,301 @@ footer {
 }
 
 //* responsive
-//! @media only screen and (max-width: 600px) {}
-//! @media only screen and (min-width: 600px) {}
-//! @media only screen and (min-width: 992px) {}
-//! @media only screen and (min-width: 1200px) {}
+//@media only screen and (max-width: 600px) {
+//
+//}
+
+@media only screen and (min-width: 600px) {
+  .sidebar {
+    z-index: 10;
+    width: 278px;
+
+    &.active {
+      width: 0;
+    }
+
+    .sidebar-top {
+      .sidebar-top-left {
+        .sidebarToggle {
+          display: block;
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
+
+          img {
+            width: 25px;
+            height: 25px;
+          }
+        }
+      }
+    }
+
+  }
+
+  $baseWidth: 550px;
+
+  .navbar {
+    .navbar-container {
+      padding: 1rem;
+      margin-left: 3rem;
+    }
+  }
+
+  .main-content {
+    margin-left: 1rem;
+
+    &.active {
+      margin-left: 1rem;
+    }
+  }
+
+  .homepage-container {
+    .homepage-bg {
+      max-width: $baseWidth;
+    }
+
+  }
+
+  .students-container {
+    width: $baseWidth;
+    height: $baseWidth;
+    justify-content: normal;
+
+    .homepage-bg {
+      display: none;
+    }
+
+    .add-students {
+      left: auto;
+      right: 1rem;
+      bottom: 5rem;
+      z-index: 5;
+    }
+
+    .delete-students {
+      right: 1rem;
+      left: auto;
+      bottom: 2rem;
+      z-index: 5;
+    }
+
+    .table-container {
+      //display: none;
+      width: 100%;
+      box-shadow: 0 0 1rem rgba(0, 0, 0, .25);
+
+      .limiter {
+        width: 100%;
+
+        .container-table100 {
+          max-height: 600px;
+
+          .wrap-table100 {
+            .table {
+              .row {
+                .cell:nth-child(1) {
+                  padding: 0 10px;
+                }
+
+                .cell {
+                  width: 0 !important;
+
+                  &::before {
+                    min-width: 0;
+                  }
+                }
+              }
+            }
+          }
+
+        }
+      }
+    }
+  }
+
+}
+
+@media only screen and (min-width: 992px) {
+
+  $baseWidth: 800px;
+
+  .navbar {
+    .navbar-container {
+      padding: 1rem;
+      margin-left: 13rem;
+
+      a {
+        display: flex;
+      }
+    }
+  }
+
+  .main-content {
+    margin-left: 4rem;
+
+    &.active {
+      margin-left: 4rem;
+    }
+  }
+
+  .homepage-container {
+    .homepage-bg {
+      max-width: $baseWidth;
+    }
+  }
+
+  .students-container {
+    width: $baseWidth;
+    justify-content: normal;
+
+    .homepage-bg {
+      max-width: $baseWidth;
+    }
+
+    .add-students {
+      left: 1rem;
+      z-index: 5;
+      bottom: 2rem;
+    }
+
+    .delete-students {
+      right: 1rem;
+      left: auto;
+      z-index: 5;
+    }
+
+    .table-container {
+      //display: none;
+      width: 100%;
+
+      .limiter {
+        width: 80%;
+
+        .container-table100 {
+          max-height: 375px;
+        }
+      }
+    }
+  }
+
+}
+
+@media only screen and (min-width: 1200px) {
+
+  $baseWidth: 1000px;
+
+  .navbar {
+    .navbar-container {
+      padding: 1rem;
+      margin-left: 13rem;
+    }
+  }
+
+  .main-content {
+    margin-left: 6rem;
+
+    &.active {
+      margin-left: 6rem;
+    }
+  }
+
+  .homepage-container {
+    .homepage-bg {
+      max-width: $baseWidth;
+    }
+  }
+
+  .students-container {
+    width: $baseWidth;
+    justify-content: normal;
+
+    .homepage-bg {
+      max-width: $baseWidth;
+    }
+
+    .add-students {
+      left: 1rem;
+      z-index: 5;
+    }
+
+    .delete-students {
+      right: 1rem;
+      left: auto;
+      z-index: 5;
+    }
+
+    .table-container {
+      //display: none;
+      width: 100%;
+
+      .limiter {
+        width: 90%;
+
+        .container-table100 {
+          max-height: 375px;
+        }
+      }
+    }
+
+  }
+
+}
+
+@media only screen and (min-width: 1201px) {
+  .sidebar {
+    z-index: 1;
+  }
+
+  .navbar {
+    .navbar-container {
+      padding: 1rem;
+      margin-left: 13rem;
+    }
+  }
+
+  .main-content {
+    margin-left: 10rem;
+
+    &.active {
+      margin-left: 10rem;
+    }
+  }
+
+  .homepage-container {
+    .homepage-bg {
+      max-width: 1340px;
+    }
+  }
+
+  .students-container {
+    width: 1340px;
+    justify-content: center;
+
+    .homepage-bg {
+      max-width: 1340px;
+    }
+
+    .add-students {
+      left: 1rem;
+    }
+
+    .delete-students {
+      right: 1rem;
+      left: auto;
+    }
+
+    .table-container {
+      //display: none;
+      width: auto;
+
+      .limiter {
+        width: auto;
+
+        .container-table100 {
+          max-height: 650px;
+        }
+      }
+    }
+
+  }
+}
