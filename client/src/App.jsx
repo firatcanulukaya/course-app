@@ -82,7 +82,7 @@ const App = () => {
             <div className="wrapper">
             <div className={"blur " + (isBlur && "active")}/>
                 <Navbar sidebarCollapse={sidebarCollapse}/>
-                <Sidebar sidebarItems={sidebarItems} logo={logo}/>
+                <Sidebar sidebarItems={sidebarItems} logo={logo} sidebarCollapse={sidebarCollapse}/>
 
                 <div className="main-content">
                     <Routes>

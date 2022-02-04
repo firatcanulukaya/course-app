@@ -1,9 +1,13 @@
 import React from "react";
+import xIcon from '../assets/img/xIcon.svg'
 
-const Sidebar = ({sidebarItems, logo}) => {
+const Sidebar = ({sidebarItems, logo, sidebarCollapse}) => {
     return <div className="sidebar">
         <div className="sidebar-top">
             <div className="sidebar-top-left">
+                <div className="sidebarToggle">
+                    <img src={xIcon} alt="x Icon" onClick={() => sidebarCollapse()} style={{cursor: "pointer"}}/>
+                </div>
                 <img src={logo} alt="logo"/>
                 <p>Course App</p>
             </div>
