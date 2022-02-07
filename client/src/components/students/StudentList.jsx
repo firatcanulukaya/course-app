@@ -92,19 +92,14 @@ const StudentList = ({deleteStudent}) => {
                                                 Class: {item.class ? item.class.className : "Student has no class"}
                                                 <br/>
                                                 Age: {item.studentAge.length < 20 ? item.studentAge : item.studentAge.substr(0, 15) + "..."}
+                                                <br/>
+                                                Total courses: {item.courses.length}
                                             </p>
                                         </div>
                                         <div className="cell" data-title="Courses">
 
                                             <ul>
                                                 <li className="student-table-li">
-                                                    {
-                                                        item.courses.length > 0 ?
-                                                            <CourseBadge hex="#011F3B">
-                                                                Total: {item.courses.length}
-                                                            </CourseBadge>
-                                                            : ""
-                                                    }
                                                     {item.courses.length > 0 ? item.courses.map((course, index) => (
                                                             <CourseBadge hex={course.courseColor} key={index}>
                                                                 <a href={`course/${course.id}`}>{course.courseName.length < 20 ? course.courseName : course.courseName.substr(0, 20) + "..."}</a>
