@@ -99,7 +99,8 @@ button {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 1rem 10rem;
+  padding: 1rem 2rem;
+  margin-left: 17rem;
 }
 .navbar .navbar-container a {
   background: #4475f2;
@@ -363,10 +364,10 @@ button {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  border-radius: 10px;
 }
 .students-container .table-container .limiter .container-table100 .wrap-table100 {
   width: 960px;
-  border-radius: 10px;
   overflow: hidden;
 }
 .students-container .table-container .limiter .container-table100 .wrap-table100 .table {
@@ -500,7 +501,7 @@ button {
   color: #666666;
   line-height: 1.2;
   font-weight: unset !important;
-  padding: 20px;
+  padding: 10px;
   border-bottom: 1px solid #E4E4EF;
 }
 
@@ -637,6 +638,98 @@ footer {
     width: 10em;
   }
 }
+@media only screen and (max-width: 600px) {
+  .sidebar {
+    z-index: 10;
+    width: 278px;
+  }
+  .sidebar.active {
+    width: 0;
+  }
+  .sidebar .sidebar-top .sidebar-top-left .sidebarToggle {
+    display: block;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+  .sidebar .sidebar-top .sidebar-top-left .sidebarToggle img {
+    width: 25px;
+    height: 25px;
+  }
+
+  .navbar .navbar-container {
+    padding: 1rem;
+    margin-left: 3rem;
+  }
+
+  .main-content {
+    margin-left: 1rem;
+  }
+  .main-content.active {
+    margin-left: 1rem;
+  }
+
+  .homepage-container {
+    margin: 0;
+  }
+  .homepage-container p {
+    font-size: 2rem;
+  }
+  .homepage-container a {
+    margin-top: 10rem;
+  }
+  .homepage-container .homepage-bg {
+    max-width: max-content;
+    height: max-content;
+  }
+
+  .students-container {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+  }
+  .students-container .homepage-bg {
+    display: none;
+  }
+  .students-container .add-students {
+    left: 0;
+    bottom: 5rem;
+    z-index: 5;
+  }
+  .students-container .delete-students {
+    left: 0;
+    bottom: 2rem;
+    z-index: 5;
+  }
+  .students-container .table-container {
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+  }
+  .students-container .table-container .limiter {
+    width: 100%;
+  }
+  .students-container .table-container .limiter .container-table100 {
+    max-height: 600px;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 {
+    width: 400px;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell:nth-child(1) {
+    display: none;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell:nth-child(3) {
+    display: none;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell:nth-child(4) {
+    display: none;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell {
+    width: 0 !important;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell::before {
+    min-width: 0;
+  }
+}
 @media only screen and (min-width: 600px) {
   .sidebar {
     z-index: 10;
@@ -668,33 +761,41 @@ footer {
     margin-left: 1rem;
   }
 
+  .homepage-container {
+    margin: 0;
+  }
+  .homepage-container p {
+    font-size: 2rem;
+  }
+  .homepage-container a {
+    margin-top: 10rem;
+  }
   .homepage-container .homepage-bg {
-    max-width: 550px;
+    max-width: max-content;
+    height: max-content;
   }
 
   .students-container {
-    width: 550px;
-    height: 550px;
-    justify-content: normal;
+    width: 100%;
+    height: 100vh;
+    margin: 0;
   }
   .students-container .homepage-bg {
     display: none;
   }
   .students-container .add-students {
-    left: auto;
-    right: 1rem;
+    left: 0;
     bottom: 5rem;
     z-index: 5;
   }
   .students-container .delete-students {
-    right: 1rem;
-    left: auto;
+    left: 0;
     bottom: 2rem;
     z-index: 5;
   }
   .students-container .table-container {
-    width: 100%;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
   }
   .students-container .table-container .limiter {
     width: 100%;
@@ -702,8 +803,17 @@ footer {
   .students-container .table-container .limiter .container-table100 {
     max-height: 600px;
   }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 {
+    width: 400px;
+  }
   .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell:nth-child(1) {
-    padding: 0 10px;
+    display: none;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell:nth-child(3) {
+    display: none;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell:nth-child(4) {
+    display: none;
   }
   .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell {
     width: 0 !important;
@@ -713,138 +823,250 @@ footer {
   }
 }
 @media only screen and (min-width: 992px) {
+  .sidebar {
+    z-index: 10;
+    width: 278px;
+  }
+  .sidebar.active {
+    width: 0;
+  }
+  .sidebar .sidebar-top .sidebar-top-left .sidebarToggle {
+    display: block;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+  .sidebar .sidebar-top .sidebar-top-left .sidebarToggle img {
+    width: 25px;
+    height: 25px;
+  }
+
   .navbar .navbar-container {
     padding: 1rem;
-    margin-left: 13rem;
-  }
-  .navbar .navbar-container a {
-    display: flex;
+    margin-left: 3rem;
   }
 
   .main-content {
-    margin-left: 4rem;
+    margin-left: 1rem;
   }
   .main-content.active {
-    margin-left: 4rem;
+    margin-left: 1rem;
   }
 
+  .homepage-container {
+    margin: 0;
+  }
+  .homepage-container p {
+    font-size: 2rem;
+  }
+  .homepage-container a {
+    margin-top: 10rem;
+  }
   .homepage-container .homepage-bg {
-    max-width: 800px;
+    max-width: max-content;
+    height: max-content;
   }
 
   .students-container {
-    width: 800px;
-    justify-content: normal;
+    width: 100%;
+    height: 100vh;
+    margin: 0;
   }
   .students-container .homepage-bg {
-    max-width: 800px;
+    display: none;
   }
   .students-container .add-students {
-    left: 1rem;
+    left: 0;
+    bottom: 5rem;
     z-index: 5;
-    bottom: 2rem;
   }
   .students-container .delete-students {
-    right: 1rem;
-    left: auto;
+    left: 0;
+    bottom: 2rem;
     z-index: 5;
   }
   .students-container .table-container {
-    width: 100%;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
   }
   .students-container .table-container .limiter {
-    width: 80%;
+    width: 100%;
   }
   .students-container .table-container .limiter .container-table100 {
-    max-height: 375px;
+    max-height: 600px;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 {
+    width: 600px;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell:nth-child(1) {
+    display: table-cell;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell:nth-child(3) {
+    display: table-cell;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell:nth-child(4) {
+    display: table-cell;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell {
+    width: 0 !important;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell::before {
+    min-width: 0;
   }
 }
 @media only screen and (min-width: 1200px) {
+  .sidebar {
+    z-index: 10;
+    width: 278px;
+  }
+  .sidebar.active {
+    width: 0;
+  }
+  .sidebar .sidebar-top .sidebar-top-left .sidebarToggle {
+    display: block;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+  .sidebar .sidebar-top .sidebar-top-left .sidebarToggle img {
+    width: 25px;
+    height: 25px;
+  }
+
   .navbar .navbar-container {
     padding: 1rem;
-    margin-left: 13rem;
+    margin-left: 3rem;
   }
 
   .main-content {
-    margin-left: 6rem;
+    margin-left: 1rem;
   }
   .main-content.active {
-    margin-left: 6rem;
+    margin-left: 1rem;
   }
 
+  .homepage-container {
+    margin: 0;
+  }
+  .homepage-container p {
+    font-size: 2rem;
+  }
+  .homepage-container a {
+    margin-top: 10rem;
+  }
   .homepage-container .homepage-bg {
-    max-width: 1000px;
+    max-width: max-content;
+    height: max-content;
   }
 
   .students-container {
-    width: 1000px;
-    justify-content: normal;
+    width: 100%;
+    height: auto;
+    margin: 40px 0;
   }
   .students-container .homepage-bg {
-    max-width: 1000px;
+    width: 1100px;
+    display: block;
   }
   .students-container .add-students {
-    left: 1rem;
+    left: 4rem;
+    bottom: 1rem;
     z-index: 5;
   }
   .students-container .delete-students {
-    right: 1rem;
+    right: 4rem;
     left: auto;
+    bottom: 1rem;
     z-index: 5;
   }
   .students-container .table-container {
-    width: 100%;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
   }
   .students-container .table-container .limiter {
-    width: 90%;
+    width: 100%;
   }
   .students-container .table-container .limiter .container-table100 {
-    max-height: 375px;
+    max-height: 500px;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 {
+    width: 950px;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell:nth-child(1) {
+    display: table-cell;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell:nth-child(3) {
+    display: table-cell;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell:nth-child(4) {
+    display: table-cell;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell {
+    width: 0 !important;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell::before {
+    min-width: 0;
   }
 }
 @media only screen and (min-width: 1201px) {
   .sidebar {
-    z-index: 1;
+    z-index: 10;
+    width: 278px;
   }
-
-  .navbar .navbar-container {
-    padding: 1rem;
-    margin-left: 13rem;
+  .sidebar.active {
+    width: 0;
   }
-
-  .main-content {
-    margin-left: 10rem;
-  }
-  .main-content.active {
-    margin-left: 10rem;
-  }
-
-  .homepage-container .homepage-bg {
-    max-width: 1340px;
+  .sidebar .sidebar-top .sidebar-top-left .sidebarToggle {
+    display: none;
   }
 
   .students-container {
-    width: 1340px;
-    justify-content: center;
+    width: 100%;
+    height: auto;
+    margin: 40px 0;
   }
   .students-container .homepage-bg {
-    max-width: 1340px;
+    width: 1340px;
+    display: block;
   }
   .students-container .add-students {
-    left: 1rem;
+    left: 2rem;
+    bottom: 1rem;
+    z-index: 5;
   }
   .students-container .delete-students {
-    right: 1rem;
+    right: 2rem;
     left: auto;
+    bottom: 1rem;
+    z-index: 5;
   }
   .students-container .table-container {
-    width: auto;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
   }
   .students-container .table-container .limiter {
-    width: auto;
+    width: 100%;
   }
   .students-container .table-container .limiter .container-table100 {
-    max-height: 650px;
+    max-height: 700px;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 {
+    width: 1200px;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell:nth-child(1) {
+    display: table-cell;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell:nth-child(3) {
+    display: table-cell;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell:nth-child(4) {
+    display: table-cell;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell {
+    width: 0 !important;
+  }
+  .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell::before {
+    min-width: 0;
   }
 }
 

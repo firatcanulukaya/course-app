@@ -108,7 +108,8 @@ button {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 1rem 10rem;
+    padding: 1rem 2rem;
+    margin-left: 17rem;
 
     a {
       background: #4475f2;
@@ -428,10 +429,10 @@ button {
         align-items: center;
         justify-content: center;
         flex-wrap: wrap;
+        border-radius: 10px;
 
         .wrap-table100 {
           width: 960px;
-          border-radius: 10px;
           overflow: hidden;
 
           .table {
@@ -605,7 +606,7 @@ button {
   color: #666666;
   line-height: 1.2;
   font-weight: unset !important;
-  padding: 20px;
+  padding: 10px;
   border-bottom: 1px solid #E4E4EF;
 }
 
@@ -755,11 +756,8 @@ footer {
 }
 
 //* responsive
-//@media only screen and (max-width: 600px) {
-//
-//}
+@media only screen and (max-width: 600px) {
 
-@media only screen and (min-width: 600px) {
   .sidebar {
     z-index: 10;
     width: 278px;
@@ -804,39 +802,48 @@ footer {
   }
 
   .homepage-container {
+    margin: 0;
+
+    p {
+      font-size: 2rem;
+    }
+
+    a {
+      margin-top: 10rem;
+    }
+
     .homepage-bg {
-      max-width: $baseWidth;
+      max-width: max-content;
+      height: max-content;
     }
 
   }
 
   .students-container {
-    width: $baseWidth;
-    height: $baseWidth;
-    justify-content: normal;
+    width: 100%;
+    height: 100vh;
+    margin: 0;
 
     .homepage-bg {
       display: none;
     }
 
     .add-students {
-      left: auto;
-      right: 1rem;
+      left: 0;
       bottom: 5rem;
       z-index: 5;
     }
 
     .delete-students {
-      right: 1rem;
-      left: auto;
+      left: 0;
       bottom: 2rem;
       z-index: 5;
     }
 
     .table-container {
       //display: none;
-      width: 100%;
       box-shadow: 0 0 1rem rgba(0, 0, 0, .25);
+      border-radius: 10px;
 
       .limiter {
         width: 100%;
@@ -845,10 +852,152 @@ footer {
           max-height: 600px;
 
           .wrap-table100 {
+            width: 400px;
             .table {
               .row {
-                .cell:nth-child(1) {
-                  padding: 0 10px;
+                .cell {
+                  &:nth-child(1) {
+                    display: none;
+                  }
+
+                  &:nth-child(3) {
+                    display: none;
+                  }
+
+                  &:nth-child(4) {
+                    display: none;
+                  }
+                }
+
+                .cell {
+                  width: 0 !important;
+
+                  &::before {
+                    min-width: 0;
+                  }
+                }
+              }
+            }
+          }
+
+        }
+      }
+    }
+  }
+
+}
+
+@media only screen and (min-width: 600px) {
+
+  .sidebar {
+    z-index: 10;
+    width: 278px;
+
+    &.active {
+      width: 0;
+    }
+
+    .sidebar-top {
+      .sidebar-top-left {
+        .sidebarToggle {
+          display: block;
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
+
+          img {
+            width: 25px;
+            height: 25px;
+          }
+        }
+      }
+    }
+
+  }
+
+  $baseWidth: 550px;
+
+  .navbar {
+    .navbar-container {
+      padding: 1rem;
+      margin-left: 3rem;
+    }
+  }
+
+  .main-content {
+    margin-left: 1rem;
+
+    &.active {
+      margin-left: 1rem;
+    }
+  }
+
+  .homepage-container {
+    margin: 0;
+
+    p {
+      font-size: 2rem;
+    }
+
+    a {
+      margin-top: 10rem;
+    }
+
+    .homepage-bg {
+      max-width: max-content;
+      height: max-content;
+    }
+
+  }
+
+  .students-container {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+
+    .homepage-bg {
+      display: none;
+    }
+
+    .add-students {
+      left: 0;
+      bottom: 5rem;
+      z-index: 5;
+    }
+
+    .delete-students {
+      left: 0;
+      bottom: 2rem;
+      z-index: 5;
+    }
+
+    .table-container {
+      //display: none;
+      box-shadow: 0 0 1rem rgba(0, 0, 0, .25);
+      border-radius: 10px;
+
+      .limiter {
+        width: 100%;
+
+        .container-table100 {
+          max-height: 600px;
+
+          .wrap-table100 {
+            width: 400px;
+            .table {
+              .row {
+                .cell {
+                  &:nth-child(1) {
+                    display: none;
+                  }
+
+                  &:nth-child(3) {
+                    display: none;
+                  }
+
+                  &:nth-child(4) {
+                    display: none;
+                  }
                 }
 
                 .cell {
@@ -870,186 +1019,351 @@ footer {
 }
 
 @media only screen and (min-width: 992px) {
+  .sidebar {
+    z-index: 10;
+    width: 278px;
 
-  $baseWidth: 800px;
+    &.active {
+      width: 0;
+    }
+
+    .sidebar-top {
+      .sidebar-top-left {
+        .sidebarToggle {
+          display: block;
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
+
+          img {
+            width: 25px;
+            height: 25px;
+          }
+        }
+      }
+    }
+
+  }
+
+  $baseWidth: 550px;
 
   .navbar {
     .navbar-container {
       padding: 1rem;
-      margin-left: 13rem;
-
-      a {
-        display: flex;
-      }
+      margin-left: 3rem;
     }
   }
 
   .main-content {
-    margin-left: 4rem;
+    margin-left: 1rem;
 
     &.active {
-      margin-left: 4rem;
+      margin-left: 1rem;
     }
   }
 
   .homepage-container {
-    .homepage-bg {
-      max-width: $baseWidth;
+    margin: 0;
+
+    p {
+      font-size: 2rem;
     }
+
+    a {
+      margin-top: 10rem;
+    }
+
+    .homepage-bg {
+      max-width: max-content;
+      height: max-content;
+    }
+
   }
 
   .students-container {
-    width: $baseWidth;
-    justify-content: normal;
+    width: 100%;
+    height: 100vh;
+    margin: 0;
 
     .homepage-bg {
-      max-width: $baseWidth;
+      display: none;
     }
 
     .add-students {
-      left: 1rem;
+      left: 0;
+      bottom: 5rem;
       z-index: 5;
-      bottom: 2rem;
     }
 
     .delete-students {
-      right: 1rem;
-      left: auto;
+      left: 0;
+      bottom: 2rem;
       z-index: 5;
     }
 
     .table-container {
       //display: none;
-      width: 100%;
+      box-shadow: 0 0 1rem rgba(0, 0, 0, .25);
+      border-radius: 10px;
 
       .limiter {
-        width: 80%;
+        width: 100%;
 
         .container-table100 {
-          max-height: 375px;
+          max-height: 600px;
+
+          .wrap-table100 {
+            width: 600px;
+            .table {
+              .row {
+                .cell {
+                  &:nth-child(1) {
+                    display: table-cell;
+                  }
+
+                  &:nth-child(3) {
+                    display: table-cell;
+                  }
+
+                  &:nth-child(4) {
+                    display: table-cell;
+                  }
+                }
+
+                .cell {
+                  width: 0 !important;
+
+                  &::before {
+                    min-width: 0;
+                  }
+                }
+              }
+            }
+          }
+
         }
       }
     }
   }
-
 }
 
 @media only screen and (min-width: 1200px) {
-
-  $baseWidth: 1000px;
-
-  .navbar {
-    .navbar-container {
-      padding: 1rem;
-      margin-left: 13rem;
-    }
-  }
-
-  .main-content {
-    margin-left: 6rem;
+  .sidebar {
+    z-index: 10;
+    width: 278px;
 
     &.active {
-      margin-left: 6rem;
-    }
-  }
-
-  .homepage-container {
-    .homepage-bg {
-      max-width: $baseWidth;
-    }
-  }
-
-  .students-container {
-    width: $baseWidth;
-    justify-content: normal;
-
-    .homepage-bg {
-      max-width: $baseWidth;
+      width: 0;
     }
 
-    .add-students {
-      left: 1rem;
-      z-index: 5;
-    }
+    .sidebar-top {
+      .sidebar-top-left {
+        .sidebarToggle {
+          display: block;
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
 
-    .delete-students {
-      right: 1rem;
-      left: auto;
-      z-index: 5;
-    }
-
-    .table-container {
-      //display: none;
-      width: 100%;
-
-      .limiter {
-        width: 90%;
-
-        .container-table100 {
-          max-height: 375px;
+          img {
+            width: 25px;
+            height: 25px;
+          }
         }
       }
     }
 
   }
 
+  $baseWidth: 550px;
+
+  .navbar {
+    .navbar-container {
+      padding: 1rem;
+      margin-left: 3rem;
+    }
+  }
+
+  .main-content {
+    margin-left: 1rem;
+
+    &.active {
+      margin-left: 1rem;
+    }
+  }
+
+  .homepage-container {
+    margin: 0;
+
+    p {
+      font-size: 2rem;
+    }
+
+    a {
+      margin-top: 10rem;
+    }
+
+    .homepage-bg {
+      max-width: max-content;
+      height: max-content;
+    }
+
+  }
+
+  .students-container {
+    width: 100%;
+    height: auto;
+    margin: 40px 0;
+
+    .homepage-bg {
+      width: 1100px;
+      display: block;
+    }
+
+    .add-students {
+      left: 4rem;
+      bottom: 1rem;
+      z-index: 5;
+    }
+
+    .delete-students {
+      right: 4rem;
+      left: auto;
+      bottom: 1rem;
+      z-index: 5;
+    }
+
+    .table-container {
+      //display: none;
+      box-shadow: 0 0 1rem rgba(0, 0, 0, .25);
+      border-radius: 10px;
+
+      .limiter {
+        width: 100%;
+
+        .container-table100 {
+          max-height: 500px;
+
+          .wrap-table100 {
+            width: 950px;
+            .table {
+              .row {
+                .cell {
+                  &:nth-child(1) {
+                    display: table-cell;
+                  }
+
+                  &:nth-child(3) {
+                    display: table-cell;
+                  }
+
+                  &:nth-child(4) {
+                    display: table-cell;
+                  }
+                }
+
+                .cell {
+                  width: 0 !important;
+
+                  &::before {
+                    min-width: 0;
+                  }
+                }
+              }
+            }
+          }
+
+        }
+      }
+    }
+  }
 }
 
 @media only screen and (min-width: 1201px) {
+
   .sidebar {
-    z-index: 1;
-  }
-
-  .navbar {
-    .navbar-container {
-      padding: 1rem;
-      margin-left: 13rem;
-    }
-  }
-
-  .main-content {
-    margin-left: 10rem;
+    z-index: 10;
+    width: 278px;
 
     &.active {
-      margin-left: 10rem;
-    }
-  }
-
-  .homepage-container {
-    .homepage-bg {
-      max-width: 1340px;
-    }
-  }
-
-  .students-container {
-    width: 1340px;
-    justify-content: center;
-
-    .homepage-bg {
-      max-width: 1340px;
+      width: 0;
     }
 
-    .add-students {
-      left: 1rem;
-    }
-
-    .delete-students {
-      right: 1rem;
-      left: auto;
-    }
-
-    .table-container {
-      //display: none;
-      width: auto;
-
-      .limiter {
-        width: auto;
-
-        .container-table100 {
-          max-height: 650px;
+    .sidebar-top {
+      .sidebar-top-left {
+        .sidebarToggle {
+          display: none;
         }
       }
     }
 
   }
+
+  .students-container {
+    width: 100%;
+    height: auto;
+    margin: 40px 0;
+
+    .homepage-bg {
+      width: 1340px;
+      display: block;
+    }
+
+    .add-students {
+      left: 2rem;
+      bottom: 1rem;
+      z-index: 5;
+    }
+
+    .delete-students {
+      right: 2rem;
+      left: auto;
+      bottom: 1rem;
+      z-index: 5;
+    }
+
+    .table-container {
+      //display: none;
+      box-shadow: 0 0 1rem rgba(0, 0, 0, .25);
+      border-radius: 10px;
+
+      .limiter {
+        width: 100%;
+
+        .container-table100 {
+          max-height: 700px;
+
+          .wrap-table100 {
+            width: 1200px;
+            .table {
+              .row {
+                .cell {
+                  &:nth-child(1) {
+                    display: table-cell;
+                  }
+
+                  &:nth-child(3) {
+                    display: table-cell;
+                  }
+
+                  &:nth-child(4) {
+                    display: table-cell;
+                  }
+                }
+
+                .cell {
+                  width: 0 !important;
+
+                  &::before {
+                    min-width: 0;
+                  }
+                }
+              }
+            }
+          }
+
+        }
+      }
+    }
+  }
+
 }
