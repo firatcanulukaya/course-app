@@ -72,6 +72,7 @@ export const InfoButtons = styled.button`
   font-size: 15px;
   margin: 0 16px;
   color: ${p => p.textColor};
+  border: 1px solid ${p => p.bgColor};
 
   ${p => {
     if (p.isHover) {
