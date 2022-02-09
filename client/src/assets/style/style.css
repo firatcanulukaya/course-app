@@ -671,10 +671,11 @@ footer {
   }
 
   .main-content {
-    margin-left: 1rem;
+    margin-left: 0;
+    overflow: hidden;
   }
   .main-content.active {
-    margin-left: 1rem;
+    margin-left: 0;
   }
 
   .homepage-container {
@@ -692,31 +693,25 @@ footer {
 
   .students-container {
     width: 100%;
-    height: 100vh;
     margin: 0;
   }
-  .students-container .homepage-bg {
-    display: none;
-  }
   .students-container .add-students {
-    left: 0;
-    bottom: 5rem;
+    left: 1rem;
+    bottom: 2rem;
     z-index: 5;
   }
   .students-container .delete-students {
-    left: 0;
+    left: auto;
+    right: 1rem;
     bottom: 2rem;
     z-index: 5;
   }
   .students-container .table-container {
-    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.25);
+    width: 70%;
     border-radius: 10px;
   }
   .students-container .table-container .limiter {
     width: 100%;
-  }
-  .students-container .table-container .limiter .container-table100 {
-    max-height: 600px;
   }
   .students-container .table-container .limiter .container-table100 .wrap-table100 {
     width: 400px;
@@ -735,6 +730,17 @@ footer {
   }
   .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell::before {
     min-width: 0;
+  }
+
+  .infoCardContainer {
+    width: 100%;
+    margin: 0;
+  }
+  .infoCardContainer .card-bg {
+    width: 1340px;
+  }
+  .infoCardContainer .infoCard {
+    width: 90%;
   }
 }
 @media only screen and (min-width: 600px) {
@@ -770,10 +776,11 @@ footer {
   }
 
   .main-content {
-    margin-left: 1rem;
+    margin-left: 0;
+    overflow: hidden;
   }
   .main-content.active {
-    margin-left: 1rem;
+    margin-left: 0;
   }
 
   .homepage-container {
@@ -791,31 +798,28 @@ footer {
 
   .students-container {
     width: 100%;
-    height: 100vh;
     margin: 0;
   }
-  .students-container .homepage-bg {
-    width: 95%;
-  }
   .students-container .add-students {
-    left: 0;
-    bottom: 5rem;
-    z-index: 5;
-  }
-  .students-container .delete-students {
-    left: 0;
+    left: 1rem;
     bottom: 2rem;
     z-index: 5;
   }
+  .students-container .delete-students {
+    left: auto;
+    right: 1rem;
+    bottom: 2rem;
+    z-index: 5;
+  }
+  .students-container .homepage-bg {
+    width: 1340px;
+  }
   .students-container .table-container {
-    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.25);
+    width: 70%;
     border-radius: 10px;
   }
   .students-container .table-container .limiter {
     width: 100%;
-  }
-  .students-container .table-container .limiter .container-table100 {
-    max-height: 600px;
   }
   .students-container .table-container .limiter .container-table100 .wrap-table100 {
     width: 400px;
@@ -834,6 +838,17 @@ footer {
   }
   .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell::before {
     min-width: 0;
+  }
+
+  .infoCardContainer {
+    width: 100%;
+    margin: 0;
+  }
+  .infoCardContainer .card-bg {
+    width: 1340px;
+  }
+  .infoCardContainer .infoCard {
+    width: 90%;
   }
 }
 @media only screen and (min-width: 992px) {
@@ -869,10 +884,11 @@ footer {
   }
 
   .main-content {
-    margin-left: 1rem;
+    margin-left: 0;
+    overflow: visible;
   }
   .main-content.active {
-    margin-left: 1rem;
+    margin-left: 0;
   }
 
   .homepage-container {
@@ -888,33 +904,20 @@ footer {
     width: 700px;
   }
 
-  .students-container {
-    width: 100%;
-    height: 100vh;
-    margin: 0;
-  }
-  .students-container .add-students {
-    left: 0;
-    bottom: 5rem;
-    z-index: 5;
-  }
-  .students-container .delete-students {
-    left: 0;
-    bottom: 2rem;
-    z-index: 5;
+  .students-container .homepage-bg {
+    width: 95%;
   }
   .students-container .table-container {
-    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.25);
     border-radius: 10px;
   }
   .students-container .table-container .limiter {
-    width: 100%;
+    width: 80%;
   }
   .students-container .table-container .limiter .container-table100 {
-    max-height: 600px;
+    max-height: 450px;
   }
   .students-container .table-container .limiter .container-table100 .wrap-table100 {
-    width: 600px;
+    width: 100%;
   }
   .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell:nth-child(1) {
     display: table-cell;
@@ -930,6 +933,17 @@ footer {
   }
   .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell::before {
     min-width: 0;
+  }
+
+  .infoCardContainer {
+    width: 100%;
+    margin: 40px 0;
+  }
+  .infoCardContainer .card-bg {
+    width: 99%;
+  }
+  .infoCardContainer .infoCard {
+    width: 80%;
   }
 }
 @media only screen and (min-width: 1200px) {
@@ -996,14 +1010,10 @@ footer {
     z-index: 5;
   }
   .students-container .table-container {
-    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.25);
     border-radius: 10px;
   }
   .students-container .table-container .limiter {
     width: 100%;
-  }
-  .students-container .table-container .limiter .container-table100 {
-    max-height: 500px;
   }
   .students-container .table-container .limiter .container-table100 .wrap-table100 {
     width: 100%;
@@ -1024,7 +1034,7 @@ footer {
     min-width: 0;
   }
 }
-@media only screen and (min-width: 1201px) {
+@media only screen and (min-width: 1250px) {
   .homepage-container {
     margin: 40px 0;
   }
@@ -1079,6 +1089,7 @@ footer {
     z-index: 5;
   }
   .students-container .table-container {
+    width: 70%;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.25);
     border-radius: 10px;
   }
@@ -1086,10 +1097,10 @@ footer {
     width: 100%;
   }
   .students-container .table-container .limiter .container-table100 {
-    max-height: 700px;
+    height: 70%;
   }
   .students-container .table-container .limiter .container-table100 .wrap-table100 {
-    width: 1200px;
+    width: 100%;
   }
   .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell:nth-child(1) {
     display: table-cell;
@@ -1105,6 +1116,17 @@ footer {
   }
   .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell::before {
     min-width: 0;
+  }
+
+  .infoCardContainer {
+    width: 100%;
+    margin: 40px 0;
+  }
+  .infoCardContainer .card-bg {
+    width: 99%;
+  }
+  .infoCardContainer .infoCard {
+    width: 40%;
   }
 }
 

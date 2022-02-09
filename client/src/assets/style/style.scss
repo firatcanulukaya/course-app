@@ -758,11 +758,11 @@ footer {
 //* responsive
 @media only screen and (max-width: 600px) {
 
-  .studentModal{
+  .studentModal {
     width: 400px;
   }
 
-  .col-33{
+  .col-33 {
     max-width: 100%;
   }
 
@@ -802,10 +802,11 @@ footer {
   }
 
   .main-content {
-    margin-left: 1rem;
+    margin-left: 0;
+    overflow: hidden;
 
     &.active {
-      margin-left: 1rem;
+      margin-left: 0;
     }
   }
 
@@ -828,38 +829,32 @@ footer {
 
   .students-container {
     width: 100%;
-    height: 100vh;
     margin: 0;
 
-    .homepage-bg {
-      display: none;
-    }
-
     .add-students {
-      left: 0;
-      bottom: 5rem;
+      left: 1rem;
+      bottom: 2rem;
       z-index: 5;
     }
 
     .delete-students {
-      left: 0;
+      left: auto;
+      right: 1rem;
       bottom: 2rem;
       z-index: 5;
     }
 
     .table-container {
-      //display: none;
-      box-shadow: 0 0 1rem rgba(0, 0, 0, .25);
+      width: 70%;
       border-radius: 10px;
 
       .limiter {
         width: 100%;
 
         .container-table100 {
-          max-height: 600px;
-
           .wrap-table100 {
             width: 400px;
+
             .table {
               .row {
                 .cell {
@@ -892,15 +887,28 @@ footer {
     }
   }
 
+  .infoCardContainer{
+    width: 100%;
+    margin: 0;
+
+    .card-bg{
+      width: 1340px;
+    }
+
+    .infoCard{
+      width: 90%;
+    }
+  }
+
 }
 
 @media only screen and (min-width: 600px) {
 
-  .studentModal{
+  .studentModal {
     width: 500px;
   }
 
-  .col-33{
+  .col-33 {
     max-width: 100%;
   }
 
@@ -940,10 +948,11 @@ footer {
   }
 
   .main-content {
-    margin-left: 1rem;
+    margin-left: 0;
+    overflow: hidden;
 
     &.active {
-      margin-left: 1rem;
+      margin-left: 0;
     }
   }
 
@@ -966,37 +975,36 @@ footer {
 
   .students-container {
     width: 100%;
-    height: 100vh;
     margin: 0;
 
-    .homepage-bg {
-      width: 95%;
-    }
-
     .add-students {
-      left: 0;
-      bottom: 5rem;
-      z-index: 5;
-    }
-
-    .delete-students {
-      left: 0;
+      left: 1rem;
       bottom: 2rem;
       z-index: 5;
     }
 
+    .delete-students {
+      left: auto;
+      right: 1rem;
+      bottom: 2rem;
+      z-index: 5;
+    }
+
+    .homepage-bg {
+      width: 1340px;
+    }
+
     .table-container {
-      box-shadow: 0 0 1rem rgba(0, 0, 0, .25);
+      width: 70%;
       border-radius: 10px;
 
       .limiter {
         width: 100%;
 
         .container-table100 {
-          max-height: 600px;
-
           .wrap-table100 {
             width: 400px;
+
             .table {
               .row {
                 .cell {
@@ -1029,15 +1037,28 @@ footer {
     }
   }
 
+  .infoCardContainer{
+    width: 100%;
+    margin: 0;
+
+    .card-bg{
+      width: 1340px;
+    }
+
+    .infoCard{
+      width: 90%;
+    }
+  }
+
 }
 
 @media only screen and (min-width: 992px) {
 
-  .col-33{
+  .col-33 {
     max-width: 33%;
   }
 
-  .studentModal{
+  .studentModal {
     width: 700px;
   }
 
@@ -1077,10 +1098,11 @@ footer {
   }
 
   .main-content {
-    margin-left: 1rem;
+    margin-left: 0;
+    overflow: visible;
 
     &.active {
-      margin-left: 1rem;
+      margin-left: 0;
     }
   }
 
@@ -1102,35 +1124,23 @@ footer {
   }
 
   .students-container {
-    width: 100%;
-    height: 100vh;
-    margin: 0;
 
-    .add-students {
-      left: 0;
-      bottom: 5rem;
-      z-index: 5;
-    }
-
-    .delete-students {
-      left: 0;
-      bottom: 2rem;
-      z-index: 5;
+    .homepage-bg {
+      width: 95%;
     }
 
     .table-container {
-      //display: none;
-      box-shadow: 0 0 1rem rgba(0, 0, 0, .25);
       border-radius: 10px;
 
       .limiter {
-        width: 100%;
+        width: 80%;
 
         .container-table100 {
-          max-height: 600px;
+          max-height: 450px;
 
           .wrap-table100 {
-            width: 600px;
+            width: 100%;
+
             .table {
               .row {
                 .cell {
@@ -1162,6 +1172,19 @@ footer {
       }
     }
   }
+
+  .infoCardContainer{
+    width: 100%;
+    margin: 40px 0;
+
+    .card-bg{
+      width: 99%;
+    }
+
+    .infoCard{
+      width: 80%;
+    }
+  }
 }
 
 @media only screen and (min-width: 1200px) {
@@ -1191,10 +1214,10 @@ footer {
       }
     }
 
-    &.active{
-      .sidebar-top{
-        .sidebar-top-left{
-          .sidebarToggle{
+    &.active {
+      .sidebar-top {
+        .sidebar-top-left {
+          .sidebarToggle {
             display: none;
           }
         }
@@ -1256,17 +1279,16 @@ footer {
     }
 
     .table-container {
-      box-shadow: 0 0 1rem rgba(0, 0, 0, .25);
       border-radius: 10px;
 
       .limiter {
         width: 100%;
 
         .container-table100 {
-          max-height: 500px;
 
           .wrap-table100 {
             width: 100%;
+
             .table {
               .row {
                 .cell {
@@ -1300,10 +1322,11 @@ footer {
   }
 }
 
-@media only screen and (min-width: 1201px) {
+@media only screen and (min-width: 1250px) {
 
-  .homepage-container{
+  .homepage-container {
     margin: 40px 0;
+
     .homepage-bg {
       width: 90%;
       display: block;
@@ -1341,7 +1364,7 @@ footer {
       padding: 1rem 5rem;
       margin-left: 20rem;
 
-      &.active{
+      &.active {
         margin-left: 3rem;
       }
     }
@@ -1370,7 +1393,7 @@ footer {
     }
 
     .table-container {
-      //display: none;
+      width: 70%;
       box-shadow: 0 0 1rem rgba(0, 0, 0, .25);
       border-radius: 10px;
 
@@ -1378,10 +1401,11 @@ footer {
         width: 100%;
 
         .container-table100 {
-          max-height: 700px;
+          height: 70%;
 
           .wrap-table100 {
-            width: 1200px;
+            width: 100%;
+
             .table {
               .row {
                 .cell {
@@ -1411,6 +1435,19 @@ footer {
 
         }
       }
+    }
+  }
+
+  .infoCardContainer{
+    width: 100%;
+    margin: 40px 0;
+
+    .card-bg{
+      width: 99%;
+    }
+
+    .infoCard{
+      width: 40%;
     }
   }
 
