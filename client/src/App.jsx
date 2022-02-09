@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { Routes, Route} from "react-router-dom";
 import "./assets/style/style.css";
 import Navbar from "./components/Navbar";
@@ -44,13 +44,26 @@ const App = () => {
         }
     ]
 
-    //TODO sidebar active ise active classı ekle
     const sidebarCollapse = () => {
         document.querySelector(".sidebar").classList.toggle("active");
         document.querySelector(".main-content").classList.toggle("active");
         document.querySelector(".navbar-container").classList.toggle("active");
-        // localStorage.setItem("sidebar", document.querySelector(".sidebar").classList.contains("active"));
+
+        if(document.querySelector(".sidebar").classList.contains("active")){
+            localStorage.setItem("sidebar", "active");
+        }
+        else{
+            localStorage.removeItem("sidebar");
+        }
     };
+
+    useEffect(() => {
+        if(localStorage.getItem("sidebar") === "active"){
+            document.querySelector(".sidebar").classList.add("active");
+            document.querySelector(".main-content").classList.add("active");
+            document.querySelector(".navbar-container").classList.add("active");
+        }
+    }, []);
 
     const [studentsData, setStudentsData] = useState([]);
     const [coursesData, setCoursesData] = useState([]);
