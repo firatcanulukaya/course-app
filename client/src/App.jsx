@@ -48,6 +48,7 @@ const App = () => {
     const sidebarCollapse = () => {
         document.querySelector(".sidebar").classList.toggle("active");
         document.querySelector(".main-content").classList.toggle("active");
+        document.querySelector(".navbar-container").classList.toggle("active");
         // localStorage.setItem("sidebar", document.querySelector(".sidebar").classList.contains("active"));
     };
 
