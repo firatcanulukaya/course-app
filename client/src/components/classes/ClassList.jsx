@@ -62,7 +62,7 @@ const ClassList = ({deleteClass}) => {
                                         ID
                                     </div>
                                     <div className="cell">
-                                        Course Info
+                                        Class Info
                                     </div>
                                     <div className="cell">
                                         Students
