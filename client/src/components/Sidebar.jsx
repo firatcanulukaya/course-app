@@ -16,7 +16,7 @@ const Sidebar = ({sidebarItems, logo, sidebarCollapse}) => {
         <div className="sidebar-items">
             <ul className="sidebar-itemnav">
                 {sidebarItems.map((item, index) => {
-                    return <a href={item.link} key={index} className="tooltip" data-tip={item.name}>
+                    return <a href={item.link} key={index}>
                         <img src={item.icon} alt="sidebar item icon"/>
                         <span>{item.name}</span>
 
