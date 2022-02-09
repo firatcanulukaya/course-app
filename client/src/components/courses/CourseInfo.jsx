@@ -1,4 +1,4 @@
-import {useState, useEffect, useContext} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import {useParams} from "react-router-dom";
 import DeleteModal from "../DeleteModal";
 import mainContext from "../../MainContext";
@@ -14,7 +14,7 @@ import {InfoBanner} from "../../styledComponents";
 import {getAll} from "../../utils/utilFunctions";
 
 const CourseInfo = () => {
-    const {serverLink, setCoursesData, coursesData, setClassesData, setStudentsData, studentsData} = useContext(mainContext)
+    const {serverLink, setCoursesData, coursesData, setStudentsData, setIsBlur} = useContext(mainContext)
     const navigate = useNavigate();
     const {id} = useParams();
 
@@ -60,9 +60,9 @@ const CourseInfo = () => {
 
     return (
         <div className="infoCardContainer">
-            <DeleteModal id={id} isActive={isOpen.delete} onClose={() => setIsOpen({...isOpen, delete: !isOpen.delete})}
+            <DeleteModal id={id} isActive={isOpen.delete} onClose={() => { setIsOpen({...isOpen, delete: !isOpen.delete}); setIsBlur(false) }}
                          handleDelete={deleteCourse} type="course"/>
-            <CourseEditModal isActive={isOpen.edit} onClose={() => setIsOpen({...isOpen, edit: !isOpen.edit})}
+            <CourseEditModal isActive={isOpen.edit} onClose={() => { setIsOpen({...isOpen, edit: !isOpen.edit}); setIsBlur(false) }}
                              courseId={id}/>
 
             <img src={bg} alt="background" className="card-bg"/>
@@ -117,9 +117,9 @@ const CourseInfo = () => {
 
                     <div className="infoCardFooterButtons">
                         <InfoButtons bgColor="#F1F1F1" textcolor="#23262F"
-                                     onClick={() => setIsOpen({...isOpen, edit: !isOpen.edit})}>Edit</InfoButtons>
+                                     onClick={() => { setIsOpen({...isOpen, edit: !isOpen.edit}); setIsBlur(true) }}>Edit</InfoButtons>
                         <InfoButtons bgColor="#E53535" textColor="#FCFCFD" isHover={true}
-                                     onClick={() => setIsOpen({...isOpen, delete: !isOpen.delete})}>Delete</InfoButtons>
+                                     onClick={() => { setIsOpen({...isOpen, delete: !isOpen.delete}); setIsBlur(true) }}>Delete</InfoButtons>
                     </div>
 
                 </div>

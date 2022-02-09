@@ -14,7 +14,7 @@ import {getAll, getInfo} from "../../utils/utilFunctions";
 import {InfoCardTopPhoto} from "../../styledComponents";
 
 const StudentInfo = () => {
-    const {serverLink, coursesData, setCoursesData, classesData, setClassesData, setStudentsData, studentsData} = useContext(mainContext)
+    const {serverLink, setCoursesData, setClassesData, setStudentsData, studentsData, setIsBlur} = useContext(mainContext)
     const navigate = useNavigate();
     const {id} = useParams();
 
@@ -64,9 +64,9 @@ const StudentInfo = () => {
 
     return (
         <div className="infoCardContainer">
-            <DeleteModal id={id} isActive={isOpen.delete} onClose={() => setIsOpen({...isOpen, delete: !isOpen.delete})}
+            <DeleteModal id={id} isActive={isOpen.delete} onClose={() => { setIsOpen({...isOpen, delete: !isOpen.delete}); setIsBlur(false) }}
                          handleDelete={deleteStudent} type="student"/>
-            <StudentEditModal isActive={isOpen.edit} onClose={() => setIsOpen({...isOpen, edit: !isOpen.edit})}
+            <StudentEditModal isActive={isOpen.edit} onClose={() => { setIsOpen({...isOpen, edit: !isOpen.edit}); setIsBlur(false) }}
                               studentId={id} indexID={studentIndex}/>
 
             <img src={bg} alt="background" className="card-bg"/>
@@ -122,9 +122,9 @@ const StudentInfo = () => {
 
                     <div className="infoCardFooterButtons">
                         <InfoButtons bgColor="#F1F1F1" textcolor="#23262F"
-                                     onClick={() => setIsOpen({...isOpen, edit: !isOpen.edit})}>Edit</InfoButtons>
+                                     onClick={() => { setIsOpen({...isOpen, edit: !isOpen.edit}); setIsBlur(true) }}>Edit</InfoButtons>
                         <InfoButtons bgColor="#E53535" textColor="#FCFCFD" isHover={true}
-                                     onClick={() => setIsOpen({...isOpen, delete: !isOpen.delete})}>Delete</InfoButtons>
+                                     onClick={() => { setIsOpen({...isOpen, delete: !isOpen.delete}); setIsBlur(true) }}>Delete</InfoButtons>
                     </div>
 
                 </div>
