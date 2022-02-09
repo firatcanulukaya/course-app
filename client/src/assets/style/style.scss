@@ -758,6 +758,14 @@ footer {
 //* responsive
 @media only screen and (max-width: 600px) {
 
+  .studentModal{
+    width: 400px;
+  }
+
+  .col-33{
+    max-width: 100%;
+  }
+
   .sidebar {
     z-index: 10;
     width: 278px;
@@ -802,19 +810,18 @@ footer {
   }
 
   .homepage-container {
-    margin: 0;
+    margin: 40px 0;
 
     p {
-      font-size: 2rem;
+      font-size: 1rem;
     }
 
     a {
-      margin-top: 10rem;
+      margin-top: 23%;
     }
 
     .homepage-bg {
-      max-width: max-content;
-      height: max-content;
+      width: 95%;
     }
 
   }
@@ -889,6 +896,14 @@ footer {
 
 @media only screen and (min-width: 600px) {
 
+  .studentModal{
+    width: 500px;
+  }
+
+  .col-33{
+    max-width: 100%;
+  }
+
   .sidebar {
     z-index: 10;
     width: 278px;
@@ -933,19 +948,18 @@ footer {
   }
 
   .homepage-container {
-    margin: 0;
+    margin: 40px 0;
 
     p {
-      font-size: 2rem;
+      font-size: 1.3rem;
     }
 
     a {
-      margin-top: 10rem;
+      margin-top: 7rem;
     }
 
     .homepage-bg {
-      max-width: max-content;
-      height: max-content;
+      width: 530px;
     }
 
   }
@@ -956,7 +970,7 @@ footer {
     margin: 0;
 
     .homepage-bg {
-      display: none;
+      width: 95%;
     }
 
     .add-students {
@@ -972,7 +986,6 @@ footer {
     }
 
     .table-container {
-      //display: none;
       box-shadow: 0 0 1rem rgba(0, 0, 0, .25);
       border-radius: 10px;
 
@@ -1019,6 +1032,15 @@ footer {
 }
 
 @media only screen and (min-width: 992px) {
+
+  .col-33{
+    max-width: 33%;
+  }
+
+  .studentModal{
+    width: 700px;
+  }
+
   .sidebar {
     z-index: 10;
     width: 278px;
@@ -1063,19 +1085,18 @@ footer {
   }
 
   .homepage-container {
-    margin: 0;
+    margin: 40px 0;
 
     p {
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
 
     a {
-      margin-top: 10rem;
+      margin-top: 7rem;
     }
 
     .homepage-bg {
-      max-width: max-content;
-      height: max-content;
+      width: 700px;
     }
 
   }
@@ -1084,10 +1105,6 @@ footer {
     width: 100%;
     height: 100vh;
     margin: 0;
-
-    .homepage-bg {
-      display: none;
-    }
 
     .add-students {
       left: 0;
@@ -1148,12 +1165,13 @@ footer {
 }
 
 @media only screen and (min-width: 1200px) {
+
   .sidebar {
     z-index: 10;
     width: 278px;
 
     &.active {
-      width: 0;
+      width: 100px;
     }
 
     .sidebar-top {
@@ -1167,6 +1185,17 @@ footer {
           img {
             width: 25px;
             height: 25px;
+          }
+
+        }
+      }
+    }
+
+    &.active{
+      .sidebar-top{
+        .sidebar-top-left{
+          .sidebarToggle{
+            display: none;
           }
         }
       }
@@ -1184,15 +1213,15 @@ footer {
   }
 
   .main-content {
-    margin-left: 1rem;
+    margin-left: 8rem;
 
     &.active {
-      margin-left: 1rem;
+      margin-left: 8rem;
     }
   }
 
   .homepage-container {
-    margin: 0;
+    margin: 40px 0;
 
     p {
       font-size: 2rem;
@@ -1203,8 +1232,7 @@ footer {
     }
 
     .homepage-bg {
-      max-width: max-content;
-      height: max-content;
+      width: 900px;
     }
 
   }
@@ -1213,11 +1241,6 @@ footer {
     width: 100%;
     height: auto;
     margin: 40px 0;
-
-    .homepage-bg {
-      width: 1100px;
-      display: block;
-    }
 
     .add-students {
       left: 4rem;
@@ -1233,7 +1256,6 @@ footer {
     }
 
     .table-container {
-      //display: none;
       box-shadow: 0 0 1rem rgba(0, 0, 0, .25);
       border-radius: 10px;
 
@@ -1244,7 +1266,7 @@ footer {
           max-height: 500px;
 
           .wrap-table100 {
-            width: 950px;
+            width: 100%;
             .table {
               .row {
                 .cell {
@@ -1280,12 +1302,20 @@ footer {
 
 @media only screen and (min-width: 1201px) {
 
+  .homepage-container{
+    margin: 40px 0;
+    .homepage-bg {
+      width: 90%;
+      display: block;
+    }
+  }
+
   .sidebar {
     z-index: 10;
     width: 278px;
 
     &.active {
-      width: 0;
+      width: 100px;
     }
 
     .sidebar-top {
@@ -1298,24 +1328,42 @@ footer {
 
   }
 
+  .main-content {
+    margin-left: 20rem;
+
+    &.active {
+      margin-left: 4rem;
+    }
+  }
+
+  .navbar {
+    .navbar-container {
+      padding: 1rem 5rem;
+      margin-left: 20rem;
+
+      &.active{
+        margin-left: 3rem;
+      }
+    }
+  }
+
   .students-container {
     width: 100%;
     height: auto;
     margin: 40px 0;
 
     .homepage-bg {
-      width: 1340px;
-      display: block;
+      width: 95%;
     }
 
     .add-students {
-      left: 2rem;
+      left: 3rem;
       bottom: 1rem;
       z-index: 5;
     }
 
     .delete-students {
-      right: 2rem;
+      right: 3rem;
       left: auto;
       bottom: 1rem;
       z-index: 5;
