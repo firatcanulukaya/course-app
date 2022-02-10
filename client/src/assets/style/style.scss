@@ -854,6 +854,7 @@ footer {
         .container-table100 {
           .wrap-table100 {
             width: 400px;
+            border-radius: 10px;
 
             .table {
               .row {
@@ -887,15 +888,15 @@ footer {
     }
   }
 
-  .infoCardContainer{
+  .infoCardContainer {
     width: 100%;
     margin: 0;
 
-    .card-bg{
+    .card-bg {
       width: 1340px;
     }
 
-    .infoCard{
+    .infoCard {
       width: 90%;
     }
   }
@@ -1004,6 +1005,7 @@ footer {
         .container-table100 {
           .wrap-table100 {
             width: 400px;
+            border-radius: 10px;
 
             .table {
               .row {
@@ -1037,15 +1039,15 @@ footer {
     }
   }
 
-  .infoCardContainer{
+  .infoCardContainer {
     width: 100%;
     margin: 0;
 
-    .card-bg{
+    .card-bg {
       width: 1340px;
     }
 
-    .infoCard{
+    .infoCard {
       width: 90%;
     }
   }
@@ -1129,6 +1131,15 @@ footer {
       width: 95%;
     }
 
+    .delete-students{
+      left: auto !important;
+      right: 3rem;
+    }
+
+    .add-students{
+      left: 3rem;
+    }
+
     .table-container {
       border-radius: 10px;
 
@@ -1173,15 +1184,15 @@ footer {
     }
   }
 
-  .infoCardContainer{
+  .infoCardContainer {
     width: 100%;
     margin: 40px 0;
 
-    .card-bg{
+    .card-bg {
       width: 99%;
     }
 
-    .infoCard{
+    .infoCard {
       width: 80%;
     }
   }
@@ -1438,15 +1449,15 @@ footer {
     }
   }
 
-  .infoCardContainer{
+  .infoCardContainer {
     width: 100%;
     margin: 40px 0;
 
-    .card-bg{
+    .card-bg {
       width: 99%;
     }
 
-    .infoCard{
+    .infoCard {
       width: 40%;
     }
   }

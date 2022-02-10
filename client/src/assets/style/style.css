@@ -715,6 +715,7 @@ footer {
   }
   .students-container .table-container .limiter .container-table100 .wrap-table100 {
     width: 400px;
+    border-radius: 10px;
   }
   .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell:nth-child(1) {
     display: none;
@@ -823,6 +824,7 @@ footer {
   }
   .students-container .table-container .limiter .container-table100 .wrap-table100 {
     width: 400px;
+    border-radius: 10px;
   }
   .students-container .table-container .limiter .container-table100 .wrap-table100 .table .row .cell:nth-child(1) {
     display: none;
@@ -906,6 +908,13 @@ footer {
 
   .students-container .homepage-bg {
     width: 95%;
+  }
+  .students-container .delete-students {
+    left: auto !important;
+    right: 3rem;
+  }
+  .students-container .add-students {
+    left: 3rem;
   }
   .students-container .table-container {
     border-radius: 10px;
