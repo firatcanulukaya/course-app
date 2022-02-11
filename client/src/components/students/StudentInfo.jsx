@@ -14,7 +14,14 @@ import {getAll, getInfo} from "../../utils/utilFunctions";
 import {InfoCardTopPhoto} from "../../styledComponents";
 
 const StudentInfo = () => {
-    const {serverLink, setCoursesData, setClassesData, setStudentsData, studentsData, setIsBlur} = useContext(mainContext)
+    const {
+        serverLink,
+        setCoursesData,
+        setClassesData,
+        setStudentsData,
+        studentsData,
+        setIsBlur
+    } = useContext(mainContext)
     const navigate = useNavigate();
     const {id} = useParams();
 
@@ -64,9 +71,15 @@ const StudentInfo = () => {
 
     return (
         <div className="infoCardContainer">
-            <DeleteModal id={id} isActive={isOpen.delete} onClose={() => { setIsOpen({...isOpen, delete: !isOpen.delete}); setIsBlur(false) }}
+            <DeleteModal id={id} isActive={isOpen.delete} onClose={() => {
+                setIsOpen({...isOpen, delete: !isOpen.delete});
+                setIsBlur(false)
+            }}
                          handleDelete={deleteStudent} type="student"/>
-            <StudentEditModal isActive={isOpen.edit} onClose={() => { setIsOpen({...isOpen, edit: !isOpen.edit}); setIsBlur(false) }}
+            <StudentEditModal isActive={isOpen.edit} onClose={() => {
+                setIsOpen({...isOpen, edit: !isOpen.edit});
+                setIsBlur(false)
+            }}
                               studentId={id} indexID={studentIndex}/>
 
             <img src={bg} alt="background" className="card-bg"/>
@@ -89,7 +102,10 @@ const StudentInfo = () => {
 
                     <div className="infoCardContent-section">
                         <p>Class:</p>
-                        <a href={`/class/${student?.class?.id}`} style={{color: "#011F3B"}}>{student?.class?.className ? student?.class?.className : "Student has no class"}</a>
+                        <a onClick={() => navigate(`/class/${student?.class?.id}`)} style={{
+                            color: "#011F3B",
+                            cursor: "pointer"
+                        }}>{student?.class?.className ? student?.class?.className : "Student has no class"}</a>
                     </div>
 
                     <div className="infoCardContent-section">
@@ -99,11 +115,13 @@ const StudentInfo = () => {
                             <li className="student-table-li">
                                 {student?.courses?.length > 0 ? student?.courses.map((course, index) => (
                                     <CourseBadge hex={course.courseColor} key={index}>
-                                        <a href={`/course/${course.id}`}>{course.courseName.length < 20 ? course.courseName : course.courseName.substr(0, 20) + "..."}</a>
+                                        <a onClick={() => navigate(`/course/${course.id}`)}
+                                           style={{cursor: "pointer"}}>{course.courseName.length < 20 ? course.courseName : course.courseName.substr(0, 20) + "..."}</a>
                                         <button className="tooltip"
                                                 data-tip={`Remove ${course.courseName} course from student`}
                                                 onClick={() => removeCourse(student?.id, course.id)}>
-                                            <img src={timesIcon} style={{mixBlendMode: "luminosity"}} alt="times icon"/></button>
+                                            <img src={timesIcon} style={{mixBlendMode: "luminosity"}} alt="times icon"/>
+                                        </button>
                                     </CourseBadge>
                                 )) : <InfoCardTag textColor={"red"}>Student has not any courses.</InfoCardTag>}
                             </li>
@@ -122,9 +140,15 @@ const StudentInfo = () => {
 
                     <div className="infoCardFooterButtons">
                         <InfoButtons bgColor="#F1F1F1" textcolor="#23262F"
-                                     onClick={() => { setIsOpen({...isOpen, edit: !isOpen.edit}); setIsBlur(true) }}>Edit</InfoButtons>
+                                     onClick={() => {
+                                         setIsOpen({...isOpen, edit: !isOpen.edit});
+                                         setIsBlur(true)
+                                     }}>Edit</InfoButtons>
                         <InfoButtons bgColor="#E53535" textColor="#FCFCFD" isHover={true}
-                                     onClick={() => { setIsOpen({...isOpen, delete: !isOpen.delete}); setIsBlur(true) }}>Delete</InfoButtons>
+                                     onClick={() => {
+                                         setIsOpen({...isOpen, delete: !isOpen.delete});
+                                         setIsBlur(true)
+                                     }}>Delete</InfoButtons>
                     </div>
 
                 </div>

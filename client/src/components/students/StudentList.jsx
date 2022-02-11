@@ -7,9 +7,11 @@ import editIcon from "../../assets/img/edit.svg";
 import deleteIcon from "../../assets/img/delete.svg";
 import timesIcon from "../../assets/img/times.svg";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 const StudentList = ({deleteStudent}) => {
     const {studentsData, setStudentsData, serverLink, setIsBlur} = useContext(mainContext)
+    const navigate = useNavigate();
 
     const [studentIds, setStudentIds] = useState({
         index: 0,
@@ -87,7 +89,8 @@ const StudentList = ({deleteStudent}) => {
                                             {item.id}
                                         </div>
                                         <div className="cell" data-title="Student Info">
-                                            <a href={`student/${item.id}`}>{item.studentName.length < 20 ? item.studentName : item.studentName.substr(0, 20) + "..."}</a>
+                                            <a onClick={() => navigate(`/student/${item.id}`)}
+                                               style={{cursor: "pointer"}}>{item.studentName.length < 20 ? item.studentName : item.studentName.substr(0, 20) + "..."}</a>
                                             <p>
                                                 Class: {item.class ? item.class.className : "Student has no class"}
                                                 <br/>
@@ -102,7 +105,8 @@ const StudentList = ({deleteStudent}) => {
                                                 <li className="student-table-li">
                                                     {item.courses.length > 0 ? item.courses.map((course, index) => (
                                                             <CourseBadge hex={course.courseColor} key={index}>
-                                                                <a href={`course/${course.id}`}>{course.courseName.length < 20 ? course.courseName : course.courseName.substr(0, 20) + "..."}</a>
+                                                                <a onClick={() => navigate(`/course/${course.id}`)}
+                                                                   style={{cursor: "pointer"}}>{course.courseName.length < 20 ? course.courseName : course.courseName.substr(0, 20) + "..."}</a>
                                                                 <button className="tooltip"
                                                                         data-tip={`Remove ${course.courseName} course from student`}
                                                                         onClick={() => removeCourse(item.id, course.id)}>

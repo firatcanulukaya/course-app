@@ -90,7 +90,7 @@ const ClassInfo = () => {
                             <li className="student-table-li">
                                 {clas?.students?.length > 0 ? clas?.students.map((student, index) => (
                                     <CourseBadge hex="#ABCDEF" key={index}>
-                                        <a href={`/student/${student.id}`}>{student.studentName.length < 20 ? student.studentName : student.studentName.substr(0, 20) + "..."}</a>
+                                        <a onClick={() => navigate(`/student/${student.id}`)} style={{cursor: "pointer"}}>{student.studentName.length < 20 ? student.studentName : student.studentName.substr(0, 20) + "..."}</a>
                                         <button className="tooltip"
                                                 data-tip={`Remove ${student.studentName} student from class`}
                                                 onClick={() => removeStudent(clas?.id, student.id)}>

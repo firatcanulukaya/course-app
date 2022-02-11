@@ -7,10 +7,12 @@ import deleteIcon from "../../assets/img/delete.svg";
 import timesIcon from "../../assets/img/times.svg";
 import axios from "axios";
 import DeleteModal from "../DeleteModal";
+import {useNavigate} from "react-router-dom";
 
 
 const CourseList = ({deleteCourse}) => {
     const {coursesData, setCoursesData, serverLink, setIsBlur} = useContext(mainContext);
+    const navigate = useNavigate();
 
     const [courseIds, setCourseIds] = useState({
         index: 0,
@@ -85,7 +87,8 @@ const CourseList = ({deleteCourse}) => {
                                             {item.id}
                                         </div>
                                         <div className="cell" data-title="Course Info">
-                                            <a href={`course/${item.id}`}> {item.courseName} </a>
+                                            <a onClick={() => navigate(`/course/${item.id}`)}
+                                               style={{cursor: "pointer"}}> {item.courseName} </a>
                                             <p>Total Student Count: {item.students.length}</p>
                                         </div>
                                         <div className="cell" data-title="Students">
@@ -94,11 +97,14 @@ const CourseList = ({deleteCourse}) => {
                                                     {
                                                         item.students.length > 0 ? item.students.map((student, index) => (
                                                             <CourseBadge key={index} hex={item.courseColor}>
-                                                                <a href={`student/${student.id}`}>{student.studentName.length < 20 ? student.studentName : student.studentName.substr(0, 20) + "..."}</a>
+                                                                <a onClick={() => navigate(`/student/${student.id}`)}
+                                                                   style={{cursor: "pointer"}}>{student.studentName.length < 20 ? student.studentName : student.studentName.substr(0, 20) + "..."}</a>
                                                                 <button className="tooltip"
                                                                         data-tip={`Remove ${student.studentName} student from course`}
                                                                         onClick={() => removeStudent(student.id, item.id)}>
-                                                                    <img src={timesIcon} style={{mixBlendMode: "luminosity"}} alt="times icon"/></button>
+                                                                    <img src={timesIcon}
+                                                                         style={{mixBlendMode: "luminosity"}}
+                                                                         alt="times icon"/></button>
                                                             </CourseBadge>
                                                         )) : <CourseBadge hex="#B91C1C">
                                                             Course has not any students yet

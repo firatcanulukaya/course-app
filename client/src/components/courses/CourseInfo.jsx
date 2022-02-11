@@ -60,9 +60,15 @@ const CourseInfo = () => {
 
     return (
         <div className="infoCardContainer">
-            <DeleteModal id={id} isActive={isOpen.delete} onClose={() => { setIsOpen({...isOpen, delete: !isOpen.delete}); setIsBlur(false) }}
+            <DeleteModal id={id} isActive={isOpen.delete} onClose={() => {
+                setIsOpen({...isOpen, delete: !isOpen.delete});
+                setIsBlur(false)
+            }}
                          handleDelete={deleteCourse} type="course"/>
-            <CourseEditModal isActive={isOpen.edit} onClose={() => { setIsOpen({...isOpen, edit: !isOpen.edit}); setIsBlur(false) }}
+            <CourseEditModal isActive={isOpen.edit} onClose={() => {
+                setIsOpen({...isOpen, edit: !isOpen.edit});
+                setIsBlur(false)
+            }}
                              courseId={id}/>
 
             <img src={bg} alt="background" className="card-bg"/>
@@ -77,10 +83,10 @@ const CourseInfo = () => {
                         <div className="infoCardUtils">
                             <p>{course?.courseName?.length > 50 ? course?.courseName.substr(0, 50) : course?.courseName}</p>
                             <span>Created at: {new Date(course?.createdAt).toLocaleDateString("en-US", {
-                                    year: "numeric",
-                                    month: "long",
-                                    day: "numeric",
-                                })}</span>
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                            })}</span>
                         </div>
                     </div>
                 </div>
@@ -94,11 +100,13 @@ const CourseInfo = () => {
                             <li className="student-table-li">
                                 {course?.students?.length > 0 ? course?.students.map((student, index) => (
                                     <CourseBadge hex={course.courseColor} key={index}>
-                                        <a href={`/student/${student.id}`}>{student.studentName.length < 20 ? student.studentName : student.studentName.substr(0, 20) + "..."}</a>
+                                        <a onClick={() => navigate(`/student/${student.id}`)}
+                                           style={{cursor: "pointer"}}>{student.studentName.length < 20 ? student.studentName : student.studentName.substr(0, 20) + "..."}</a>
                                         <button className="tooltip"
                                                 data-tip={`Remove ${student.studentName} student from course`}
                                                 onClick={() => removeStudent(course?.id, student.id)}>
-                                            <img src={timesIcon} style={{mixBlendMode: "luminosity"}} alt="times icon"/></button>
+                                            <img src={timesIcon} style={{mixBlendMode: "luminosity"}} alt="times icon"/>
+                                        </button>
                                     </CourseBadge>
                                 )) : <InfoCardTag textColor={"red"}>Course has not any students.</InfoCardTag>}
                             </li>
@@ -117,9 +125,15 @@ const CourseInfo = () => {
 
                     <div className="infoCardFooterButtons">
                         <InfoButtons bgColor="#F1F1F1" textcolor="#23262F"
-                                     onClick={() => { setIsOpen({...isOpen, edit: !isOpen.edit}); setIsBlur(true) }}>Edit</InfoButtons>
+                                     onClick={() => {
+                                         setIsOpen({...isOpen, edit: !isOpen.edit});
+                                         setIsBlur(true)
+                                     }}>Edit</InfoButtons>
                         <InfoButtons bgColor="#E53535" textColor="#FCFCFD" isHover={true}
-                                     onClick={() => { setIsOpen({...isOpen, delete: !isOpen.delete}); setIsBlur(true) }}>Delete</InfoButtons>
+                                     onClick={() => {
+                                         setIsOpen({...isOpen, delete: !isOpen.delete});
+                                         setIsBlur(true)
+                                     }}>Delete</InfoButtons>
                     </div>
 
                 </div>

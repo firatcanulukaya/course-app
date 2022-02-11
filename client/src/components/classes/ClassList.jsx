@@ -7,10 +7,12 @@ import deleteIcon from "../../assets/img/delete.svg";
 import timesIcon from "../../assets/img/times.svg";
 import axios from "axios";
 import DeleteModal from "../DeleteModal";
+import {useNavigate} from "react-router-dom";
 
 
 const ClassList = ({deleteClass}) => {
     const {classesData, setClassesData, serverLink, setIsBlur} = useContext(mainContext);
+    const navigate = useNavigate();
 
     const [classIds, setClassIds] = useState({
         index: 0,
@@ -76,7 +78,8 @@ const ClassList = ({deleteClass}) => {
                                             {item.id}
                                         </div>
                                         <div className="cell" data-title="Course Info">
-                                            <a href={`class/${item.id}`}> {item.className} </a>
+                                            <a onClick={() => navigate(`/class/${item.id}`)}
+                                               style={{cursor: "pointer"}}> {item.className} </a>
                                             <p>Total Student Count: {item.students.length}</p>
                                         </div>
                                         <div className="cell" data-title="Students">
@@ -85,11 +88,14 @@ const ClassList = ({deleteClass}) => {
                                                     {
                                                         item.students.length > 0 ? item.students.map((student, index) => (
                                                             <CourseBadge key={index} hex="#ABCDEF">
-                                                                <a href={`student/${student.id}`}>{student.studentName.length < 20 ? student.studentName : student.studentName.substr(0, 20) + "..."}</a>
+                                                                <a onClick={() => navigate(`/student/${student.id}`)}
+                                                                   style={{cursor: "pointer"}}>{student.studentName.length < 20 ? student.studentName : student.studentName.substr(0, 20) + "..."}</a>
                                                                 <button className="tooltip"
                                                                         data-tip={`Remove ${student.studentName} student from class`}
                                                                         onClick={() => removeStudent(student.id, item.id)}>
-                                                                    <img src={timesIcon} style={{mixBlendMode: "luminosity"}} alt="times icon"/></button>
+                                                                    <img src={timesIcon}
+                                                                         style={{mixBlendMode: "luminosity"}}
+                                                                         alt="times icon"/></button>
                                                             </CourseBadge>
                                                         )) : <CourseBadge hex="#B91C1C">
                                                             Class has not any students yet
