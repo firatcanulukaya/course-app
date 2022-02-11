@@ -1,14 +1,12 @@
 const db = require('../models');
 
-//TODO class controller'ın içinden öğrenci ekleme yapılacak
-
 const createClass = async (req, res) => {
     try {
         const {className} = req.body;
         const newClass = await db.Class.create({
             className
         });
-        res.status(201).json(newClass);
+        res.status(201).json({message: "Class created successfully", class: newClass});
     } catch (error) {
         res.status(500).json({error: error.message});
     }
@@ -52,17 +50,28 @@ const editClass = async (req, res) => {
 const deleteClass = async (req, res) => {
     try {
         const {id} = req.params;
-        const students = await db.Student.findAll({where: {classId: id}});
+        const students = await db.Student.findAll({
+                where: {
+                    classId: id
+                }
+            }
+        );
 
         students.map(async (student) => {
             await db.Student.update(
                 {classId: null},
-                {where: {id: student.id}}
+                {
+                    where: {
+                        id: student.id
+                    }
+                }
             );
         });
 
         const deletedClass = await db.Class.destroy({
-            where: {id}
+            where: {
+                id
+            }
         });
         res.status(200).json({message: 'Class deleted successfully', deletedClass});
     } catch (error) {

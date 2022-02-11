@@ -2,14 +2,16 @@ const db = require('../models');
 
 const createStudent = async (req, res) => {
     try {
+
+        const {studentName, studentAge, classId} = req.body;
+
         let data = {
-            studentName: req.body.studentName,
-            studentAge: req.body.studentAge,
-            classId: req.body.classId,
-            courseId: req.body.courseId
+            studentName,
+            studentAge,
+            classId
         }
         let jsonData = await db.Student.create(data)
-        res.status(200).json(jsonData)
+        res.status(201).json(jsonData)
     } catch (err) {
         res.status(500).json(err)
     }
@@ -18,13 +20,13 @@ const createStudent = async (req, res) => {
 const editStudent = async (req, res) => {
 
     try {
-        let data = {
-            studentName: req.body.studentName,
-            studentAge: req.body.studentAge,
-            classId: req.body.classId,
-            courseId: req.body.courseId
-        }
+        const {studentName, studentAge, classId} = req.body;
 
+        let data = {
+            studentName,
+            studentAge,
+            classId
+        }
         await db.Student.update(data, {
             where: {
                 id: req.params.id
@@ -43,6 +45,7 @@ const getAllStudents = async (req, res) => {
         const students = await db.Student.findAll({
             include: ["class", "courses"]
         });
+
         res.status(200).json(students);
     } catch (error) {
         res.status(500).json({error: error.message});
@@ -95,9 +98,15 @@ const deleteStudent = async (req, res) => {
 
 const deleteAllStudents = async (req, res) => {
     try {
-        await db.StudentCourse.destroy({where: {}})
+        await db.StudentCourse.destroy({
+            where: {},
+            truncate: true
+        });
 
-        await db.Student.destroy({where: {}})
+        await db.Student.destroy({
+            where: {},
+            truncate: true
+        })
         res.status(200).json({
             message: 'All students deleted'
         })
