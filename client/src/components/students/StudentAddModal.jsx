@@ -11,7 +11,7 @@ const StudentAddModal = ({isActive, onClose}) => {
     const [studentValues, setStudentValues] = useState({
         name: "",
         age: "",
-        classId: "",
+        classId: "0",
         courseIds: []
     });
 
@@ -110,7 +110,6 @@ const StudentAddModal = ({isActive, onClose}) => {
 
                                 <select
                                     className="studentModalInput"
-                                    required
                                     name={'classId'}
                                     onChange={(e) => handleChange(e, setStudentValues, studentValues)}
                                 >
