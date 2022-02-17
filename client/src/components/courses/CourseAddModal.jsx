@@ -39,7 +39,7 @@ const CourseAddModal = ({isActive, onClose}) => {
         })
             .then(res => {
                 axios.post(`${serverLink}/api/course/addMultipleStudentsToCourse`, {
-                    courseId: res.data.id,
+                    courseId: res.data.course.id,
                     studentIds: courseValues.studentIds
                 })
                     .then(() => {

@@ -31,7 +31,7 @@ const ClassAddModal = ({isActive, onClose}) => {
             className: classesValues.className
         }).then(res => {
             axios.patch(`${serverLink}/api/class/addStudents`, {
-                classId: res.data.id,
+                classId: res.data.class.id,
                 studentIds: classesValues.studentIds
             }).then(() => {
                 axios.get(`${serverLink}/api/class/getAll`).then(res => {
